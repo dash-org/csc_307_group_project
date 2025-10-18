@@ -1,0 +1,6 @@
+To run the front end, run `npm run dev` from root
+
+To run the backend end for the first time, 
+replace the template connection string in secret.js
+
+then run the cmd `npm run dev` from the express-backend directory
