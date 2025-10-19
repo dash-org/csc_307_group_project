@@ -3,4 +3,7 @@ To run the front end, run `npm run dev` from root
 To run the backend end for the first time, 
 replace the template connection string in secret.js
 
+Also use the cmd `git update-index --assume-unchanged packages/express-backend/secret.js` 
+from the root directory to prevent your connection string from overiding the template
+
 then run the cmd `npm run dev` from the express-backend directory
