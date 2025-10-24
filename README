@@ -17,3 +17,9 @@ Use the standards described by .prettierrc and eslint.config.js in root, and def
 
 Prettier: npm run lint, npm run lint-fix
 ESLint: npm run format, npm run check-format
+
+
+### Testing
+
+Start by running npm install jest
+To test currently navigate to jest-unit-testing and run npm test (note 1 should fail, catches bug in code)
