@@ -7,3 +7,8 @@ Also use the cmd `git update-index --assume-unchanged packages/express-backend/s
 from the root directory to prevent your connection string from overiding the template
 
 then run the cmd `npm run dev` from the express-backend directory
+
+## Contributing
+
+Please install the Prettier and ESLint extensions in your editor.
+Use the standards described by .prettierrc and eslint.config.js in root, and default to https://google.github.io/styleguide/jsguide.html otherwise.

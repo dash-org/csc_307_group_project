@@ -11,10 +11,7 @@ export default defineConfig([
   globalIgnores(['dist']),
   {
     files: ['**/*.{js,jsx}'],
-    extends: [
-      js.configs.recommended,
-      configPrettier,
-    ],
+    extends: [js.configs.recommended, configPrettier],
     languageOptions: {
       ecmaVersion: 'latest',
       sourceType: 'module',
