@@ -1,12 +1,12 @@
-To run the front end, run ```npm run dev``` from root
+To run the front end, run `npm run dev` from root
 
 To run the backend end for the first time,
 replace the template connection string in secret.js
 
-Also use the cmd ```git update-index --assume-unchanged packages/express-backend/secret.js```
+Also use the cmd `git update-index --assume-unchanged packages/express-backend/secret.js`
 from the root directory to prevent your connection string from overiding the template
 
-then run the cmd ```npm run dev``` from the express-backend directory
+then run the cmd `npm run dev` from the express-backend directory
 
 ## Contributing
 
@@ -15,8 +15,8 @@ Use the standards described by .prettierrc and eslint.config.js in root, and def
 
 ### Linting
 
-Prettier: ```npm run format```, ```npm run check-format```
-ESLint: ```npm run lint```, ```npm run lint-fix```
+Prettier: `npm run format`, `npm run check-format`
+ESLint: `npm run lint`, `npm run lint-fix`
 
 ### Testing
 
