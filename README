@@ -15,9 +15,8 @@ Use the standards described by .prettierrc and eslint.config.js in root, and def
 
 ### Linting
 
-Prettier: npm run lint, npm run lint-fix
-ESLint: npm run format, npm run check-format
-
+Prettier: `npm run format`, `npm run check-format`
+ESLint: `npm run lint`, `npm run lint-fix`
 
 ### Testing
 
