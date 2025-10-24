@@ -1,10 +1,10 @@
-import mongoose from "mongoose";
-import userModel from "./user.js";
-import connectionString from "./secret.js";
+import mongoose from 'mongoose';
+import userModel from './user.js';
+import connectionString from './secret.js';
 
 //mongodb+srv://salcedop_db_user:1oI3PduqOasAEKF2@cluster0.n2igwlg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 
-mongoose.set("debug", true);
+mongoose.set('debug', true);
 
 mongoose
   .connect(connectionString, {

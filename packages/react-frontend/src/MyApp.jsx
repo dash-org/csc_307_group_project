@@ -1,31 +1,31 @@
 // src/MyApp.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import Table from "./Table";
-import Form from "./Form";
+import Table from './Table';
+import Form from './Form';
 
 function MyApp() {
   const [characters, setCharacters] = useState([]);
 
   function fetchUsers() {
-    const promise = fetch("http://localhost:8000/users");
+    const promise = fetch('http://localhost:8000/users');
     return promise;
   }
 
   useEffect(() => {
     fetchUsers()
       .then((res) => res.json())
-      .then((json) => setCharacters(json["users_list"]))
+      .then((json) => setCharacters(json['users_list']))
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
   function postUser(person) {
-    const promise = fetch("Http://localhost:8000/users", {
-      method: "POST",
+    const promise = fetch('Http://localhost:8000/users', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(person),
     });
