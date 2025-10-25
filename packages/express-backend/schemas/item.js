@@ -17,7 +17,7 @@
 
 import mongoose from 'mongoose';
 
-const itemSchema = new mongoose.Schema({
+export const itemSchema = new mongoose.Schema({
   name: { type: String, required: true },
   quantity: { type: Number, default: 1 },
   description: { type: String },
@@ -30,4 +30,5 @@ const itemSchema = new mongoose.Schema({
   },
 });
 
-export const Item = mongoose.model('Item', itemSchema);
+const Item = mongoose.model('Item', itemSchema);
+export default Item;

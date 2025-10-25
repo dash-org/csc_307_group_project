@@ -1,12 +1,16 @@
-import userModel from './user.js';
+import userModel from '../schemas/user.js';
 
-function getUsers(name, job) {
+function getUsers(name, email, createdAt) {
   let promise = userModel.find();
 
   if (name) {
     promise = promise.find({ name: name });
-  } else if (job) {
-    promise = promise.find({ job: job });
+  }
+  if (email) {
+    promise = promise.find({ email: email });
+  }
+  if (createdAt) {
+    promise = promise.find({ createdAt: createdAt });
   }
 
   return promise;
@@ -22,14 +26,6 @@ function addUser(user) {
   return promise;
 }
 
-function findUserByName(name) {
-  return userModel.find({ name: name });
-}
-
-function findUserByJob(job) {
-  return userModel.find({ job: job });
-}
-
 function deleteUserById(id) {
   return userModel.deleteOne({ _id: id });
 }
@@ -38,7 +34,5 @@ export default {
   addUser,
   getUsers,
   findUserById,
-  findUserByName,
-  findUserByJob,
   deleteUserById,
 };

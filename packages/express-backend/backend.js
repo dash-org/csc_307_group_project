@@ -1,7 +1,21 @@
 // backend.js
 import express from 'express';
 import cors from 'cors';
-import userServices from './user-services.js';
+import userServices from './services/user-services.js';
+import mongoose from 'mongoose';
+import connectionString from './secret.js';
+import memberServices from './services/member-services.js';
+import inventoryServices from './services/inventory-services.js';
+import itemServices from './services/item-services.js';
+
+mongoose.set('debug', true);
+
+mongoose
+  .connect(connectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .catch((error) => console.log(error));
 
 const app = express();
 const port = 8000;
@@ -15,11 +29,55 @@ app.get('/', (req, res) => {
 
 app.get('/users', (req, res) => {
   userServices
-    .getUsers(req.query.name, req.query.job)
+    .getUsers(req.query.name, req.query.email, req.query.createdAt)
     .then((users) => {
       return res.send({ users_list: users });
     })
     .catch((error) => console.log(error));
+});
+
+app.get('/memberships', (req, res) => {
+  memberServices
+    .getMembers(
+      req.query.userId,
+      req.query.role,
+      req.query.permissions,
+      req.query.addedAt
+    )
+    .then((members) => {
+      return res.send({ members_list: members });
+    })
+    .catch((error) => console.log(error));
+});
+
+app.get('/inventories', (req, res) => {
+  inventoryServices
+    .getInventory(
+      req.query.name,
+      req.query.createdBy,
+      req.query.createdAt,
+      req.query.items
+    )
+    .then((inventories) => {
+      return res.send({ inventory_list: inventories });
+    })
+    .catch((error) => console.log(error));
+});
+
+app.get('/items', (req, res) => {
+  itemServices
+    .getItems(
+      req.query.name,
+      req.query.quantity,
+      req.query.description,
+      req.query.tags,
+      req.query.createdAt,
+      req.query.createdBy
+    )
+    .then((items) => {
+      return res.send({ item_list: items });
+    })
+    .cath((error) => console.log(error));
 });
 
 app.get('/users/:id', (req, res) => {
@@ -28,6 +86,45 @@ app.get('/users/:id', (req, res) => {
     .findUserById(id)
     .then((user) => {
       res.send(user);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(404).send('Resource not found.');
+    });
+});
+
+app.get('/items/:id', (req, res) => {
+  const id = req.params['id']; //or req.params.id
+  itemServices
+    .findItemById(id)
+    .then((item) => {
+      res.send(item);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(404).send('Resource not found.');
+    });
+});
+
+app.get('/memberships/:id', (req, res) => {
+  const id = req.params['id']; //or req.params.id
+  memberServices
+    .findMemberById(id)
+    .then((member) => {
+      res.send(member);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(404).send('Resource not found.');
+    });
+});
+
+app.get('/inventories/:id', (req, res) => {
+  const id = req.params['id']; //or req.params.id
+  inventoryServices
+    .findInventoryById(id)
+    .then((inventory) => {
+      res.send(inventory);
     })
     .catch((error) => {
       console.log(error);
@@ -46,12 +143,87 @@ app.post('/users', (req, res) => {
     .catch((error) => console.log(error));
 });
 
+app.post('/items', (req, res) => {
+  let itemToAdd = req.body;
+  itemServices
+    .addItem(itemToAdd)
+    .then((item) => {
+      itemToAdd = item;
+      res.status(201).send(itemToAdd);
+    })
+    .catch((error) => console.log(error));
+});
+
+app.post('/memberships', (req, res) => {
+  let memberToAdd = req.body;
+  memberServices
+    .addItem(memberToAdd)
+    .then((item) => {
+      memberToAdd = item;
+      res.status(201).send(memberToAdd);
+    })
+    .catch((error) => console.log(error));
+});
+
+app.post('/inventories', (req, res) => {
+  let inventoryToAdd = req.body;
+  inventoryServices
+    .addItem(inventoryToAdd)
+    .then((inventory) => {
+      inventoryToAdd = inventory;
+      res.status(201).send(inventoryToAdd);
+    })
+    .catch((error) => console.log(error));
+});
+
 app.delete('/users/:id', (req, res) => {
   const id = req.params['id'];
   userServices
     .deleteUserById(id)
     .then((user) => {
-      console.log(`Deleted user ${user.id}`);
+      console.log(`Deleted user ${user._id}`);
+      res.status(204).send();
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(404).send();
+    });
+});
+
+app.delete('/items/:id', (req, res) => {
+  const id = req.params['id'];
+  itemServices
+    .deleteItemById(id)
+    .then((item) => {
+      console.log(`Deleted item ${item._id}`);
+      res.status(204).send();
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(404).send();
+    });
+});
+
+app.delete('/memberships/:id', (req, res) => {
+  const id = req.params['id'];
+  memberServices
+    .deleteMemberById(id)
+    .then((member) => {
+      console.log(`Deleted membership ${member._id}`);
+      res.status(204).send();
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(404).send();
+    });
+});
+
+app.delete('/inventories/:id', (req, res) => {
+  const id = req.params['id'];
+  inventoryServices
+    .deleteInventoryById(id)
+    .then((inventory) => {
+      console.log(`Deleted inventory ${inventory.id}`);
       res.status(204).send();
     })
     .catch((error) => {
