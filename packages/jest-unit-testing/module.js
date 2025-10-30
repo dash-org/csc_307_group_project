@@ -1,16 +1,16 @@
 function sum(a, b) {
-  return a + b
+  return a + b;
 }
 
 function div(a, b) {
-  return a / b
+  return a / b;
 }
 
 function containsNumbers(text) {
   for (let i = 0; i < text.length; i++) {
-    if (!isNaN(text.charAt(i))) return true
+    if (!isNaN(text.charAt(i))) return true;
   }
-  return false
+  return false;
 }
 
-export default { sum, div, containsNumbers }
+export default { sum, div, containsNumbers };
