@@ -20,5 +20,5 @@ ESLint: `npm run lint`, `npm run lint-fix`
 
 ### Testing
 
-Start by running npm install jest
-To test currently navigate to jest-unit-testing and run npm test (note 1 should fail, catches bug in code)
+Start by running 'npm install jest'
+To test currently navigate to jest-unit-testing and run 'npm test' (note 1 should fail, catches bug in code)
