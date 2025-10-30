@@ -22,3 +22,4 @@ ESLint: `npm run lint`, `npm run lint-fix`
 
 Start by running 'npm install jest'
 To test currently navigate to jest-unit-testing and run 'npm test' (note 1 should fail, catches bug in code)
+To test backend run 'npm run test:backend'
