@@ -4,7 +4,7 @@ function TableHeader() {
       <tr>
         <th>Id</th>
         <th>Name</th>
-        <th>Email</th>
+        <th>Hashpassword</th>
         <th>CreatedAt</th>
         <th>Remove</th>
       </tr>
@@ -13,12 +13,15 @@ function TableHeader() {
 }
 
 function TableBody(props) {
+  if (props.characterData === null) {
+    return <caption>Data Unavailable</caption>;
+  }
   const rows = props.characterData.map((row, index) => {
     return (
       <tr key={index}>
         <td>{row._id}</td>
         <td>{row.name}</td>
-        <td>{row.email}</td>
+        <td>{row.hashpassword}</td>
         <td>{row.createdAt}</td>
         <td>
           <button onClick={() => props.removeCharacter(index)}>Delete</button>

@@ -1,13 +1,10 @@
 import userModel from '../schemas/user.js';
 
-function getUsers(name, email, createdAt) {
+function getUsers(name, createdAt) {
   let promise = userModel.find();
 
   if (name) {
     promise = promise.find({ name: name });
-  }
-  if (email) {
-    promise = promise.find({ email: email });
   }
   if (createdAt) {
     promise = promise.find({ createdAt: createdAt });
