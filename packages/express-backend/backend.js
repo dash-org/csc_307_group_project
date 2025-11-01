@@ -7,6 +7,7 @@ import connectionString from './secret.js';
 import memberServices from './services/member-services.js';
 import inventoryServices from './services/inventory-services.js';
 import itemServices from './services/item-services.js';
+import { registerUser, authenticateUser, loginUser } from './auth.js';
 
 mongoose.set('debug', true);
 
@@ -23,20 +24,24 @@ const port = 8000;
 app.use(express.json());
 app.use(cors());
 
+app.post('/signup', registerUser);
+
+app.post('/login', loginUser);
+
 app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
-app.get('/users', (req, res) => {
+app.get('/users', authenticateUser, (req, res) => {
   userServices
-    .getUsers(req.query.name, req.query.email, req.query.createdAt)
+    .getUsers(req.query.name, req.query.createdAt)
     .then((users) => {
       return res.send({ users_list: users });
     })
     .catch((error) => console.log(error));
 });
 
-app.get('/memberships', (req, res) => {
+app.get('/memberships', authenticateUser, (req, res) => {
   memberServices
     .getMembers(
       req.query.userId,
@@ -50,7 +55,7 @@ app.get('/memberships', (req, res) => {
     .catch((error) => console.log(error));
 });
 
-app.get('/inventories', (req, res) => {
+app.get('/inventories', authenticateUser, (req, res) => {
   inventoryServices
     .getInventory(
       req.query.name,
@@ -64,7 +69,7 @@ app.get('/inventories', (req, res) => {
     .catch((error) => console.log(error));
 });
 
-app.get('/items', (req, res) => {
+app.get('/items', authenticateUser, (req, res) => {
   itemServices
     .getItems(
       req.query.name,
@@ -80,7 +85,7 @@ app.get('/items', (req, res) => {
     .cath((error) => console.log(error));
 });
 
-app.get('/users/:id', (req, res) => {
+app.get('/users/:id', authenticateUser, (req, res) => {
   const id = req.params['id']; //or req.params.id
   userServices
     .findUserById(id)
@@ -93,7 +98,7 @@ app.get('/users/:id', (req, res) => {
     });
 });
 
-app.get('/items/:id', (req, res) => {
+app.get('/items/:id', authenticateUser, (req, res) => {
   const id = req.params['id']; //or req.params.id
   itemServices
     .findItemById(id)
@@ -106,7 +111,7 @@ app.get('/items/:id', (req, res) => {
     });
 });
 
-app.get('/memberships/:id', (req, res) => {
+app.get('/memberships/:id', authenticateUser, (req, res) => {
   const id = req.params['id']; //or req.params.id
   memberServices
     .findMemberById(id)
@@ -119,7 +124,7 @@ app.get('/memberships/:id', (req, res) => {
     });
 });
 
-app.get('/inventories/:id', (req, res) => {
+app.get('/inventories/:id', authenticateUser, (req, res) => {
   const id = req.params['id']; //or req.params.id
   inventoryServices
     .findInventoryById(id)
@@ -132,18 +137,20 @@ app.get('/inventories/:id', (req, res) => {
     });
 });
 
-app.post('/users', (req, res) => {
+app.post('/users', authenticateUser, (req, res) => {
   let userToAdd = req.body;
+
   userServices
     .addUser(userToAdd)
     .then((user) => {
       userToAdd = user;
+
       res.status(201).send(userToAdd);
     })
     .catch((error) => console.log(error));
 });
 
-app.post('/items', (req, res) => {
+app.post('/items', authenticateUser, (req, res) => {
   let itemToAdd = req.body;
   itemServices
     .addItem(itemToAdd)
@@ -154,7 +161,7 @@ app.post('/items', (req, res) => {
     .catch((error) => console.log(error));
 });
 
-app.post('/memberships', (req, res) => {
+app.post('/memberships', authenticateUser, (req, res) => {
   let memberToAdd = req.body;
   memberServices
     .addItem(memberToAdd)
@@ -165,7 +172,7 @@ app.post('/memberships', (req, res) => {
     .catch((error) => console.log(error));
 });
 
-app.post('/inventories', (req, res) => {
+app.post('/inventories', authenticateUser, (req, res) => {
   let inventoryToAdd = req.body;
   inventoryServices
     .addItem(inventoryToAdd)
@@ -176,7 +183,7 @@ app.post('/inventories', (req, res) => {
     .catch((error) => console.log(error));
 });
 
-app.delete('/users/:id', (req, res) => {
+app.delete('/users/:id', authenticateUser, (req, res) => {
   const id = req.params['id'];
   userServices
     .deleteUserById(id)
@@ -190,7 +197,7 @@ app.delete('/users/:id', (req, res) => {
     });
 });
 
-app.delete('/items/:id', (req, res) => {
+app.delete('/items/:id', authenticateUser, (req, res) => {
   const id = req.params['id'];
   itemServices
     .deleteItemById(id)
@@ -204,7 +211,7 @@ app.delete('/items/:id', (req, res) => {
     });
 });
 
-app.delete('/memberships/:id', (req, res) => {
+app.delete('/memberships/:id', authenticateUser, (req, res) => {
   const id = req.params['id'];
   memberServices
     .deleteMemberById(id)
@@ -218,7 +225,7 @@ app.delete('/memberships/:id', (req, res) => {
     });
 });
 
-app.delete('/inventories/:id', (req, res) => {
+app.delete('/inventories/:id', authenticateUser, (req, res) => {
   const id = req.params['id'];
   inventoryServices
     .deleteInventoryById(id)
