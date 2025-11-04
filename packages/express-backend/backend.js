@@ -7,6 +7,7 @@ import connectionString from './secret.js';
 import memberServices from './services/member-services.js';
 import inventoryServices from './services/inventory-services.js';
 import itemServices from './services/item-services.js';
+import kitchenServices from './services/kitchen-services.js';
 import { registerUser, authenticateUser, loginUser } from './auth.js';
 
 mongoose.set('debug', true);
@@ -82,7 +83,22 @@ app.get('/items', authenticateUser, (req, res) => {
     .then((items) => {
       return res.send({ item_list: items });
     })
-    .cath((error) => console.log(error));
+    .catch((error) => console.log(error));
+});
+
+app.get('/kitchens', (req, res) => {
+  kitchenServices
+    .getKitchen(
+      req.query.name,
+      req.query.owner,
+      req.query.createdAt,
+      req.query.inventories ? req.query.inventories.split(',') : [],
+      req.query.memberships ? req.query.memberships.split(',') : []
+    )
+    .then((kitchens) => {
+      return res.send({ kitchen_list: kitchens });
+    })
+    .catch((error) => console.log(error));
 });
 
 app.get('/users/:id', authenticateUser, (req, res) => {
@@ -137,6 +153,34 @@ app.get('/inventories/:id', authenticateUser, (req, res) => {
     });
 });
 
+app.get('/kitchens/:id', (req, res) => {
+  const id = req.params['id']; //or req.params.id
+
+  kitchenServices
+    .findKitchenById(id)
+    .then((kitchen) => {
+      res.send(kitchen);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(404).send('Resource not found.');
+    });
+});
+
+app.get('/kitchens/:id', (req, res) => {
+  const id = req.params['id']; //or req.params.id
+
+  kitchenServices
+    .findKitchenById(id)
+    .then((kitchen) => {
+      res.send(kitchen);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(404).send('Resource not found.');
+    });
+});
+
 app.post('/users', authenticateUser, (req, res) => {
   let userToAdd = req.body;
 
@@ -179,6 +223,28 @@ app.post('/inventories', authenticateUser, (req, res) => {
     .then((inventory) => {
       inventoryToAdd = inventory;
       res.status(201).send(inventoryToAdd);
+    })
+    .catch((error) => console.log(error));
+});
+
+app.post('/kitchens', (req, res) => {
+  let kitchenToAdd = req.body;
+  kitchenServices
+    .addKitchen(kitchenToAdd)
+    .then((kitchen) => {
+      kitchenToAdd = kitchen;
+      res.status(201).send(kitchenToAdd);
+    })
+    .catch((error) => console.log(error));
+});
+
+app.post('/kitchens', (req, res) => {
+  let kitchenToAdd = req.body;
+  kitchenServices
+    .addKitchen(kitchenToAdd)
+    .then((kitchen) => {
+      kitchenToAdd = kitchen;
+      res.status(201).send(kitchenToAdd);
     })
     .catch((error) => console.log(error));
 });
@@ -231,6 +297,20 @@ app.delete('/inventories/:id', authenticateUser, (req, res) => {
     .deleteInventoryById(id)
     .then((inventory) => {
       console.log(`Deleted inventory ${inventory.id}`);
+      res.status(204).send();
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(404).send();
+    });
+});
+
+app.delete('/kitchens/:id', (req, res) => {
+  const id = req.params['id'];
+  kitchenServices
+    .deleteKitchenById(id)
+    .then((kitchen) => {
+      console.log(`Deleted kitchen ${kitchen.id}`);
       res.status(204).send();
     })
     .catch((error) => {
