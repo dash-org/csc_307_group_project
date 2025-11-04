@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Table from './Table';
 import Form from './Form';
 import Login from './Login';
+import { LoginCentered } from './LoginPage/Login2';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function MyApp() {
@@ -166,11 +167,15 @@ function MyApp() {
                 characterData={characters}
                 removeCharacter={removeOneCharacter}
               />
-              <Form handleSubmit={updateList} />
+              {/* <Form handleSubmit={updateList} /> */}
             </div>
           }
         />
-        <Route path="/login" element={<Login handleSubmit={loginUser} />} />;
+        {/* <Route path="/login" element={<Login handleSubmit={loginUser} />} />; */}
+        <Route
+          path="/login"
+          element={<LoginCentered handleSubmit={loginUser} />}
+        />
         <Route
           path="/signup"
           element={<Login handleSubmit={signupUser} buttonLabel="Sign Up" />}
