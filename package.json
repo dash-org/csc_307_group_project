@@ -2,13 +2,15 @@
   "name": "csc-307-app",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npm run dev --workspace react-frontend",
+    "test": "npm run test --workspace jest-unit-testing",
+    "dev": "npm run dev --workspace express-backend",
     "format": "prettier --write .",
     "check-format": "prettier --check .",
-    "lint": "eslint .",
-    "lint-fix": "eslint . --fix"
+    "lint": "npx eslint . && npx prettier --check .",
+    "lint-fix": "eslint . --fix",
+    "start": "node backend_with_db.js"
   },
   "author": "",
   "license": "ISC",
