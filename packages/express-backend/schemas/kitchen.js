@@ -22,7 +22,7 @@ import mongoose from 'mongoose';
 const kitchenSchema = new mongoose.Schema({
   name: { type: String, required: true },
 
-  owner: { // createdBy
+  owner: { // equivalent to createdBy
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,

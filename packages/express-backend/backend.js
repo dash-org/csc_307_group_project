@@ -48,7 +48,8 @@ app.get('/memberships', authenticateUser, (req, res) => {
       req.query.userId,
       req.query.role,
       req.query.permissions,
-      req.query.addedAt
+      req.query.addedAt,
+      req.query.createdBy
     )
     .then((members) => {
       return res.send({ members_list: members });
@@ -209,8 +210,10 @@ app.post('/items', authenticateUser, (req, res) => {
 
 app.post('/memberships', authenticateUser, (req, res) => {
   let memberToAdd = req.body;
+  memberToAdd.createdBy = req.userId;
+
   memberServices
-    .addItem(memberToAdd)
+    .addMember(memberToAdd)
     .then((item) => {
       memberToAdd = item;
       res.status(201).send(memberToAdd);

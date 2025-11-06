@@ -45,6 +45,11 @@ const membershipSchema = new mongoose.Schema({
     },
   },
   addedAt: { type: Date, default: Date.now },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 membershipSchema.index({ inventoryId: 1, userId: 1 }, { unique: true });
