@@ -102,7 +102,7 @@ app.get('/kitchens', (req, res) => {
 });
 
 app.get('/users/:id', authenticateUser, (req, res) => {
-  const id = req.params['id']; //or req.params.id
+  const id = req.params['id'];
   userServices
     .findUserById(id)
     .then((user) => {
@@ -115,7 +115,7 @@ app.get('/users/:id', authenticateUser, (req, res) => {
 });
 
 app.get('/items/:id', authenticateUser, (req, res) => {
-  const id = req.params['id']; //or req.params.id
+  const id = req.params['id'];
   itemServices
     .findItemById(id)
     .then((item) => {
@@ -128,7 +128,7 @@ app.get('/items/:id', authenticateUser, (req, res) => {
 });
 
 app.get('/memberships/:id', authenticateUser, (req, res) => {
-  const id = req.params['id']; //or req.params.id
+  const id = req.params['id'];
   memberServices
     .findMemberById(id)
     .then((member) => {
@@ -141,7 +141,7 @@ app.get('/memberships/:id', authenticateUser, (req, res) => {
 });
 
 app.get('/inventories/:id', authenticateUser, (req, res) => {
-  const id = req.params['id']; //or req.params.id
+  const id = req.params['id'];
   inventoryServices
     .findInventoryById(id)
     .then((inventory) => {
@@ -154,7 +154,7 @@ app.get('/inventories/:id', authenticateUser, (req, res) => {
 });
 
 app.get('/kitchens/:id', (req, res) => {
-  const id = req.params['id']; //or req.params.id
+  const id = req.params['id'];
 
   kitchenServices
     .findKitchenById(id)
@@ -168,7 +168,7 @@ app.get('/kitchens/:id', (req, res) => {
 });
 
 app.get('/kitchens/:id', (req, res) => {
-  const id = req.params['id']; //or req.params.id
+  const id = req.params['id'];
 
   kitchenServices
     .findKitchenById(id)
@@ -196,6 +196,8 @@ app.post('/users', authenticateUser, (req, res) => {
 
 app.post('/items', authenticateUser, (req, res) => {
   let itemToAdd = req.body;
+  itemToAdd.createdBy = req.userId;
+  
   itemServices
     .addItem(itemToAdd)
     .then((item) => {
@@ -218,8 +220,10 @@ app.post('/memberships', authenticateUser, (req, res) => {
 
 app.post('/inventories', authenticateUser, (req, res) => {
   let inventoryToAdd = req.body;
+  inventoryToAdd.createdBy = req.userId;
+  
   inventoryServices
-    .addItem(inventoryToAdd)
+    .addInventory(inventoryToAdd)
     .then((inventory) => {
       inventoryToAdd = inventory;
       res.status(201).send(inventoryToAdd);
@@ -227,19 +231,10 @@ app.post('/inventories', authenticateUser, (req, res) => {
     .catch((error) => console.log(error));
 });
 
-app.post('/kitchens', (req, res) => {
+app.post('/kitchens', authenticateUser, (req, res) => {
   let kitchenToAdd = req.body;
-  kitchenServices
-    .addKitchen(kitchenToAdd)
-    .then((kitchen) => {
-      kitchenToAdd = kitchen;
-      res.status(201).send(kitchenToAdd);
-    })
-    .catch((error) => console.log(error));
-});
-
-app.post('/kitchens', (req, res) => {
-  let kitchenToAdd = req.body;
+  kitchenToAdd.owner = req.userId;
+  
   kitchenServices
     .addKitchen(kitchenToAdd)
     .then((kitchen) => {
