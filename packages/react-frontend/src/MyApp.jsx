@@ -113,7 +113,7 @@ function MyApp() {
   }
 
   function postUser(person) {
-    const promise = fetch('Http://localhost:8000/users', {
+    const promise = fetch('http://localhost:8000/users', {
       method: 'POST',
       headers: addAuthHeader({
         'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ function MyApp() {
 
   function removeOneCharacter(index) {
     const trash = characters.at(index);
-    const promise = fetch(`Http://localhost:8000/users/${trash._id}`, {
+    const promise = fetch(`http://localhost:8000/users/${trash._id}`, {
       method: `DELETE`,
       headers: addAuthHeader(),
     });
