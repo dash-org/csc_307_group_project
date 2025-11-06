@@ -72,8 +72,12 @@ export const LoginCentered = (props) => {
 
             <p className="don-t-have-an">
               <span className="span">Don’t have an account? </span>
+              <a className="text-wrapper-7" href="http://localhost:5173/signup">
+                {' '}
+                Create an account{' '}
+              </a>
 
-              <span className="text-wrapper-7">Create an account</span>
+              {/* <span className="text-wrapper-7">Create an account</span> */}
             </p>
           </div>
         </div>
