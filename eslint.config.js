@@ -5,10 +5,21 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import prettier from 'eslint-plugin-prettier';
 import configPrettier from 'eslint-config-prettier';
-import { defineConfig, globalIgnores } from 'eslint/config';
+import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  {
+    ignores: [
+      'node_modules/**',
+      'dist/**',
+      'build/**',
+      'coverage/**',
+      'public/**',
+      '**/*.min.js',
+      'packages/*/dist/**',
+      'packages/*/build/**',
+    ],
+  },
   {
     files: ['**/*.{js,jsx}'],
     extends: [js.configs.recommended, configPrettier],

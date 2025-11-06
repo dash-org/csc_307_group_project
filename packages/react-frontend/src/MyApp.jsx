@@ -1,5 +1,5 @@
 // src/MyApp.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import Table from './Table';
 import Form from './Form';
@@ -11,28 +11,31 @@ function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
   const API_PREFIX = 'http://localhost:8000';
   const [token, setToken] = useState(INVALID_TOKEN);
-  const [message, setMessage] = useState('');
+  const [, setMessage] = useState('');
   const [characters, setCharacters] = useState([]);
 
-  function addAuthHeader(otherHeaders = {}) {
-    if (token === INVALID_TOKEN) {
-      console.log('still invalid');
-      return otherHeaders;
-    } else {
-      console.log('adding token to header');
-      return {
-        ...otherHeaders,
-        Authorization: `Bearer ${token}`,
-      };
-    }
-  }
+  const addAuthHeader = useCallback(
+    (otherHeaders = {}) => {
+      if (token === INVALID_TOKEN) {
+        console.log('still invalid');
+        return otherHeaders;
+      } else {
+        console.log('adding token to header');
+        return {
+          ...otherHeaders,
+          Authorization: `Bearer ${token}`,
+        };
+      }
+    },
+    [token]
+  );
 
-  function fetchUsers() {
-    const promise = fetch('http://localhost:8000/users', {
+  const fetchUsers = useCallback(() => {
+    const promise = fetch(`${API_PREFIX}/users`, {
       headers: addAuthHeader(),
     });
     return promise;
-  }
+  }, [addAuthHeader]);
 
   useEffect(() => {
     console.log('jofifd');
@@ -49,7 +52,7 @@ function MyApp() {
       .catch((error) => {
         console.log(error);
       });
-  }, [token]);
+  }, [fetchUsers, token]);
 
   function loginUser(creds) {
     const promise = fetch(`${API_PREFIX}/login`, {
@@ -140,7 +143,7 @@ function MyApp() {
       .catch((error) => console.log(error));
   }
 
-  function updateList(person) {
+  function _updateList(person) {
     postUser(person)
       .then((res) => {
         if (res.status != 201) {

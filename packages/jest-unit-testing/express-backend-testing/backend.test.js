@@ -1,4 +1,11 @@
-import { jest } from '@jest/globals';
+import {
+  jest,
+  describe,
+  expect,
+  test,
+  beforeAll,
+  afterAll,
+} from '@jest/globals';
 jest.setTimeout(10000); //timout if longer than 10 seconds
 
 function fetchWithTimeout(url, options = {}, ms = 2000) {

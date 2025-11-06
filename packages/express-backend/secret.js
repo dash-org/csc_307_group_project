@@ -1,4 +1,4 @@
 let connectionString =
-  'mongodb+srv://<Username>:<Password>@cluster0.x4pm7rc.mongodb.net/';
+  'mongodb+srv://isaacericsson222:OLEfAQhUwgZGrBqg@cluster0.x4pm7rc.mongodb.net/';
 
 export default connectionString;
