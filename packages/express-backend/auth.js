@@ -20,13 +20,19 @@ export function registerUser(req, res) {
           .then((hashedPassword) => {
             generateAccessToken(username).then((token) => {
               console.log('Token:', token);
-              userServices.addUser({
-                name: username,
-                hashpassword: hashedPassword,
-              });
-              res
-                .status(201)
-                .send({ token: token, hashpassword: hashedPassword });
+              userServices
+                .addUser({
+                  name: username,
+                  hashpassword: hashedPassword,
+                })
+                .then(() =>
+                  res
+                    .status(201)
+                    .send({ token: token, hashpassword: hashedPassword })
+                )
+                .catch(() =>
+                  res.status(400).send('Failed to add user to database')
+                );
             });
           });
       }
