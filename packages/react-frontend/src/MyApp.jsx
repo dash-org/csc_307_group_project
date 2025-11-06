@@ -11,9 +11,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
   const API_PREFIX = 'http://localhost:8000';
-  const [token, setToken] = useState(INVALID_TOKEN);
+  const [token, setToken] = useState(
+    localStorage.getItem('authToken') ?? INVALID_TOKEN
+  );
   const [, setMessage] = useState('');
   const [characters, setCharacters] = useState([]);
+  const [error, setError] = useState(0);
 
   const addAuthHeader = useCallback(
     (otherHeaders = {}) => {
@@ -68,11 +71,16 @@ function MyApp() {
           return response.json();
         } else {
           setMessage(`Login Error ${response.status}: ${response.data}`);
+          setError(1);
+          console.log('test12345');
         }
       })
       .then((json) => {
         setToken(json.token);
+        localStorage.setItem('authToken', json.token);
         setMessage(`Login successful; auth token saved`);
+        window.location.assign('/');
+        setError(0);
         console.log('sanity check');
       })
       .catch((error) => {
@@ -94,6 +102,7 @@ function MyApp() {
         if (response.status === 201) {
           response.json().then((payload) => {
             setToken(payload.token);
+            localStorage.setItem('authToken', payload.token);
             postUser({
               name: creds.username,
               hashpassword: payload.hashpassword,
@@ -178,7 +187,7 @@ function MyApp() {
         {/* <Route path="/login" element={<Login handleSubmit={loginUser} />} />; */}
         <Route
           path="/login"
-          element={<LoginCentered handleSubmit={loginUser} />}
+          element={<LoginCentered handleSubmit={loginUser} error={error} />}
         />
         <Route
           path="/signup"

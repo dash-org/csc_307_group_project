@@ -1,9 +1,7 @@
 import './login.css';
-import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 
 export const LoginCentered = (props) => {
-  const navigate = useNavigate();
   const [creds, setCreds] = useState({
     username: '',
     pwd: '',
@@ -18,6 +16,13 @@ export const LoginCentered = (props) => {
 
         <div className="frame-2">
           <div className="text-wrapper-2">Log In</div>
+
+          <div
+            className="error"
+            style={{ display: props.error ? 'block' : 'none' }}
+          >
+            Incorrect Password or Username
+          </div>
 
           <div className="frame-3">
             <div className="frame-4">
@@ -98,7 +103,7 @@ export const LoginCentered = (props) => {
   }
 
   function submitForm() {
-    props.handleSubmit(creds).then(() => navigate('/'));
+    props.handleSubmit(creds);
     setCreds({ username: '', pwd: '' });
   }
 };
