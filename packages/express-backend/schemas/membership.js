@@ -25,7 +25,7 @@ const allowedPermissions = {
 };
 
 const membershipSchema = new mongoose.Schema({
-  inventoryId: {
+  kitchenId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Kitchen',
     required: true,

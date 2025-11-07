@@ -33,6 +33,10 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 });
 
+/**
+ * GET ROUTES
+ */
+
 app.get('/users', authenticateUser, (req, res) => {
   userServices
     .getUsers(req.query.name, req.query.createdAt)
@@ -57,70 +61,12 @@ app.get('/memberships', authenticateUser, (req, res) => {
     .catch((error) => console.log(error));
 });
 
-app.get('/inventories', authenticateUser, (req, res) => {
-  inventoryServices
-    .getInventory(
-      req.query.name,
-      req.query.createdBy,
-      req.query.createdAt,
-      req.query.items
-    )
-    .then((inventories) => {
-      return res.send({ inventory_list: inventories });
-    })
-    .catch((error) => console.log(error));
-});
-
-app.get('/items', authenticateUser, (req, res) => {
-  itemServices
-    .getItems(
-      req.query.name,
-      req.query.quantity,
-      req.query.description,
-      req.query.tags,
-      req.query.createdAt,
-      req.query.createdBy
-    )
-    .then((items) => {
-      return res.send({ item_list: items });
-    })
-    .catch((error) => console.log(error));
-});
-
-app.get('/kitchens', (req, res) => {
-  kitchenServices
-    .getKitchen(
-      req.query.name,
-      req.query.owner,
-      req.query.createdAt,
-      req.query.inventories ? req.query.inventories.split(',') : [],
-      req.query.memberships ? req.query.memberships.split(',') : []
-    )
-    .then((kitchens) => {
-      return res.send({ kitchen_list: kitchens });
-    })
-    .catch((error) => console.log(error));
-});
-
 app.get('/users/:id', authenticateUser, (req, res) => {
   const id = req.params['id'];
   userServices
     .findUserById(id)
     .then((user) => {
       res.send(user);
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(404).send('Resource not found.');
-    });
-});
-
-app.get('/items/:id', authenticateUser, (req, res) => {
-  const id = req.params['id'];
-  itemServices
-    .findItemById(id)
-    .then((item) => {
-      res.send(item);
     })
     .catch((error) => {
       console.log(error);
@@ -141,11 +87,22 @@ app.get('/memberships/:id', authenticateUser, (req, res) => {
     });
 });
 
-app.get('/inventories/:id', authenticateUser, (req, res) => {
-  const id = req.params['id'];
-  inventoryServices
-    .findInventoryById(id)
+app.get('/kitchens/:kitchenId/inventories/:id', authenticateUser, (req, res) => {
+  const kitchenId = req.params.kitchenId;
+  const id = req.params.id;
+  
+  kitchenServices
+    .findKitchenById(kitchenId)
+    .then((kitchen) => {
+      if (!kitchen) {
+        return res.status(404).send('Kitchen not found');
+      }
+      return inventoryServices.findInventoryById(id);
+    })
     .then((inventory) => {
+      if (!inventory) {
+        return res.status(404).send('Inventory not found');
+      }
       res.send(inventory);
     })
     .catch((error) => {
@@ -155,6 +112,7 @@ app.get('/inventories/:id', authenticateUser, (req, res) => {
 });
 
 app.get('/kitchens/:id', (req, res) => {
+  // Includes list of inventories within this kitchen
   const id = req.params['id'];
 
   kitchenServices
@@ -168,19 +126,24 @@ app.get('/kitchens/:id', (req, res) => {
     });
 });
 
-app.get('/kitchens/:id', (req, res) => {
-  const id = req.params['id'];
-
+app.get('/kitchens', (req, res) => {
+  // List all kitchens. Will not include inventories. Use kitchens/:id to get inventories
   kitchenServices
-    .findKitchenById(id)
-    .then((kitchen) => {
-      res.send(kitchen);
+    .getKitchen(
+      req.query.name,
+      req.query.owner,
+      req.query.createdAt,
+      req.query.memberships ? req.query.memberships.split(',') : []
+    )
+    .then((kitchens) => {
+      return res.send({ kitchen_list: kitchens });
     })
-    .catch((error) => {
-      console.log(error);
-      res.status(404).send('Resource not found.');
-    });
+    .catch((error) => console.log(error));
 });
+
+/**
+ * POST ROUTES
+ */
 
 app.post('/users', authenticateUser, (req, res) => {
   let userToAdd = req.body;
@@ -191,19 +154,6 @@ app.post('/users', authenticateUser, (req, res) => {
       userToAdd = user;
 
       res.status(201).send(userToAdd);
-    })
-    .catch((error) => console.log(error));
-});
-
-app.post('/items', authenticateUser, (req, res) => {
-  let itemToAdd = req.body;
-  itemToAdd.createdBy = req.userId;
-  
-  itemServices
-    .addItem(itemToAdd)
-    .then((item) => {
-      itemToAdd = item;
-      res.status(201).send(itemToAdd);
     })
     .catch((error) => console.log(error));
 });
@@ -221,17 +171,55 @@ app.post('/memberships', authenticateUser, (req, res) => {
     .catch((error) => console.log(error));
 });
 
-app.post('/inventories', authenticateUser, (req, res) => {
+app.post('/kitchens/:kitchenId/inventories/:inventoryId/items', authenticateUser, (req, res) => {
+  const kitchenId = req.params.kitchenId;
+  const inventoryId = req.params.inventoryId;
+  let itemToAdd = req.body;
+  itemToAdd.createdBy = req.userId;
+
+  kitchenServices
+    .findKitchenById(kitchenId)
+    .then((kitchen) => {
+      if (!kitchen) {
+        return res.status(404).send('Kitchen not found');
+      }
+      return inventoryServices.addItemToInventory(inventoryId, itemToAdd);
+    })
+    .then((inventory) => {
+      const addedItem = inventory.items[inventory.items.length - 1];
+      res.status(201).send(addedItem);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send('Error adding item');
+    });
+});
+
+app.post('/kitchens/:kitchenId/inventories', authenticateUser, (req, res) => {
+  const kitchenId = req.params.kitchenId;
   let inventoryToAdd = req.body;
   inventoryToAdd.createdBy = req.userId;
-  
-  inventoryServices
-    .addInventory(inventoryToAdd)
-    .then((inventory) => {
-      inventoryToAdd = inventory;
-      res.status(201).send(inventoryToAdd);
+
+  kitchenServices
+    .findKitchenById(kitchenId)
+    .then((kitchen) => {
+      if (!kitchen) {
+        return res.status(404).send('Kitchen not found');
+      }
+
+      return inventoryServices.addInventory(inventoryToAdd);
     })
-    .catch((error) => console.log(error));
+    .then((inventory) => {
+      return kitchenServices.addInventoryToKitchen(kitchenId, inventory._id)
+        .then(() => inventory);
+    })
+    .then((inventory) => {
+      res.status(201).send(inventory);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send('Error creating inventory');
+    });
 });
 
 app.post('/kitchens', authenticateUser, (req, res) => {
@@ -247,26 +235,16 @@ app.post('/kitchens', authenticateUser, (req, res) => {
     .catch((error) => console.log(error));
 });
 
+/**
+ * DELETE ROUTES
+ */
+
 app.delete('/users/:id', authenticateUser, (req, res) => {
   const id = req.params['id'];
   userServices
     .deleteUserById(id)
     .then((user) => {
       console.log(`Deleted user ${user._id}`);
-      res.status(204).send();
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(404).send();
-    });
-});
-
-app.delete('/items/:id', authenticateUser, (req, res) => {
-  const id = req.params['id'];
-  itemServices
-    .deleteItemById(id)
-    .then((item) => {
-      console.log(`Deleted item ${item._id}`);
       res.status(204).send();
     })
     .catch((error) => {
@@ -289,17 +267,51 @@ app.delete('/memberships/:id', authenticateUser, (req, res) => {
     });
 });
 
-app.delete('/inventories/:id', authenticateUser, (req, res) => {
-  const id = req.params['id'];
-  inventoryServices
-    .deleteInventoryById(id)
+app.delete('/kitchens/:kitchenId/inventories/:inventoryId/items/:id', authenticateUser, (req, res) => {
+  const kitchenId = req.params.kitchenId;
+  const inventoryId = req.params.inventoryId;
+  const id = req.params.id;
+
+  kitchenServices
+    .findKitchenById(kitchenId)
+    .then((kitchen) => {
+      if (!kitchen) {
+        return res.status(404).send('Kitchen not found');
+      }
+      return inventoryServices.removeItemFromInventory(inventoryId, id);
+    })
     .then((inventory) => {
-      console.log(`Deleted inventory ${inventory.id}`);
+      if (!inventory) {
+        return res.status(404).send('Inventory not found');
+      }
+      console.log(`Deleted item ${id}`);
       res.status(204).send();
     })
     .catch((error) => {
       console.log(error);
-      res.status(404).send();
+      res.status(500).send('Error deleting item');
+    });
+});
+
+app.delete('/kitchens/:kitchenId/inventories/:id', authenticateUser, (req, res) => {
+  const kitchenId = req.params.kitchenId;
+  const id = req.params.id;
+  
+  inventoryServices
+    .deleteInventoryById(id)
+    .then((inventory) => {
+      if (!inventory) {
+        return res.status(404).send('Inventory not found');
+      }
+      return kitchenServices.removeInventoryFromKitchen(kitchenId, id);
+    })
+    .then(() => {
+      console.log(`Deleted inventory ${id}`);
+      res.status(204).send();
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send('Error deleting inventory');
     });
 });
 
