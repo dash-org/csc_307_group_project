@@ -1,7 +1,7 @@
 To run the front end, run `npm run dev` from root
 
 To run the backend end for the first time,
-first create your .env file
+first create your .env file in express-backend
 past in and then fill out
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.x4pm7rc.mongodb.net/<dbname>?retryWrites=true&w=majority
 TOKEN_SECRET=change-this-to-a-long-random-string
