@@ -28,6 +28,10 @@ const port = 8000;
 app.use(express.json());
 app.use(cors());
 
+/**
+ * NON AUTH ROUTES
+ */
+
 app.post('/signup', registerUser);
 
 app.post('/login', loginUser);
@@ -40,28 +44,24 @@ app.get('/', (req, res) => {
  * GET ROUTES
  */
 
-app.get('/users', authenticateUser, (req, res) => {
+app.get('/users/:userId/memberships', authenticateUser, (req, res) => {
+  const userId = req.params.userId;
+  
   userServices
-    .getUsers(req.query.name, req.query.createdAt)
-    .then((users) => {
-      return res.send({ users_list: users });
+    .findUserById(userId)
+    .then((user) => {
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+      return memberServices.getMembersByUserId(userId);
     })
-    .catch((error) => console.log(error));
-});
-
-app.get('/memberships', authenticateUser, (req, res) => {
-  memberServices
-    .getMembers(
-      req.query.userId,
-      req.query.role,
-      req.query.permissions,
-      req.query.addedAt,
-      req.query.createdBy
-    )
-    .then((members) => {
-      return res.send({ members_list: members });
+    .then((memberships) => {
+      res.send({ members_list: memberships });
     })
-    .catch((error) => console.log(error));
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send('Error fetching memberships');
+    });
 });
 
 app.get('/users/:id', authenticateUser, (req, res) => {
@@ -77,16 +77,32 @@ app.get('/users/:id', authenticateUser, (req, res) => {
     });
 });
 
-app.get('/memberships/:id', authenticateUser, (req, res) => {
-  const id = req.params['id'];
-  memberServices
-    .findMemberById(id)
-    .then((member) => {
-      res.send(member);
+app.get('/users', authenticateUser, (req, res) => {
+  userServices
+    .getUsers(req.query.name, req.query.createdAt)
+    .then((users) => {
+      return res.send({ users_list: users });
+    })
+    .catch((error) => console.log(error));
+});
+
+app.get('/kitchens/:kitchenId/memberships', authenticateUser, (req, res) => {
+  const kitchenId = req.params.kitchenId;
+  
+  kitchenServices
+    .findKitchenById(kitchenId)
+    .then((kitchen) => {
+      if (!kitchen) {
+        return res.status(404).send('Kitchen not found');
+      }
+      return memberServices.getMembersByKitchenId(kitchenId);
+    })
+    .then((memberships) => {
+      res.send({ members_list: memberships });
     })
     .catch((error) => {
       console.log(error);
-      res.status(404).send('Resource not found.');
+      res.status(500).send('Error fetching memberships');
     });
 });
 

@@ -1,4 +1,5 @@
 import userModel from '../schemas/user.js';
+import memberModel from '../schemas/member.js';
 
 function getUsers(name, createdAt) {
   let promise = userModel.find();
@@ -24,7 +25,8 @@ function addUser(user) {
 }
 
 function deleteUserById(id) {
-  return userModel.deleteOne({ _id: id });
+  return memberModel.deleteMany({ userId: id })
+    .then(() => userModel.deleteOne({ _id: id }));
 }
 
 export default {
