@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import userServices from './services/user-services.js';
 import mongoose from 'mongoose';
-import connectionString from './secret.js';
+import dotenv from 'dotenv';
 import memberServices from './services/member-services.js';
 import inventoryServices from './services/inventory-services.js';
 import itemServices from './services/item-services.js';
@@ -11,6 +11,9 @@ import kitchenServices from './services/kitchen-services.js';
 import { registerUser, authenticateUser, loginUser } from './auth.js';
 
 mongoose.set('debug', true);
+
+dotenv.config();
+const connectionString = process.env.MONGODB_URI;
 
 mongoose
   .connect(connectionString, {
