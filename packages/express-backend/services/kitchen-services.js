@@ -31,18 +31,19 @@ function findKitchenById(id) {
 function addKitchen(kitchen) {
   const kitchenToAdd = new kitchenModel(kitchen);
   let savedKitchen;
-  
-  return kitchenToAdd.save()
+
+  return kitchenToAdd
+    .save()
     .then((kitchen) => {
       savedKitchen = kitchen;
-      
+
       const adminMembership = new memberModel({
         userId: kitchen.owner,
         kitchenId: kitchen._id,
         role: 'admin',
-        permissions: []
+        permissions: [],
       });
-      
+
       return adminMembership.save();
     })
     .then((membership) => {
@@ -55,19 +56,19 @@ function addKitchen(kitchen) {
 }
 
 function deleteKitchenById(id) {
-  return kitchenModel.findById(id)
-    .then((kitchen) => {
-      if (!kitchen) {
-        throw new Error('Kitchen not found');
-      }
-      
-      const inventoryIds = kitchen.inventories;
-      const membershipIds = kitchen.memberships;
-      
-      return inventoryModel.deleteMany({ _id: { $in: inventoryIds } })
-        .then(() => memberModel.deleteMany({ _id: { $in: membershipIds } }))
-        .then(() => kitchenModel.deleteOne({ _id: id }));
-    });
+  return kitchenModel.findById(id).then((kitchen) => {
+    if (!kitchen) {
+      throw new Error('Kitchen not found');
+    }
+
+    const inventoryIds = kitchen.inventories;
+    const membershipIds = kitchen.memberships;
+
+    return inventoryModel
+      .deleteMany({ _id: { $in: inventoryIds } })
+      .then(() => memberModel.deleteMany({ _id: { $in: membershipIds } }))
+      .then(() => kitchenModel.deleteOne({ _id: id }));
+  });
 }
 
 function addInventoryToKitchen(kitchenId, inventoryId) {

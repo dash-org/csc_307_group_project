@@ -25,7 +25,8 @@ function addUser(user) {
 }
 
 function deleteUserById(id) {
-  return memberModel.deleteMany({ userId: id })
+  return memberModel
+    .deleteMany({ userId: id })
     .then(() => userModel.deleteOne({ _id: id }));
 }
 

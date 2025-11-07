@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
 
 app.get('/users/:userId/memberships', authenticateUser, (req, res) => {
   const userId = req.params.userId;
-  
+
   userServices
     .findUserById(userId)
     .then((user) => {
@@ -88,7 +88,7 @@ app.get('/users', authenticateUser, (req, res) => {
 
 app.get('/kitchens/:kitchenId/memberships', authenticateUser, (req, res) => {
   const kitchenId = req.params.kitchenId;
-  
+
   kitchenServices
     .findKitchenById(kitchenId)
     .then((kitchen) => {
