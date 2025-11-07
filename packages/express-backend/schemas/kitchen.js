@@ -35,13 +35,6 @@ const kitchenSchema = new mongoose.Schema({
     },
   ],
 
-  memberships: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Membership',
-    },
-  ],
-
   createdAt: { type: Date, default: Date.now },
 });
 

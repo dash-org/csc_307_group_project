@@ -133,7 +133,6 @@ app.get('/kitchens', (req, res) => {
       req.query.name,
       req.query.owner,
       req.query.createdAt,
-      req.query.memberships ? req.query.memberships.split(',') : []
     )
     .then((kitchens) => {
       return res.send({ kitchen_list: kitchens });

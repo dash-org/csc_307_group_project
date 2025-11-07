@@ -1,7 +1,7 @@
 import kitchenModel from '../schemas/kitchen.js';
 import inventoryModel from '../schemas/inventory.js';
 
-function getKitchen(name, owner, createdAt, memberships) {
+function getKitchen(name, owner, createdAt) {
   let promise = kitchenModel.find().select('-inventories');
 
   if (name) {
@@ -12,9 +12,6 @@ function getKitchen(name, owner, createdAt, memberships) {
   }
   if (createdAt) {
     promise = promise.find({ createdAt });
-  }
-  if (memberships && memberships.length > 0) {
-    promise = promise.find({ memberships: { $all: memberships } });
   }
 
   return promise;
@@ -27,7 +24,6 @@ function findKitchenById(id) {
       path: 'inventories',
       select: '-items' // exclude the 'items' field
     })
-    .populate('memberships')
     .populate('owner');
 }
 
