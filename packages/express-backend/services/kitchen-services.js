@@ -30,7 +30,28 @@ function findKitchenById(id) {
 
 function addKitchen(kitchen) {
   const kitchenToAdd = new kitchenModel(kitchen);
-  return kitchenToAdd.save();
+  let savedKitchen;
+  
+  return kitchenToAdd.save()
+    .then((kitchen) => {
+      savedKitchen = kitchen;
+      
+      const adminMembership = new memberModel({
+        userId: kitchen.owner,
+        kitchenId: kitchen._id,
+        role: 'admin',
+        permissions: []
+      });
+      
+      return adminMembership.save();
+    })
+    .then((membership) => {
+      return kitchenModel.findByIdAndUpdate(
+        savedKitchen._id,
+        { $push: { memberships: membership._id } },
+        { new: true }
+      );
+    });
 }
 
 function deleteKitchenById(id) {
