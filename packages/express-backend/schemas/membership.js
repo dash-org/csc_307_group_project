@@ -25,7 +25,7 @@ const allowedPermissions = {
 };
 
 const membershipSchema = new mongoose.Schema({
-  inventoryId: {
+  kitchenId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Kitchen',
     required: true,
@@ -45,6 +45,11 @@ const membershipSchema = new mongoose.Schema({
     },
   },
   addedAt: { type: Date, default: Date.now },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 membershipSchema.index({ inventoryId: 1, userId: 1 }, { unique: true });

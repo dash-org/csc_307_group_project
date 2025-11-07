@@ -1,7 +1,8 @@
 import kitchenModel from '../schemas/kitchen.js';
+import inventoryModel from '../schemas/inventory.js';
 
-function getKitchen(name, owner, createdAt, inventories, memberships) {
-  let promise = kitchenModel.find();
+function getKitchen(name, owner, createdAt) {
+  let promise = kitchenModel.find().select('-inventories');
 
   if (name) {
     promise = promise.find({ name });
@@ -12,12 +13,6 @@ function getKitchen(name, owner, createdAt, inventories, memberships) {
   if (createdAt) {
     promise = promise.find({ createdAt });
   }
-  if (inventories && inventories.length > 0) {
-    promise = promise.find({ inventories: { $all: inventories } });
-  }
-  if (memberships && memberships.length > 0) {
-    promise = promise.find({ memberships: { $all: memberships } });
-  }
 
   return promise;
 }
@@ -25,8 +20,10 @@ function getKitchen(name, owner, createdAt, inventories, memberships) {
 function findKitchenById(id) {
   return kitchenModel
     .findById(id)
-    .populate('inventories')
-    .populate('memberships')
+    .populate({
+      path: 'inventories',
+      select: '-items' // exclude the 'items' field
+    })
     .populate('owner');
 }
 
@@ -36,7 +33,33 @@ function addKitchen(kitchen) {
 }
 
 function deleteKitchenById(id) {
-  return kitchenModel.deleteOne({ _id: id });
+  return kitchenModel.findById(id)
+    .then((kitchen) => {
+      if (!kitchen) {
+        throw new Error('Kitchen not found');
+      }
+      
+      const inventoryIds = kitchen.inventories;
+      
+      return inventoryModel.deleteMany({ _id: { $in: inventoryIds } })
+        .then(() => kitchenModel.deleteOne({ _id: id }));
+    });
+}
+
+function addInventoryToKitchen(kitchenId, inventoryId) {
+  return kitchenModel.findByIdAndUpdate(
+    kitchenId,
+    { $push: { inventories: inventoryId } },
+    { new: true }
+  );
+}
+
+function removeInventoryFromKitchen(kitchenId, inventoryId) {
+  return kitchenModel.findByIdAndUpdate(
+    kitchenId,
+    { $pull: { inventories: inventoryId } },
+    { new: true }
+  );
 }
 
 export default {
@@ -44,4 +67,6 @@ export default {
   findKitchenById,
   addKitchen,
   deleteKitchenById,
+  addInventoryToKitchen,
+  removeInventoryFromKitchen,
 };
