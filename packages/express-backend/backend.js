@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import memberServices from './services/member-services.js';
 import inventoryServices from './services/inventory-services.js';
-import itemServices from './services/item-services.js';
+// import itemServices from './services/item-services.js';
 import kitchenServices from './services/kitchen-services.js';
 import { registerUser, authenticateUser, loginUser } from './auth.js';
 
@@ -90,29 +90,33 @@ app.get('/memberships/:id', authenticateUser, (req, res) => {
     });
 });
 
-app.get('/kitchens/:kitchenId/inventories/:id', authenticateUser, (req, res) => {
-  const kitchenId = req.params.kitchenId;
-  const id = req.params.id;
-  
-  kitchenServices
-    .findKitchenById(kitchenId)
-    .then((kitchen) => {
-      if (!kitchen) {
-        return res.status(404).send('Kitchen not found');
-      }
-      return inventoryServices.findInventoryById(id);
-    })
-    .then((inventory) => {
-      if (!inventory) {
-        return res.status(404).send('Inventory not found');
-      }
-      res.send(inventory);
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(404).send('Resource not found.');
-    });
-});
+app.get(
+  '/kitchens/:kitchenId/inventories/:id',
+  authenticateUser,
+  (req, res) => {
+    const kitchenId = req.params.kitchenId;
+    const id = req.params.id;
+
+    kitchenServices
+      .findKitchenById(kitchenId)
+      .then((kitchen) => {
+        if (!kitchen) {
+          return res.status(404).send('Kitchen not found');
+        }
+        return inventoryServices.findInventoryById(id);
+      })
+      .then((inventory) => {
+        if (!inventory) {
+          return res.status(404).send('Inventory not found');
+        }
+        res.send(inventory);
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(404).send('Resource not found.');
+      });
+  }
+);
 
 app.get('/kitchens/:id', (req, res) => {
   // Includes list of inventories within this kitchen
@@ -132,11 +136,7 @@ app.get('/kitchens/:id', (req, res) => {
 app.get('/kitchens', (req, res) => {
   // List all kitchens. Will not include inventories. Use kitchens/:id to get inventories
   kitchenServices
-    .getKitchen(
-      req.query.name,
-      req.query.owner,
-      req.query.createdAt,
-    )
+    .getKitchen(req.query.name, req.query.owner, req.query.createdAt)
     .then((kitchens) => {
       return res.send({ kitchen_list: kitchens });
     })
@@ -173,29 +173,33 @@ app.post('/memberships', authenticateUser, (req, res) => {
     .catch((error) => console.log(error));
 });
 
-app.post('/kitchens/:kitchenId/inventories/:inventoryId/items', authenticateUser, (req, res) => {
-  const kitchenId = req.params.kitchenId;
-  const inventoryId = req.params.inventoryId;
-  let itemToAdd = req.body;
-  itemToAdd.createdBy = req.userId;
+app.post(
+  '/kitchens/:kitchenId/inventories/:inventoryId/items',
+  authenticateUser,
+  (req, res) => {
+    const kitchenId = req.params.kitchenId;
+    const inventoryId = req.params.inventoryId;
+    let itemToAdd = req.body;
+    itemToAdd.createdBy = req.userId;
 
-  kitchenServices
-    .findKitchenById(kitchenId)
-    .then((kitchen) => {
-      if (!kitchen) {
-        return res.status(404).send('Kitchen not found');
-      }
-      return inventoryServices.addItemToInventory(inventoryId, itemToAdd);
-    })
-    .then((inventory) => {
-      const addedItem = inventory.items[inventory.items.length - 1];
-      res.status(201).send(addedItem);
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).send('Error adding item');
-    });
-});
+    kitchenServices
+      .findKitchenById(kitchenId)
+      .then((kitchen) => {
+        if (!kitchen) {
+          return res.status(404).send('Kitchen not found');
+        }
+        return inventoryServices.addItemToInventory(inventoryId, itemToAdd);
+      })
+      .then((inventory) => {
+        const addedItem = inventory.items[inventory.items.length - 1];
+        res.status(201).send(addedItem);
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send('Error adding item');
+      });
+  }
+);
 
 app.post('/kitchens/:kitchenId/inventories', authenticateUser, (req, res) => {
   const kitchenId = req.params.kitchenId;
@@ -212,7 +216,8 @@ app.post('/kitchens/:kitchenId/inventories', authenticateUser, (req, res) => {
       return inventoryServices.addInventory(inventoryToAdd);
     })
     .then((inventory) => {
-      return kitchenServices.addInventoryToKitchen(kitchenId, inventory._id)
+      return kitchenServices
+        .addInventoryToKitchen(kitchenId, inventory._id)
         .then(() => inventory);
     })
     .then((inventory) => {
@@ -227,7 +232,7 @@ app.post('/kitchens/:kitchenId/inventories', authenticateUser, (req, res) => {
 app.post('/kitchens', authenticateUser, (req, res) => {
   let kitchenToAdd = req.body;
   kitchenToAdd.owner = req.userId;
-  
+
   kitchenServices
     .addKitchen(kitchenToAdd)
     .then((kitchen) => {
@@ -269,53 +274,61 @@ app.delete('/memberships/:id', authenticateUser, (req, res) => {
     });
 });
 
-app.delete('/kitchens/:kitchenId/inventories/:inventoryId/items/:id', authenticateUser, (req, res) => {
-  const kitchenId = req.params.kitchenId;
-  const inventoryId = req.params.inventoryId;
-  const id = req.params.id;
+app.delete(
+  '/kitchens/:kitchenId/inventories/:inventoryId/items/:id',
+  authenticateUser,
+  (req, res) => {
+    const kitchenId = req.params.kitchenId;
+    const inventoryId = req.params.inventoryId;
+    const id = req.params.id;
 
-  kitchenServices
-    .findKitchenById(kitchenId)
-    .then((kitchen) => {
-      if (!kitchen) {
-        return res.status(404).send('Kitchen not found');
-      }
-      return inventoryServices.removeItemFromInventory(inventoryId, id);
-    })
-    .then((inventory) => {
-      if (!inventory) {
-        return res.status(404).send('Inventory not found');
-      }
-      console.log(`Deleted item ${id}`);
-      res.status(204).send();
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).send('Error deleting item');
-    });
-});
+    kitchenServices
+      .findKitchenById(kitchenId)
+      .then((kitchen) => {
+        if (!kitchen) {
+          return res.status(404).send('Kitchen not found');
+        }
+        return inventoryServices.removeItemFromInventory(inventoryId, id);
+      })
+      .then((inventory) => {
+        if (!inventory) {
+          return res.status(404).send('Inventory not found');
+        }
+        console.log(`Deleted item ${id}`);
+        res.status(204).send();
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send('Error deleting item');
+      });
+  }
+);
 
-app.delete('/kitchens/:kitchenId/inventories/:id', authenticateUser, (req, res) => {
-  const kitchenId = req.params.kitchenId;
-  const id = req.params.id;
-  
-  inventoryServices
-    .deleteInventoryById(id)
-    .then((inventory) => {
-      if (!inventory) {
-        return res.status(404).send('Inventory not found');
-      }
-      return kitchenServices.removeInventoryFromKitchen(kitchenId, id);
-    })
-    .then(() => {
-      console.log(`Deleted inventory ${id}`);
-      res.status(204).send();
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).send('Error deleting inventory');
-    });
-});
+app.delete(
+  '/kitchens/:kitchenId/inventories/:id',
+  authenticateUser,
+  (req, res) => {
+    const kitchenId = req.params.kitchenId;
+    const id = req.params.id;
+
+    inventoryServices
+      .deleteInventoryById(id)
+      .then((inventory) => {
+        if (!inventory) {
+          return res.status(404).send('Inventory not found');
+        }
+        return kitchenServices.removeInventoryFromKitchen(kitchenId, id);
+      })
+      .then(() => {
+        console.log(`Deleted inventory ${id}`);
+        res.status(204).send();
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send('Error deleting inventory');
+      });
+  }
+);
 
 app.delete('/kitchens/:id', (req, res) => {
   const id = req.params['id'];

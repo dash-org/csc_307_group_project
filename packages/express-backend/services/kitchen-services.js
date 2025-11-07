@@ -22,7 +22,7 @@ function findKitchenById(id) {
     .findById(id)
     .populate({
       path: 'inventories',
-      select: '-items' // exclude the 'items' field
+      select: '-items', // exclude the 'items' field
     })
     .populate('owner');
 }
@@ -33,17 +33,17 @@ function addKitchen(kitchen) {
 }
 
 function deleteKitchenById(id) {
-  return kitchenModel.findById(id)
-    .then((kitchen) => {
-      if (!kitchen) {
-        throw new Error('Kitchen not found');
-      }
-      
-      const inventoryIds = kitchen.inventories;
-      
-      return inventoryModel.deleteMany({ _id: { $in: inventoryIds } })
-        .then(() => kitchenModel.deleteOne({ _id: id }));
-    });
+  return kitchenModel.findById(id).then((kitchen) => {
+    if (!kitchen) {
+      throw new Error('Kitchen not found');
+    }
+
+    const inventoryIds = kitchen.inventories;
+
+    return inventoryModel
+      .deleteMany({ _id: { $in: inventoryIds } })
+      .then(() => kitchenModel.deleteOne({ _id: id }));
+  });
 }
 
 function addInventoryToKitchen(kitchenId, inventoryId) {

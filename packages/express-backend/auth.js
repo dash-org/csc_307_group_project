@@ -18,17 +18,19 @@ export function registerUser(req, res) {
           .genSalt(10)
           .then((salt) => bcrypt.hash(pwd, salt))
           .then((hashedPassword) => {
-            userServices.addUser({
-              name: username,
-              hashpassword: hashedPassword,
-            }).then((newUser) => {
-              generateAccessToken(newUser._id).then((token) => {
-                console.log('Token:', token);
-                res
-                  .status(201)
-                  .send({ token: token, hashpassword: hashedPassword });
+            userServices
+              .addUser({
+                name: username,
+                hashpassword: hashedPassword,
+              })
+              .then((newUser) => {
+                generateAccessToken(newUser._id).then((token) => {
+                  console.log('Token:', token);
+                  res
+                    .status(201)
+                    .send({ token: token, hashpassword: hashedPassword });
+                });
               });
-            });
           });
       }
     });
