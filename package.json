@@ -4,13 +4,15 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "npm run test --workspace jest-unit-testing",
-    "dev": "npm run dev --workspace react-frontend",
+    "test": "npm run test:backend --prefix packages/jest-unit-testing",
+    "frontend": "npm run dev --workspace react-frontend",
     "format": "prettier --write .",
     "check-format": "prettier --check .",
     "lint": "npx eslint . && npx prettier --check .",
     "lint-fix": "eslint . --fix",
-    "start": "node backend_with_db.js"
+    "start": "node backend_with_db.js",
+    "backend": "npm run dev --workspace express-backend",
+    "test:workflow": "(npm run backend &) && (npm run frontend &) && sleep 5 && npm test && pkill -f 'npm run backend' && pkill -f 'npm run frontend'"
   },
   "author": "",
   "license": "ISC",
