@@ -1,0 +1,142 @@
+import React from "react";
+import calendar from "./calendar.png";
+import chat from "./chat.png";
+import controlPanel from "./control-panel.png";
+import googleWebSearch from "./google-web-search.png";
+import highImportance from "./high-importance.png";
+import image from "./image.png";
+import playlist from "./playlist.png";
+import plus2 from "./plus-2.png";
+import plus from "./plus.png";
+import search from "./search.png";
+import settings from "./settings.png";
+import shoppingBag from "./shopping-bag.png";
+import "./style.css";
+import testAccount from "./test-account.png";
+
+export const DashboardEmpty = () => {
+  return (
+    <div className="dashboard-empty">
+      <div className="text-wrapper">SIDER</div>
+
+      <div className="rectangle" />
+
+      <div className="div" />
+
+      <div className="rectangle-2" />
+
+      <div className="text-wrapper-2">Dashboard</div>
+
+      <div className="text-wrapper-3">Home</div>
+
+      <div className="text-wrapper-4">Supplies</div>
+
+      <div className="ellipse" />
+
+      <div className="ellipse-2" />
+
+      <div className="ellipse-3" />
+
+      <div className="ellipse-4" />
+
+      <div className="ellipse-5" />
+
+      <div className="ellipse-6" />
+
+      <div className="ellipse-7" />
+
+      <img className="control-panel" alt="Control panel" src={controlPanel} />
+
+      <img className="calendar" alt="Calendar" src={calendar} />
+
+      <img className="shopping-bag" alt="Shopping bag" src={shoppingBag} />
+
+      <img className="playlist" alt="Playlist" src={playlist} />
+
+      <img className="chat" alt="Chat" src={chat} />
+
+      <img
+        className="high-importance"
+        alt="High importance"
+        src={highImportance}
+      />
+
+      <img className="test-account" alt="Test account" src={testAccount} />
+
+      <div className="rectangle-3" />
+
+      <img className="search" alt="Search" src={search} />
+
+      <div className="text-wrapper-5">Search Tasks</div>
+
+      <img className="settings" alt="Settings" src={settings} />
+
+      <div className="rectangle-4" />
+
+      <div className="rectangle-5" />
+
+      <div className="rectangle-6" />
+
+      <div className="rectangle-7" />
+
+      <div className="text-wrapper-6">To-Do List</div>
+
+      <div className="text-wrapper-7">Inventory</div>
+
+      <div className="text-wrapper-8">Activity</div>
+
+      <div className="text-wrapper-9">Reminder</div>
+
+      <div className="text-wrapper-10">Inventory Dashboard</div>
+
+      <div className="rectangle-8" />
+
+      <div className="rectangle-9" />
+
+      <div className="rectangle-10" />
+
+      <div className="rectangle-11" />
+
+      <div className="wallet-wanted">
+        Wallet: $0
+        <br />
+        <br />
+        Wanted Items: $0
+      </div>
+
+      <img className="plus" alt="Plus" src={image} />
+
+      <img className="img" alt="Plus" src={plus2} />
+
+      <img className="plus-2" alt="Plus" src={plus} />
+
+      <img
+        className="google-web-search"
+        alt="Google web search"
+        src={googleWebSearch}
+      />
+
+      <div className="text-wrapper-11">Nothing to do..</div>
+
+      <div className="text-wrapper-12">Empty cabinets..</div>
+
+      <div className="text-wrapper-13">No reminders..</div>
+
+      <div className="text-wrapper-14">No activity to report..</div>
+
+      <div className="text-wrapper-15">Settings</div>
+
+      <div className="text-wrapper-16">Reminders</div>
+
+      <div className="text-wrapper-17">Home</div>
+
+      <div className="text-wrapper-18">Shopping List</div>
+
+      <div className="text-wrapper-19">Members</div>
+
+      <div className="text-wrapper-20">About</div>
+
+      <div className="text-wrapper-21">Chat</div>
+    </div>
+  );
+};
