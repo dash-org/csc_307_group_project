@@ -1,5 +1,5 @@
 import userModel from '../schemas/user.js';
-import memberModel from '../schemas/member.js';
+import memberModel from '../schemas/membership.js';
 
 function getUsers(name, createdAt) {
   let promise = userModel.find();

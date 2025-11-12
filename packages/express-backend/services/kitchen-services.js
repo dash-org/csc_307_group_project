@@ -1,6 +1,6 @@
 import kitchenModel from '../schemas/kitchen.js';
 import inventoryModel from '../schemas/inventory.js';
-import memberModel from '../schemas/member.js';
+import memberModel from '../schemas/membership.js';
 
 function getKitchen(name, owner, createdAt) {
   let promise = kitchenModel.find().select('-inventories');
