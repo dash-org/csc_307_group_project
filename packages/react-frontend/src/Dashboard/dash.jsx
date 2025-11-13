@@ -1,18 +1,18 @@
 import React from "react";
-import calendar from "./calendar.png";
-import chat from "./chat.png";
-import controlPanel from "./control-panel.png";
-import googleWebSearch from "./google-web-search.png";
-import highImportance from "./high-importance.png";
+import calendar from "./Images/calendar.png";
+import chat from "./Images/chat.png";
+import controlPanel from "./Images/control-panel.png";
+import googleWebSearch from "./Images/google-web-search.png";
+import highImportance from "./Images/high-importance.png";
 import image from "./image.png";
-import playlist from "./playlist.png";
-import plus2 from "./plus-2.png";
-import plus from "./plus.png";
-import search from "./search.png";
-import settings from "./settings.png";
-import shoppingBag from "./shopping-bag.png";
+import playlist from "./Images/playlist.png";
+import plus2 from "./plus-2.png"; //
+import plus from "./Images/plus.png";
+import search from "./Images/search.png"; //
+import settings from "./Images/settings.png";
+import shoppingBag from "./Images/shopping-bag.png";
 import "./style.css";
-import testAccount from "./test-account.png";
+import testAccount from "./Images/test-account.png";
 
 export const DashboardEmpty = () => {
   return (
