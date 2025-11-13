@@ -6,9 +6,8 @@ import googleWebSearch from "./Images/google-web-search.png";
 import highImportance from "./Images/high-importance.png";
 import image from "./image.png";
 import playlist from "./Images/playlist.png";
-import plus2 from "./plus-2.png"; //
 import plus from "./Images/plus.png";
-import search from "./Images/search.png"; //
+import search from "./Images/search.png"; 
 import settings from "./Images/settings.png";
 import shoppingBag from "./Images/shopping-bag.png";
 import "./style.css";
@@ -106,7 +105,7 @@ export const DashboardEmpty = () => {
 
       <img className="plus" alt="Plus" src={image} />
 
-      <img className="img" alt="Plus" src={plus2} />
+      <img className="img" alt="Plus" src={plus} />
 
       <img className="plus-2" alt="Plus" src={plus} />
 

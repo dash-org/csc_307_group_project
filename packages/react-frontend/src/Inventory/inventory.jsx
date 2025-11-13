@@ -5,7 +5,7 @@ import controlPanel from "./Images/control-panel.png";
 import highImportance from "./Images/high-importance.png";
 import playlist from "./Images/playlist.png";
 import plus from "./Images/plus.png";
-import search from "./Images/search.png"; //
+import search from "./Images/search.png"; 
 import settings from "./Images/settings.png";
 import shoppingBag from "./Images/shopping-bag.png";
 import "./style.css";
