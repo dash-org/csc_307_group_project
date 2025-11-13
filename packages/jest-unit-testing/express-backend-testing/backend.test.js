@@ -1,4 +1,5 @@
 //file for testing the backend server using jest!
+//Comment for DEMO!
 
 import { jest, describe, expect, test, afterAll } from '@jest/globals';
 jest.setTimeout(10000); //timout if longer than 10 seconds
