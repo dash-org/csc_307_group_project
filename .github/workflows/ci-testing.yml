@@ -35,24 +35,8 @@ jobs:
 
       - name: lint throughout frontend
         run: npm run -w react-frontend lint
-
       - name: Build (compile to readable) frontend
         run: npm run -w react-frontend build
 
       - name: Run Tests
         run: npm run test:workflow
-
-      - name: Upload raw test reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: junit-reports
-          path: packages/jest-unit-testing/reports/junit/*.xml
-
-      - name: Publish Test Report
-        if: always()
-        uses: dorny/test-reporter@v1
-        with:
-          name: Unit Tests
-          path: packages/jest-unit-testing/reports/junit/*.xml
-          reporter: jest-junit
