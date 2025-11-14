@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="3" failures="0" errors="0" time="1.061">
-  <testsuite name="Backend live server tests base functions" errors="0" failures="0" skipped="0" timestamp="2025-11-14T00:20:36" time="1.026" tests="3">
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="1.696">
+  <testsuite name="Backend live server tests base functions" errors="0" failures="0" skipped="0" timestamp="2025-11-14T00:41:07" time="1.657" tests="3">
     <testcase classname="Backend live server tests base functions GET / should return Hello World!" name="Backend live server tests base functions GET / should return Hello World!" time="0.013">
     </testcase>
-    <testcase classname="Backend live server tests base functions GET /users should return users" name="Backend live server tests base functions GET /users should return users" time="0.23">
+    <testcase classname="Backend live server tests base functions GET /users should return users" name="Backend live server tests base functions GET /users should return users" time="0.354">
     </testcase>
-    <testcase classname="Backend live server tests base functions GET /users/id should return error (no user exists for this test)" name="Backend live server tests base functions GET /users/id should return error (no user exists for this test)" time="0.219">
+    <testcase classname="Backend live server tests base functions GET /users/id should return error (no user exists for this test)" name="Backend live server tests base functions GET /users/id should return error (no user exists for this test)" time="0.245">
     </testcase>
   </testsuite>
 </testsuites>
