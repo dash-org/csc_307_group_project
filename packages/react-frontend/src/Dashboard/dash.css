@@ -10,7 +10,7 @@
 
 .dashboard-empty .text-wrapper {
   color: #000000;
-  font-family: 'Inter-ExtraBold', Helvetica;
+  font-family: "Inter-ExtraBold", Helvetica;
   font-size: 64px;
   font-weight: 800;
   left: 45px;
@@ -58,7 +58,7 @@
 
 .dashboard-empty .text-wrapper-2 {
   color: #ffffff;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 32px;
   font-weight: 500;
   left: 927px;
@@ -71,7 +71,7 @@
 
 .dashboard-empty .text-wrapper-3 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 32px;
   font-weight: 500;
   left: 659px;
@@ -84,7 +84,7 @@
 
 .dashboard-empty .text-wrapper-4 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 32px;
   font-weight: 500;
   left: 1250px;
@@ -253,7 +253,7 @@
 
 .dashboard-empty .text-wrapper-5 {
   color: #606060;
-  font-family: 'Inter-Regular', Helvetica;
+  font-family: "Inter-Regular", Helvetica;
   font-size: 24px;
   font-weight: 400;
   left: 1338px;
@@ -322,7 +322,7 @@
 
 .dashboard-empty .text-wrapper-6 {
   color: #8b8b8b;
-  font-family: 'Inter-Bold', Helvetica;
+  font-family: "Inter-Bold", Helvetica;
   font-size: 40px;
   font-weight: 700;
   left: 441px;
@@ -335,7 +335,7 @@
 
 .dashboard-empty .text-wrapper-7 {
   color: #8b8b8b;
-  font-family: 'Inter-Bold', Helvetica;
+  font-family: "Inter-Bold", Helvetica;
   font-size: 40px;
   font-weight: 700;
   left: 978px;
@@ -348,7 +348,7 @@
 
 .dashboard-empty .text-wrapper-8 {
   color: #8b8b8b;
-  font-family: 'Inter-Bold', Helvetica;
+  font-family: "Inter-Bold", Helvetica;
   font-size: 40px;
   font-weight: 700;
   left: 965px;
@@ -361,7 +361,7 @@
 
 .dashboard-empty .text-wrapper-9 {
   color: #8b8b8b;
-  font-family: 'Inter-Bold', Helvetica;
+  font-family: "Inter-Bold", Helvetica;
   font-size: 40px;
   font-weight: 700;
   left: 1510px;
@@ -374,7 +374,7 @@
 
 .dashboard-empty .text-wrapper-10 {
   color: #8b8b8b;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 40px;
   font-weight: 500;
   left: 45px;
@@ -427,7 +427,7 @@
 
 .dashboard-empty .wallet-wanted {
   color: #3b3b3b;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 32px;
   font-weight: 500;
   left: 1600px;
@@ -472,10 +472,10 @@
 
 .dashboard-empty .text-wrapper-11 {
   color: #8b8b8b;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
-  left: calc(50% - 488px);
+  left: calc(50.00% - 488px);
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
@@ -486,10 +486,10 @@
 
 .dashboard-empty .text-wrapper-12 {
   color: #8b8b8b;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
-  left: calc(50% + 38px);
+  left: calc(50.00% + 38px);
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
@@ -500,10 +500,10 @@
 
 .dashboard-empty .text-wrapper-13 {
   color: #8b8b8b;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
-  left: calc(50% + 586px);
+  left: calc(50.00% + 586px);
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
@@ -514,10 +514,10 @@
 
 .dashboard-empty .text-wrapper-14 {
   color: #8b8b8b;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
-  left: calc(50% + 70px);
+  left: calc(50.00% + 70px);
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
@@ -528,7 +528,7 @@
 
 .dashboard-empty .text-wrapper-15 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
   left: 168px;
@@ -541,7 +541,7 @@
 
 .dashboard-empty .text-wrapper-16 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
   left: 174px;
@@ -554,7 +554,7 @@
 
 .dashboard-empty .text-wrapper-17 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
   left: 174px;
@@ -567,7 +567,7 @@
 
 .dashboard-empty .text-wrapper-18 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
   left: 170px;
@@ -580,7 +580,7 @@
 
 .dashboard-empty .text-wrapper-19 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
   left: 168px;
@@ -593,7 +593,7 @@
 
 .dashboard-empty .text-wrapper-20 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
   left: 170px;
@@ -606,7 +606,7 @@
 
 .dashboard-empty .text-wrapper-21 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
   left: 174px;

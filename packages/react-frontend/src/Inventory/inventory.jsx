@@ -1,15 +1,15 @@
 import React from 'react';
-import calendar from './Images/calendar.png';
-import chat from './Images/chat.png';
-import controlPanel from './Images/control-panel.png';
-import highImportance from './Images/high-importance.png';
-import playlist from './Images/playlist.png';
-import plus from './Images/plus.png';
-import search from './Images/search.png';
-import settings from './Images/settings.png';
-import shoppingBag from './Images/shopping-bag.png';
-import './style.css';
-import testAccount from './Images/test-account.png';
+import calendar from '../Images/calendar.png';
+import chat from '../Images/chat.png';
+import controlPanel from '../Images/control-panel.png';
+import highImportance from '../Images/high-importance.png';
+import playlist from '../Images/playlist.png';
+import plus from '../Images/plus.png';
+import search from '../Images/search.png';
+import settings from '../Images/settings.png';
+import shoppingBag from '../Images/shopping-bag.png';
+import './inventory.css';
+import testAccount from '../Images/test-account.png';
 
 export const InventoryEmpty = () => {
   return (

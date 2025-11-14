@@ -10,7 +10,7 @@
 
 .homepage-blank .text-wrapper {
   color: #000000;
-  font-family: 'Inter-ExtraBold', Helvetica;
+  font-family: "Inter-ExtraBold", Helvetica;
   font-size: 64px;
   font-weight: 800;
   left: 45px;
@@ -58,7 +58,7 @@
 
 .homepage-blank .text-wrapper-2 {
   color: #ffffff;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 32px;
   font-weight: 500;
   left: 665px;
@@ -71,7 +71,7 @@
 
 .homepage-blank .text-wrapper-3 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 32px;
   font-weight: 500;
   left: 934px;
@@ -85,7 +85,7 @@
 
 .homepage-blank .text-wrapper-4 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 32px;
   font-weight: 500;
   left: 1250px;
@@ -244,7 +244,7 @@
 
 .homepage-blank .text-wrapper-5 {
   color: #8b8b8b;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 40px;
   font-weight: 500;
   left: 45px;
@@ -257,10 +257,10 @@
 
 .homepage-blank .p {
   color: #8b8b8b;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
-  left: calc(50% - 310px);
+  left: calc(50.00% - 310px);
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
@@ -318,7 +318,7 @@
 
 .homepage-blank .text-wrapper-6 {
   color: #fffbfb;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 27px;
   font-weight: 500;
   left: 1174px;
@@ -330,7 +330,7 @@
 
 .homepage-blank .text-wrapper-7 {
   color: #fffbfb;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 27px;
   font-weight: 500;
   left: 1184px;
@@ -342,7 +342,7 @@
 
 .homepage-blank .text-wrapper-8 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
   left: 172px;
@@ -355,7 +355,7 @@
 
 .homepage-blank .text-wrapper-9 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
   left: 178px;
@@ -368,7 +368,7 @@
 
 .homepage-blank .text-wrapper-10 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
   left: 178px;
@@ -381,7 +381,7 @@
 
 .homepage-blank .text-wrapper-11 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
   left: 174px;
@@ -394,7 +394,7 @@
 
 .homepage-blank .text-wrapper-12 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
   left: 172px;
@@ -407,7 +407,7 @@
 
 .homepage-blank .text-wrapper-13 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
   left: 174px;
@@ -420,7 +420,7 @@
 
 .homepage-blank .text-wrapper-14 {
   color: #606060;
-  font-family: 'Inter-Medium', Helvetica;
+  font-family: "Inter-Medium", Helvetica;
   font-size: 30px;
   font-weight: 500;
   left: 178px;
