@@ -41,6 +41,61 @@ app.get('/', (req, res) => {
 });
 
 /**
+ *  Preface: These routes have been built with REST and resource heirarchy in mind, meaning that
+ *  they have capabilities on an as-needed basis. (ex. there is no route to delete all kitchens at
+ *  once). However if there isn't any route that provides what you need please feel free
+ *  to create one or let me know and I can create one. Some operations may require multiple requests
+ *  chained together.
+ *
+ *  Note: all fields in the route preceded by ':' (ex. ':userId') should be filled in with the
+ *  appropriate object id. For get and delete requests this is the only info you need to provide.
+ *  For post requests you will additionally need to provide info within the request body.
+ *
+ *  User routes:
+ *    Creating a user (account creation): post /users
+ *    Deleting a specific user (account deletion): delete /users/:id
+ *      - The backend will automatically delete any relevant memberships and owned kitchens.
+ *    List all users (includes name and createdAt): get /users
+ *    To list just one user: .get /users/:id
+ *
+ *  Memberships:
+ *    Given a specific user, see what kitchens they are a member of: get /users/:userId/memberships
+ *    For a specific kitchen, see which users are a member: get /kitchens/:kitchenId/memberships
+ *    Create a membership between a user and a kitchen: post /memberships
+ *    Delete a membership: delete /memberships/:id
+ *
+ *  Kitchens:
+ *    Get a list of all kitchens: get /kitchens
+ *      - Doesn't contain nested info such as inventories or items within.
+ *    Get info about a kitchen: get /kitchens/:id
+ *      - This contains a list of inventories within the kitchen. Doesn't contain nested info
+ *        like which items are within the inventories. To see items, see the section below about
+ *        getting info from specific inventories.
+ *    Create a kitchen: post /kitchens
+ *    Delete a kitchen: delete /kitchens/:id
+ *      - The backend will automatically delete all inventories and items within this kitchen
+ *        as well as any memberships containing this kitchen.
+ *
+ *  Inventories:
+ *  Inventories always exist within a kitchen, so they will be a subroute of a specfic kitchen.
+ *  There is a strict parent-child relationship so an inventory instance cannot be a part of multiple kitchens.
+ *    Create an inventory: post kitchens/:kitchenId/inventories
+ *    Delete an inventory: delete kitchens/:kitchenId/inventories/:id
+ *      - This will delete all items within the inventory as well
+ *    To see a list of inventories within a kitchen, see /kitchens/:id in the above section
+ *    To get info about an inventory along with all the items in it:
+ *      get /kitchens/:kitchenId/inventories/:id
+ *
+ *  Items:
+ *  Items always exist within an inventory, so they will be a subroute of a specific inventory.
+ *  There is a strict parent-child so one instance of an item cannot be a part of multiple inventories.
+ *    Create an item: post /kitchens/:kitchenId/inventories/:inventoryId/items
+ *    Delete an item: delete /kitchens/:kitchenId/inventories/:inventoryId/items/:id
+ *    Getting info about a specific item: I assume this will be done at the inventory level.
+ *      See in the above section get /kitchens/:kitchenId/inventories/:id
+ */
+
+/**
  * GET ROUTES
  */
 
