@@ -60,3 +60,25 @@ jobs:
           name: Unit Tests
           path: packages/jest-unit-testing/reports/junit/*.xml
           reporter: jest-junit
+
+      - name: Add test summary to run page
+        if: always()
+        run: |
+          FILE=packages/jest-unit-testing/reports/junit/junit.xml
+          python - <<'PY' "$FILE" >> "$GITHUB_STEP_SUMMARY"
+          import sys, xml.etree.ElementTree as ET
+          f = sys.argv[1]
+          root = ET.parse(f).getroot()
+          ts = root.attrib
+          total   = int(ts.get("tests", 0))
+          fail    = int(ts.get("failures", 0))
+          errors  = int(ts.get("errors", 0))
+          skipped = int(ts.get("skipped", 0))
+          passed  = total - fail - errors - skipped
+          print("### Unit Tests Summary\n")
+          print(f"- Passed: **{passed}**")
+          print(f"- Failed: **{fail}**")
+          print(f"- Errors: **{errors}**")
+          print(f"- Skipped: **{skipped}**")
+          print(f"- Total: **{total}**")
+          PY
