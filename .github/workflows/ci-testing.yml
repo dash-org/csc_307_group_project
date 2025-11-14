@@ -82,3 +82,18 @@ jobs:
           print(f"- Skipped: **{skipped}**")
           print(f"- Total: **{total}**")
           PY
+
+      - name: Add simple test summary
+        if: always()
+        run: |
+          FILE=packages/jest-unit-testing/reports/junit/junit.xml
+          python3 - <<'PY' "$FILE" >> "$GITHUB_STEP_SUMMARY"
+          import sys, xml.etree.ElementTree as ET
+          f = sys.argv[1]
+          root = ET.parse(f).getroot()
+          total = int(root.attrib.get("tests", 0))
+          failed = int(root.attrib.get("failures", 0)) + int(root.attrib.get("errors", 0))
+          passed = total - failed
+          color = "✅" if failed == 0 else "❌"
+          print(f"{color} **{passed}/{total} tests passed**" if failed == 0 else f"{color} **{failed} failed, {passed}/{total} passed**")
+          PY
