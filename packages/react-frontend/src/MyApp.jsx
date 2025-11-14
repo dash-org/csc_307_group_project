@@ -10,6 +10,8 @@ import { HomepageBlank } from './Homepage/home';
 import { SignCentered } from './SignPage/sign';
 import { LoginCentered } from './LoginPage/Login2';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { PantrySetupCreate } from './NewKitchen/newkitchen';
+import { PantrySetupInvited } from './ManageMember/managemember';
 
 function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
@@ -178,6 +180,14 @@ function MyApp() {
         <Route path="/dash" element={<DashboardEmpty></DashboardEmpty>} />
         <Route path="/home" element={<HomepageBlank></HomepageBlank>} />
         <Route path="/inventory" element={<InventoryEmpty></InventoryEmpty>} />
+        <Route
+          path="/kitchens/create"
+          element={<PantrySetupCreate></PantrySetupCreate>}
+        />
+        <Route
+          path="/kitchens/manage"
+          element={<PantrySetupInvited></PantrySetupInvited>}
+        />
         <Route
           path="/"
           element={
