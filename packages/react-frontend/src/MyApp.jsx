@@ -175,6 +175,9 @@ function MyApp() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/dash" element={<DashboardEmpty></DashboardEmpty>} />
+        <Route path="/home" element={<HomepageBlank></HomepageBlank>} />
+        <Route path="/inventory" element={<InventoryEmpty></InventoryEmpty>} />
         <Route
           path="/"
           element={
