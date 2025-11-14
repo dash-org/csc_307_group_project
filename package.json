@@ -14,6 +14,13 @@
     "backend": "npm run dev --workspace express-backend",
     "test:workflow": "bash -c 'npm run backend & B1=$!; sleep 2; npm test; EC=$?; kill -INT $B1 2>/dev/null || true; kill -TERM $B1 2>/dev/null || true; kill -KILL $B1 2>/dev/null || true; exit $EC'"
   },
+  "jest": {
+    "transform": {}
+  },
+  "jest-junit": {
+    "outputDirectory": "reports/junit",
+    "outputName": "jest-unit.xml"
+  },
   "license": "ISC",
   "description": "",
   "workspaces": [
@@ -27,6 +34,8 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.4.0",
+    "jest-github-actions-reporter": "^1.0.3",
+    "jest-junit": "^16.0.0",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2"
   },

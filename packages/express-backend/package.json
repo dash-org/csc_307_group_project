@@ -7,7 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon backend.js",
     "start": "node backend.js",
-    "lint": "eslint . && npx prettier --check ."
+    "lint": "eslint . && npx prettier --check .",
+    "test:ci": "jest --ci --reporters=default --reporters=github-actions --reporters=jest-junit"
+  },
+  "jest-junit": {
+    "outputDirectory": "reports/junit",
+    "outputName": "backend.xml"
   },
   "author": "",
   "license": "ISC",
