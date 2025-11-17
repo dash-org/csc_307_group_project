@@ -26,7 +26,12 @@ export const DashboardEmpty = () => {
 
       <div className="text-wrapper-2">Dashboard</div>
 
-      <div className="text-wrapper-3">Home</div>
+      <button
+        className="text-wrapper-3"
+        onClick={() => { window.location.href = '/home'; }} //Fix css issue later
+      >
+        Home
+      </button>
 
       <div className="text-wrapper-4">Supplies</div>
 
@@ -80,7 +85,12 @@ export const DashboardEmpty = () => {
 
       <div className="text-wrapper-6">To-Do List</div>
 
-      <div className="text-wrapper-7">Inventory</div>
+      <button
+        className="text-wrapper-7"
+        onClick={() => { window.location.href = '/inventory'; }} //Fix css issue later
+      >
+        Inventory
+      </button>
 
       <div className="text-wrapper-8">Activity</div>
 
@@ -127,7 +137,12 @@ export const DashboardEmpty = () => {
 
       <div className="text-wrapper-16">Reminders</div>
 
-      <div className="text-wrapper-17">Home</div>
+      <button
+        className="text-wrapper-17"
+        onClick={() => { window.location.href = '/home'; }} //Fix css issue later
+      >
+        Home
+      </button>
 
       <div className="text-wrapper-18">Shopping List</div>
 

@@ -23,7 +23,12 @@ export const HomepageBlank = () => {
 
       <div className="text-wrapper-2">Home</div>
 
-      <div className="text-wrapper-3">Dashboard</div>
+      <button
+        className="text-wrapper-3"
+        onClick={() => { window.location.href = '/dash'; }} //Fix css issue later
+      >
+        Dashboard
+      </button>
 
       <div className="text-wrapper-4">Supplies</div>
 
