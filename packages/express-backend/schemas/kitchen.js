@@ -23,6 +23,7 @@ const kitchenSchema = new mongoose.Schema({
   name: { type: String, required: true },
 
   owner: {
+    // equivalent to createdBy
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
@@ -32,13 +33,6 @@ const kitchenSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Inventory',
-    },
-  ],
-
-  memberships: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Membership',
     },
   ],
 

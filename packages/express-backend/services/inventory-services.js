@@ -33,9 +33,27 @@ function deleteInventoryById(id) {
   return inventoryModel.deleteOne({ _id: id });
 }
 
+function addItemToInventory(inventoryId, item) {
+  return inventoryModel.findByIdAndUpdate(
+    inventoryId,
+    { $push: { items: item } },
+    { new: true }
+  );
+}
+
+function removeItemFromInventory(inventoryId, itemId) {
+  return inventoryModel.findByIdAndUpdate(
+    inventoryId,
+    { $pull: { items: { _id: itemId } } },
+    { new: true }
+  );
+}
+
 export default {
   addInventory,
   getInventory,
   findInventoryById,
   deleteInventoryById,
+  addItemToInventory,
+  removeItemFromInventory,
 };

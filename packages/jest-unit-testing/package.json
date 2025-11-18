@@ -8,7 +8,7 @@
   "type": "module",
   "scripts": {
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
-    "test:backend": "cross-env NODE_OPTIONS=--experimental-vm-modules jest express-backend-testing",
+    "test:backend": "cross-env NODE_OPTIONS=--experimental-vm-modules jest express-backend-testing --ci --reporters=default --reporters=github-actions --reporters=jest-junit",
     "lint": "eslint . && npx prettier --check ."
   },
   "jest": {

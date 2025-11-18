@@ -23,6 +23,14 @@ function findMemberById(id) {
   return memberModel.findById(id);
 }
 
+function getMembersByUserId(userId) {
+  return memberModel.find({ userId: userId });
+}
+
+function getMembersByKitchenId(kitchenId) {
+  return memberModel.find({ kitchenId: kitchenId });
+}
+
 function addMember(member) {
   const memberToAdd = new memberModel(member);
   const promise = memberToAdd.save();
@@ -38,4 +46,6 @@ export default {
   getMembers,
   findMemberById,
   deleteMemberById,
+  getMembersByUserId,
+  getMembersByKitchenId,
 };

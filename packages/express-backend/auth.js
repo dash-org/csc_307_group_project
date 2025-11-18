@@ -40,10 +40,10 @@ export function registerUser(req, res) {
   }
 }
 
-function generateAccessToken(username) {
+function generateAccessToken(userId) {
   return new Promise((resolve, reject) => {
     jwt.sign(
-      { username: username },
+      { userId: userId },
       process.env.TOKEN_SECRET,
       { expiresIn: '1d' },
       (error, token) => {
@@ -59,7 +59,6 @@ function generateAccessToken(username) {
 
 export function authenticateUser(req, res, next) {
   const authHeader = req.headers['authorization'];
-  //Getting the 2nd part of the auth header (the token)
   const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
@@ -68,6 +67,7 @@ export function authenticateUser(req, res, next) {
   } else {
     jwt.verify(token, process.env.TOKEN_SECRET, (error, decoded) => {
       if (decoded) {
+        req.userId = decoded.userId;
         next();
       } else {
         console.log('JWT error:', error);
@@ -78,21 +78,21 @@ export function authenticateUser(req, res, next) {
 }
 
 export function loginUser(req, res) {
-  const { username, pwd } = req.body; // from form
+  const { username, pwd } = req.body;
 
-  userServices.getUsers(username).then((user) => {
-    if (user.length < 1) {
+  userServices.getUsers(username).then((users) => {
+    if (users.length < 1) {
       res.status(401).send('Unauthorized');
     } else {
+      const user = users[0];
       bcrypt
-        .compare(pwd, user.pop(0).hashpassword)
+        .compare(pwd, user.hashpassword)
         .then((matched) => {
           if (matched) {
-            generateAccessToken(username).then((token) => {
+            generateAccessToken(user._id).then((token) => {
               res.status(200).send({ token: token });
             });
           } else {
-            // invalid password
             res.status(401).send('Unauthorized');
           }
         })
