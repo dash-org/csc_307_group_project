@@ -6,7 +6,7 @@ name: Build and deploy Node.js app to Azure Web App - SIDER
 on:
   push:
     branches:
-      - main
+      - Cd-dev
   workflow_dispatch:
 
 jobs:
