@@ -22,7 +22,7 @@ jobs:
       contents: read
 
     env:
-      # Map the GitHub secret into a real env var for Node
+      # Uses github secrets, I already set these up...
       MONGODB_URI: ${{ secrets.MONGODB_URI }}
       TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
       NODE_ENV: test
@@ -87,5 +87,5 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: SIDER
-          slot-name: Production
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: release.zip
