@@ -8,6 +8,10 @@ import memberServices from './services/member-services.js';
 import inventoryServices from './services/inventory-services.js';
 // import itemServices from './services/item-services.js';
 import kitchenServices from './services/kitchen-services.js';
+import {
+  authorizeMembershipCreation,
+  authorizeMembershipDeletion,
+} from './kitchen-auth.js';
 import { registerUser, authenticateUser, loginUser } from './auth.js';
 
 mongoose.set('debug', true);
@@ -176,18 +180,26 @@ app.post('/users', authenticateUser, (req, res) => {
     .catch((error) => console.log(error));
 });
 
-app.post('/memberships', authenticateUser, (req, res) => {
-  let memberToAdd = req.body;
-  memberToAdd.createdBy = req.userId;
+app.post(
+  '/memberships',
+  authenticateUser,
+  authorizeMembershipCreation,
+  (req, res) => {
+    let memberToAdd = req.body;
+    memberToAdd.createdBy = req.userId;
 
-  memberServices
-    .addMember(memberToAdd)
-    .then((item) => {
-      memberToAdd = item;
-      res.status(201).send(memberToAdd);
-    })
-    .catch((error) => console.log(error));
-});
+    memberServices
+      .addMember(memberToAdd)
+      .then((item) => {
+        memberToAdd = item;
+        res.status(201).send(memberToAdd);
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send('Error creating membership');
+      });
+  }
+);
 
 app.post(
   '/kitchens/:kitchenId/inventories/:inventoryId/items',
@@ -276,19 +288,24 @@ app.delete('/users/:id', authenticateUser, (req, res) => {
     });
 });
 
-app.delete('/memberships/:id', authenticateUser, (req, res) => {
-  const id = req.params['id'];
-  memberServices
-    .deleteMemberById(id)
-    .then((member) => {
-      console.log(`Deleted membership ${member._id}`);
-      res.status(204).send();
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(404).send();
-    });
-});
+app.delete(
+  '/memberships/:id',
+  authenticateUser,
+  authorizeMembershipDeletion,
+  (req, res) => {
+    const id = req.params['id'];
+    memberServices
+      .deleteMemberById(id)
+      .then((member) => {
+        console.log(`Deleted membership ${member._id}`);
+        res.status(204).send();
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(404).send();
+      });
+  }
+);
 
 app.delete(
   '/kitchens/:kitchenId/inventories/:inventoryId/items/:id',
