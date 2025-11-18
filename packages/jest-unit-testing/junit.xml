@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="3" failures="0" errors="0" time="1.279">
-  <testsuite name="Backend live server tests base functions" errors="0" failures="0" skipped="0" timestamp="2025-11-18T20:00:14" time="1.244" tests="3">
-    <testcase classname="Backend live server tests base functions GET / should return Hello World!" name="Backend live server tests base functions GET / should return Hello World!" time="0.013">
+<testsuites name="jest tests" tests="3" failures="2" errors="0" time="0.256">
+  <testsuite name="Backend live server tests base functions" errors="0" failures="2" skipped="0" timestamp="2025-11-18T23:21:45" time="0.227" tests="3">
+    <testcase classname="Backend live server tests base functions GET / should return Hello World!" name="Backend live server tests base functions GET / should return Hello World!" time="0.017">
     </testcase>
-    <testcase classname="Backend live server tests base functions GET /users should return users" name="Backend live server tests base functions GET /users should return users" time="0.262">
+    <testcase classname="Backend live server tests base functions GET /users should return users" name="Backend live server tests base functions GET /users should return users" time="0.15">
+      <failure>TypeError: fetch failed
+    at node:internal/deps/undici/undici:15845:13
+    at getToken (/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/jest-unit-testing/express-backend-testing/backend.test.js:27:3)
+    at Object.&lt;anonymous&gt; (/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/jest-unit-testing/express-backend-testing/backend.test.js:61:19)</failure>
     </testcase>
-    <testcase classname="Backend live server tests base functions GET /users/id should return error (no user exists for this test)" name="Backend live server tests base functions GET /users/id should return error (no user exists for this test)" time="0.269">
+    <testcase classname="Backend live server tests base functions GET /users/id should return error (no user exists for this test)" name="Backend live server tests base functions GET /users/id should return error (no user exists for this test)" time="0.001">
+      <failure>TypeError: fetch failed
+    at node:internal/deps/undici/undici:15845:13
+    at getToken (/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/jest-unit-testing/express-backend-testing/backend.test.js:27:3)
+    at Object.&lt;anonymous&gt; (/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/jest-unit-testing/express-backend-testing/backend.test.js:81:19)</failure>
+    </testcase>
+    <testcase classname=" Test execution failure: could be caused by test hooks like &apos;afterAll&apos;." name=" Test execution failure: could be caused by test hooks like &apos;afterAll&apos;." time="0">
+      <failure>{&quot;message&quot;:&quot;&quot;,&quot;stack&quot;:&quot;TypeError: fetch failed\n    at node:internal/deps/undici/undici:15845:13\n    at processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at getToken (/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/jest-unit-testing/express-backend-testing/backend.test.js:27:3)\n    at Object.&lt;anonymous&gt; (/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/jest-unit-testing/express-backend-testing/backend.test.js:157:21)&quot;}</failure>
     </testcase>
   </testsuite>
 </testsuites>
