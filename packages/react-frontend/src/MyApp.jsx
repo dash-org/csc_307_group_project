@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Table from './Table';
 import Form from './Form';
 import Login from './Login';
-import { SignCentered } from './SignPage/sign';
+import { SignCentered } from './SignPage/Sign';
 import { LoginCentered } from './LoginPage/Login2';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
