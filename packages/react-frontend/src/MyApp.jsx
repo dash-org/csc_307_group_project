@@ -113,7 +113,7 @@ function MyApp() {
   }
 
   function postUser(person) {
-    const promise = fetch('sider.azurewebsites.net/users', {
+    const promise = fetch(`${API_PREFIX}/users`, {
       method: 'POST',
       headers: addAuthHeader({
         'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ function MyApp() {
 
   function removeOneCharacter(index) {
     const trash = characters.at(index);
-    const promise = fetch(`sider.azurewebsites.net/users/${trash._id}`, {
+    const promise = fetch(`${API_PREFIX}/users/${trash._id}`, {
       method: `DELETE`,
       headers: addAuthHeader(),
     });
