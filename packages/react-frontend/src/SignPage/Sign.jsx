@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 
 export const SignCentered = (props) => {
+  // This format was derived from LoginPage, so checkout out the Login2.jsx for additional documentation
   const navigate = useNavigate();
   const [creds, setCreds] = useState({
     username: '',
@@ -25,7 +26,6 @@ export const SignCentered = (props) => {
                 <div className="frame-6">
                   <div className="text-wrapper-3">Username</div>
 
-                  {/* <div className="div-wrapper"> */}
                   <input
                     className="div-wrapper"
                     type="text"
@@ -35,16 +35,10 @@ export const SignCentered = (props) => {
                     value={creds.username}
                     onChange={handleChange}
                   />
-                  {/* <div className="text-wrapper-4">Username</div> */}
-                  {/* </div> */}
                 </div>
 
                 <div className="frame-7">
                   <div className="text-wrapper-3">Password</div>
-
-                  {/* <div className="div-wrapper">
-                    <div className="text-wrapper-4">Password</div>
-                  </div> */}
                   <input
                     className="div-wrapper"
                     type="password"
@@ -56,19 +50,13 @@ export const SignCentered = (props) => {
                   />
                 </div>
               </div>
-
-              {/* <div className="text-wrapper-5">Forgot Password?</div> */}
             </div>
-
-            {/* <div className="frame-8"> */}
-            {/* <div className="text-wrapper-6">Log In</div> */}
             <input
               type="button"
               className="frame-8"
               value={props.buttonLabel || 'Sign Up'}
               onClick={submitForm}
             />
-            {/* </div> */}
           </div>
         </div>
       </div>

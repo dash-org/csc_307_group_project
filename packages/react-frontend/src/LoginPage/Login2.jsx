@@ -2,6 +2,11 @@ import './login.css';
 import React, { useState } from 'react';
 
 export const LoginCentered = (props) => {
+  /*
+  This is very similar to a form, 
+  we need a useState to render what the user types
+  or when they submit
+  */
   const [creds, setCreds] = useState({
     username: '',
     pwd: '',
@@ -16,7 +21,8 @@ export const LoginCentered = (props) => {
 
         <div className="frame-2">
           <div className="text-wrapper-2">Log In</div>
-
+          {/* props.error is passed down from MyApp.jsx
+           after a failed login attempt, the page is rerendered to props.error = 1*/}
           <div
             className="error"
             style={{ display: props.error ? 'block' : 'none' }}
@@ -30,8 +36,7 @@ export const LoginCentered = (props) => {
                 <div className="frame-6">
                   <div className="text-wrapper-3">Username</div>
 
-                  {/* <div className="div-wrapper"> */}
-                  <input
+                  <input // This is the username box that can be filled by the user
                     className="div-wrapper"
                     type="text"
                     name="username"
@@ -40,17 +45,12 @@ export const LoginCentered = (props) => {
                     value={creds.username}
                     onChange={handleChange}
                   />
-                  {/* <div className="text-wrapper-4">Username</div> */}
-                  {/* </div> */}
                 </div>
 
                 <div className="frame-7">
                   <div className="text-wrapper-3">Password</div>
 
-                  {/* <div className="div-wrapper">
-                    <div className="text-wrapper-4">Password</div>
-                  </div> */}
-                  <input
+                  <input // This is the password box that can be filled by the user
                     className="div-wrapper"
                     type="password"
                     name="password"
@@ -65,15 +65,12 @@ export const LoginCentered = (props) => {
               <div className="text-wrapper-5">Forgot Password?</div>
             </div>
 
-            {/* <div className="frame-8"> */}
-            {/* <div className="text-wrapper-6">Log In</div> */}
-            <input
+            <input // This is the submit button
               type="button"
               className="frame-8"
               value={props.buttonLabel || 'Log In'}
               onClick={submitForm}
             />
-            {/* </div> */}
 
             <p className="don-t-have-an">
               <span className="span">Don’t have an account? </span>
@@ -81,14 +78,17 @@ export const LoginCentered = (props) => {
                 {' '}
                 Create an account{' '}
               </a>
-
-              {/* <span className="text-wrapper-7">Create an account</span> */}
             </p>
           </div>
         </div>
       </div>
     </div>
   );
+
+  /*
+  handleChange is called anytime the user types into either the username box or the password box,
+  so we handle the update by rendering the change with useState setCreds()
+   */
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -102,6 +102,10 @@ export const LoginCentered = (props) => {
     }
   }
 
+  /*
+  submitForm() resets the password and username boxes,
+  the function signupUser() is then ran as it was passed down as a prop from MyApp.jsx
+   */
   function submitForm() {
     props.handleSubmit(creds);
     setCreds({ username: '', pwd: '' });
