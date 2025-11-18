@@ -5,7 +5,6 @@ on:
     branches: [Cd-dev]
   workflow_dispatch:
 
-# No id-token needed if you're not using OIDC
 permissions:
   contents: read
 
