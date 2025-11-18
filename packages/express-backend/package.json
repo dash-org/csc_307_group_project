@@ -6,8 +6,8 @@
   "scripts": {
   "test": "bash -c 'node backend.js & B1=$!; for i in {1..30}; do curl -fsS http://localhost:8000/healthz && break || sleep 1; done; npm run test:backend --prefix ../jest-unit-testing; EC=$?; kill -INT $B1 2>/dev/null || true; kill -TERM $B1 2>/dev/null || true; kill -KILL $B1 2>/dev/null || true; exit $EC'",
   "dev": "npx nodemon backend.js",
-    "start": "node backend.js",
-    "lint": "eslint . && npx prettier --check ."
+  "start": "node backend.js",
+  "lint": "eslint . && npx prettier --check ."
   },
   "author": "",
   "license": "ISC",
