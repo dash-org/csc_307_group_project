@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
-  const API_PREFIX = 'http://localhost:8000';
+  const API_PREFIX = 'sider.azurewebsites.net';
   const [token, setToken] = useState(INVALID_TOKEN);
   const [, setMessage] = useState('');
   const [characters, setCharacters] = useState([]);
@@ -113,7 +113,7 @@ function MyApp() {
   }
 
   function postUser(person) {
-    const promise = fetch('http://localhost:8000/users', {
+    const promise = fetch('sider.azurewebsites.net/users', {
       method: 'POST',
       headers: addAuthHeader({
         'Content-Type': 'application/json',
@@ -126,7 +126,7 @@ function MyApp() {
 
   function removeOneCharacter(index) {
     const trash = characters.at(index);
-    const promise = fetch(`http://localhost:8000/users/${trash._id}`, {
+    const promise = fetch(`sider.azurewebsites.net/users/${trash._id}`, {
       method: `DELETE`,
       headers: addAuthHeader(),
     });
