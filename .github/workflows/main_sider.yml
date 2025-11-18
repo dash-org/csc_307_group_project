@@ -23,6 +23,7 @@ jobs:
     env:
       # Map the GitHub secret into a real env var for Node
       MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
       NODE_ENV: test
       PORT: 8000
 
