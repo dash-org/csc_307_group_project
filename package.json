@@ -10,7 +10,6 @@
     "check-format": "prettier --check .",
     "lint": "npx eslint . && npx prettier --check .",
     "lint-fix": "eslint . --fix",
-    "start": "node backend_with_db.js",
     "backend": "npm run dev --workspace express-backend",
     "test:workflow": "bash -c 'npm run backend & B1=$!; sleep 2; npm test; EC=$?; kill -INT $B1 2>/dev/null || true; kill -TERM $B1 2>/dev/null || true; kill -KILL $B1 2>/dev/null || true; exit $EC'"
   },
