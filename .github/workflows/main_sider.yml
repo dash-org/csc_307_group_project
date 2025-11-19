@@ -29,7 +29,7 @@ jobs:
 
       - name: Install backend deps
         working-directory: packages/express-backend
-        run: npm ci --omit=dev
+        run: npm ci --omit=dev --workspaces=false
 
       - name: Build backend
         run: npm run -w express-backend build --if-present
