@@ -9,7 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
-  const API_PREFIX = 'https://sider.azurewebsites.net';
+  const API_PREFIX = 'https://yellow-flower-0dfae081e.3.azurestaticapps.net/';
   const [token, setToken] = useState(INVALID_TOKEN);
   const [, setMessage] = useState('');
   const [characters, setCharacters] = useState([]);
