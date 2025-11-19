@@ -7,7 +7,7 @@ import Login from './Login';
 import { DashboardEmpty } from './Dashboard/dash';
 import { InventoryEmpty } from './Inventory/inventory';
 import { HomepageBlank } from './Homepage/home';
-import { SignCentered } from './SignPage/sign';
+import { SignCentered } from './SignPage/Sign';
 import { LoginCentered } from './LoginPage/Login2';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PantrySetupCreate } from './NewKitchen/newkitchen';
