@@ -4,9 +4,14 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Table from './Table';
 import Form from './Form';
 import Login from './Login';
+import { DashboardEmpty } from './Dashboard/dash';
+import { InventoryEmpty } from './Inventory/inventory';
+import { HomepageBlank } from './Homepage/home';
 import { SignCentered } from './SignPage/Sign';
 import { LoginCentered } from './LoginPage/Login2';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { PantrySetupCreate } from './NewKitchen/newkitchen';
+import { PantrySetupInvited } from './ManageMember/managemember';
 
 function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
@@ -24,6 +29,7 @@ function MyApp() {
   The format of this use state should be used for future tables
    */
   const [characters, setCharacters] = useState([]);
+  const [error, setError] = useState(0);
 
   /*
   This useState allows us to rerender the page whenever an error occurs and display the error on the page.
@@ -214,6 +220,17 @@ function MyApp() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/dash" element={<DashboardEmpty></DashboardEmpty>} />
+        <Route path="/home" element={<HomepageBlank></HomepageBlank>} />
+        <Route path="/inventory" element={<InventoryEmpty></InventoryEmpty>} />
+        <Route
+          path="/kitchens/create"
+          element={<PantrySetupCreate></PantrySetupCreate>}
+        />
+        <Route
+          path="/kitchens/manage"
+          element={<PantrySetupInvited></PantrySetupInvited>}
+        />
         <Route
           path="/"
           element={
