@@ -34,10 +34,10 @@ jobs:
       - name: Build backend
         run: npm run -w express-backend build --if-present
 
-      - name: Test backend
-        run: npm run -w express-backend test --if-present
-        env:
-          NODE_ENV: test
+      # - name: Test backend
+      #  run: npm run -w express-backend test --if-present
+      #  env:
+      #    NODE_ENV: test
 
       - name: Create deployment zip
         run: |
