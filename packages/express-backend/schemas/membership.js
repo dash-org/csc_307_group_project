@@ -19,13 +19,6 @@
 import mongoose from 'mongoose';
 
 const allowedPermissions = {
-  owner: [
-    'items:read',
-    'items:write',
-    'inventories:manage',
-    'members:manage',
-    'kitchen:manage',
-  ],
   admin: ['items:read', 'items:write', 'inventories:manage', 'members:manage'],
   editor: ['items:read', 'items:write'],
   viewer: ['items:read'],
@@ -38,11 +31,7 @@ const membershipSchema = new mongoose.Schema({
     required: true,
   },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  role: {
-    type: String,
-    enum: ['owner', 'admin', 'editor', 'viewer'],
-    required: true,
-  },
+  role: { type: String, enum: ['admin', 'editor', 'viewer'], required: true },
   permissions: {
     type: [String],
     default: [],
@@ -63,7 +52,7 @@ const membershipSchema = new mongoose.Schema({
   },
 });
 
-membershipSchema.index({ kitchenId: 1, userId: 1 }, { unique: true });
+membershipSchema.index({ inventoryId: 1, userId: 1 }, { unique: true });
 
 const Membership = mongoose.model('Membership', membershipSchema);
 export default Membership;
