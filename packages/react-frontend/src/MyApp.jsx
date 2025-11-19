@@ -16,13 +16,32 @@ import { PantrySetupInvited } from './ManageMember/managemember';
 function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
   const API_PREFIX = 'http://localhost:8000';
+  /*
+  The value of token upon booting the frontend is what is stored in local storage, 
+  if its not found in local storage then it is set to INVALID_TOKEN
+   */
   const [token, setToken] = useState(
     localStorage.getItem('authToken') ?? INVALID_TOKEN
   );
-  const [, setMessage] = useState('');
+  const [, setMessage] = useState(''); // Errors are currently not being displayed
+
+  /*
+  The format of this use state should be used for future tables
+   */
   const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(0);
 
+  /*
+  This useState allows us to rerender the page whenever an error occurs and display the error on the page.
+  For now this is just the login page and rerenders whenever the login request fails
+  */
+  const [error, setError] = useState(0);
+
+  /*
+  Populates the header of your request automatically
+  Info such as the token is required by the backend for requests all requests aside from signup/login
+  It has a dependency on token, so everytime token changes, the content populated by addAuthHeader will also change
+  */
   const addAuthHeader = useCallback(
     (otherHeaders = {}) => {
       if (token === INVALID_TOKEN) {
@@ -39,6 +58,10 @@ function MyApp() {
     [token]
   );
 
+  /*
+  fetchUsers will make a get request with the header populated by addAuthHeader, which means that the request format will change
+  everytime addAuthHeader/token changes
+  */
   const fetchUsers = useCallback(() => {
     const promise = fetch(`${API_PREFIX}/users`, {
       headers: addAuthHeader(),
@@ -46,6 +69,11 @@ function MyApp() {
     return promise;
   }, [addAuthHeader]);
 
+  /*
+  This useffect depends on fetchUsers and token, which means it runs every time the token changes
+  The token is set upon loading the page, so this use effect will run at the start of the page every time
+  We get to set the users being displayed based on the response from fetchUsers()
+   */
   useEffect(() => {
     console.log('jofifd');
     console.log(token);
@@ -63,6 +91,10 @@ function MyApp() {
       });
   }, [fetchUsers, token]);
 
+  /*
+  This is called everytime the user submits the login form on the login page, which sends a post request with the
+  credentials in the body. Based on the response, we either set token and redirect to the main page, or we set error
+  */
   function loginUser(creds) {
     const promise = fetch(`${API_PREFIX}/login`, {
       method: 'POST',
@@ -95,6 +127,9 @@ function MyApp() {
     return promise;
   }
 
+  /*
+  signupUser() is ver similar to loginUser, refer to it for additional documentation
+  */
   function signupUser(creds) {
     const promise = fetch(`${API_PREFIX}/signup`, {
       method: 'POST',
@@ -127,6 +162,10 @@ function MyApp() {
     return promise;
   }
 
+  /*
+  Normally you would need to update the frontend whenever you add a user, but adding a user requires them to signup.
+  Which causes a page reload anyways allowing us to render the new user.
+  */
   function postUser(person) {
     const promise = fetch('http://localhost:8000/users', {
       method: 'POST',
@@ -139,6 +178,10 @@ function MyApp() {
     return promise;
   }
 
+  /* 
+  Refer to this for future api calls
+  Based on the response status, we utilize setCharacters to rerender the table with the updated set of users
+  */
   function removeOneCharacter(index) {
     const trash = characters.at(index);
     const promise = fetch(`http://localhost:8000/users/${trash._id}`, {
