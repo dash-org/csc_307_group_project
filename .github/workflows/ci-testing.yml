@@ -33,7 +33,7 @@ jobs:
         with:
           node-version: 20
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --workspaces --include-workspace-root
 
       - name: lint throughout backend
         run: npm run -w express-backend lint
