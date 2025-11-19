@@ -1,11 +1,10 @@
 To run the front end, run `npm run dev` from root
 
 To run the backend end for the first time,
-replace the template connection string in secret.js
-
-Also use the cmd `git update-index --assume-unchanged packages/express-backend/secret.js`
-from the root directory to prevent your connection string from overiding the template
-
+first create your .env file in express-backend
+past in and then fill out
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.x4pm7rc.mongodb.net/<dbname>?retryWrites=true&w=majority
+TOKEN_SECRET=change-this-to-a-long-random-string
 then run the cmd `npm run dev` from the express-backend directory
 
 ## Contributing

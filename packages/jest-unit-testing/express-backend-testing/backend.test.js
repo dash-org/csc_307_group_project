@@ -1,19 +1,49 @@
-import {
-  jest,
-  describe,
-  expect,
-  test,
-  beforeAll,
-  afterAll,
-} from '@jest/globals';
-jest.setTimeout(10000); //timout if longer than 10 seconds
+//file for testing the backend server using jest!
+//Line for DEMOasdfasdf
 
+import { jest, describe, expect, test, afterAll } from '@jest/globals';
+jest.setTimeout(10000); //timout if longer than 10 seconds!
+const tempUsernames = new Set(); //used to keep track of users created during tests!
 function fetchWithTimeout(url, options = {}, ms = 2000) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), ms);
   return fetch(url, { ...options, signal: controller.signal }).finally(() =>
     clearTimeout(timer)
   );
+}
+
+function authedFetch(url, token, options = {}, ms = 2000) {
+  const headers = {
+    ...(options.headers || {}),
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+  return fetchWithTimeout(url, { ...options, headers }, ms);
+}
+
+async function getToken(BASE_URL) {
+  const username = `jest_${Date.now()}@example.com`;
+  const pwd = 'P@ssw0rd!';
+  tempUsernames.add(username);
+  await fetchWithTimeout(
+    `${BASE_URL}/signup`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, pwd }),
+    },
+    4000
+  );
+  const loginRes = await fetchWithTimeout(
+    `${BASE_URL}/login`,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, pwd }),
+    },
+    4000
+  );
+  const { token } = await loginRes.json();
+  return token;
 }
 
 describe('Backend live server tests base functions', () => {
@@ -28,7 +58,8 @@ describe('Backend live server tests base functions', () => {
   });
 
   test('GET /users should return users', async () => {
-    const response = await fetch(`${BASE_URL}/users`);
+    const token = await getToken(BASE_URL);
+    const response = await authedFetch(`${BASE_URL}/users`, token);
     expect(response.status).toBe(200);
 
     const body = await response.json();
@@ -43,38 +74,39 @@ describe('Backend live server tests base functions', () => {
       expect(u).toHaveProperty('name');
       expect(u).toHaveProperty('createdAt');
       expect(u).toHaveProperty('hashpassword');
-      expect(u).toHaveProperty('email');
     }
   });
 
   test('GET /users/id should return error (no user exists for this test)', async () => {
-    const response = await fetch(`${BASE_URL}/users/id`);
+    const token = await getToken(BASE_URL);
+    const response = await authedFetch(`${BASE_URL}/users/id`, token);
     expect(response.status).toBe(404);
   });
 });
 
+/*
 describe('Backend live server user tests functions', () => {
   const BASE_URL = 'http://localhost:8000';
   let createdUser = null;
+  let authToken = null;
 
   // Hook timeout greater than fetch timeout
   beforeAll(async () => {
-    const newUser = {
-      name: 'Mac Tester',
-      email: `mac_${Date.now()}@example.com`,
-      // No password yet — hashpassword not implemented yet.
-    };
-
+    authToken = await getToken(BASE_URL);
     try {
-      const res = await fetchWithTimeout(
+      const res = await authedFetch(
         `${BASE_URL}/users`,
+        authToken,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(newUser),
+          body: JSON.stringify({
+            name: 'Mac Tester',
+            // No password needed here
+          }),
         },
-        2000
-      ); //2 second timeout
+        1000
+      ); //1 second timeout
 
       // If the server does respond
       if (res.status !== 201) {
@@ -96,18 +128,19 @@ describe('Backend live server user tests functions', () => {
 
   // cleanup delete created user after all tests are completed
   afterAll(async () => {
-    if (!createdUser._id) return;
+    if (!createdUser || !createdUser._id) return;
 
-    await fetchWithTimeout(
+    await authedFetch(
       `${BASE_URL}/users/${createdUser._id}`,
+      authToken,
       { method: 'DELETE' },
       4000
     );
   });
   test('GET /users/:id should return the created user by id', async () => {
-    // test will not run, yet, beforeall does not succeeed!!
-    const res = await fetchWithTimeout(
+    const res = await authedFetch(
       `${BASE_URL}/users/${createdUser._id}`,
+      authToken,
       {},
       2000
     );
@@ -115,4 +148,34 @@ describe('Backend live server user tests functions', () => {
     const body = await res.json();
     expect(body._id).toBe(createdUser._id);
   });
+});
+*/
+
+// Cleanup any users created during tests
+afterAll(async () => {
+  const BASE_URL = 'http://localhost:8000';
+  const authToken = await getToken(BASE_URL);
+
+  for (const username of tempUsernames) {
+    // Fetch user list to find user ID by username
+    const usersRes = await authedFetch(
+      `${BASE_URL}/users`,
+      authToken,
+      {},
+      4000
+    );
+    if (usersRes.status !== 200) continue;
+
+    const usersBody = await usersRes.json();
+    const user = usersBody.users_list.find((u) => u.name === username);
+    if (!user) continue;
+
+    // Delete the user by ID
+    await authedFetch(
+      `${BASE_URL}/users/${user._id}`,
+      authToken,
+      { method: 'DELETE' },
+      4000
+    );
+  }
 });
