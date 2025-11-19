@@ -7,7 +7,7 @@ import Login from './Login';
 import { DashboardEmpty } from './Dashboard/dash';
 import { InventoryEmpty } from './Inventory/inventory';
 import { HomepageBlank } from './Homepage/home';
-import { SignCentered } from './SignPage/Sign';
+import { SignCentered } from './SignPage/sign';
 import { LoginCentered } from './LoginPage/Login2';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PantrySetupCreate } from './NewKitchen/newkitchen';
@@ -29,7 +29,6 @@ function MyApp() {
   The format of this use state should be used for future tables
    */
   const [characters, setCharacters] = useState([]);
-  const [error, setError] = useState(0);
 
   /*
   This useState allows us to rerender the page whenever an error occurs and display the error on the page.
