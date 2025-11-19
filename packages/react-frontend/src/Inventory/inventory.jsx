@@ -24,14 +24,18 @@ export const InventoryEmpty = () => {
 
       <button
         className="text-wrapper-2"
-        onClick={() => { window.location.href = '/dash'; }} //Fix css issue later
+        onClick={() => {
+          window.location.href = '/dash';
+        }} //Fix css issue later
       >
         Dashboard
       </button>
 
       <button
         className="text-wrapper-3"
-        onClick={() => { window.location.href = '/home'; }} //Fix css issue later
+        onClick={() => {
+          window.location.href = '/home';
+        }} //Fix css issue later
       >
         Home
       </button>
@@ -98,7 +102,9 @@ export const InventoryEmpty = () => {
 
       <button
         className="text-wrapper-11"
-        onClick={() => { window.location.href = '/home'; }} //Fix css issue later
+        onClick={() => {
+          window.location.href = '/home';
+        }} //Fix css issue later
       >
         Home
       </button>

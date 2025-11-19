@@ -29,7 +29,9 @@ export const DashboardEmpty = () => {
       <div className="dashboard-empty">
         <button
           className="text-wrapper-3"
-          onClick={() => { window.location.href = '/home'; }} //Fix css issue later
+          onClick={() => {
+            window.location.href = '/home';
+          }} //Fix css issue later
         >
           Home
         </button>
@@ -90,7 +92,9 @@ export const DashboardEmpty = () => {
       <div className="dashboard-empty">
         <button
           className="text-wrapper-7"
-          onClick={() => { window.location.href = '/inventory'; }} //Fix css issue later
+          onClick={() => {
+            window.location.href = '/inventory';
+          }} //Fix css issue later
         >
           Inventory
         </button>
@@ -144,7 +148,9 @@ export const DashboardEmpty = () => {
       <div className="dashboard-empty">
         <button
           className="text-wrapper-17"
-          onClick={() => { window.location.href = '/home'; }} //Fix css issue later
+          onClick={() => {
+            window.location.href = '/home';
+          }} //Fix css issue later
         >
           Home
         </button>

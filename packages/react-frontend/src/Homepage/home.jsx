@@ -25,7 +25,9 @@ export const HomepageBlank = () => {
 
       <button
         className="text-wrapper-3"
-        onClick={() => { window.location.href = '/dash'; }} //Fix css issue later
+        onClick={() => {
+          window.location.href = '/dash';
+        }} //Fix css issue later
       >
         Dashboard
       </button>
