@@ -34,10 +34,10 @@ jobs:
       - name: Build backend
         run: npm run -w express-backend build --if-present
 
-      #- name: Test backend
-      # run: npm run -w express-backend test --if-present
-      #env:
-      #   NODE_ENV: test
+      # - name: Test backend
+      #   run: npm run -w express-backend test --if-present
+      #   env:
+      #     NODE_ENV: test
 
       - name: Create deployment zip
         run: |
@@ -60,11 +60,16 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
+          path: .
+
+      # Optional: sanity check the zip contents
+      - name: Inspect zip (optional)
+        run: unzip -l release.zip | head -n 50
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
         with:
           app-name: SIDER
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: packages/express-backend
+          package: release.zip
           # omit slot-name unless you're deploying to a non-production slot
