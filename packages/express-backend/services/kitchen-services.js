@@ -23,7 +23,7 @@ function findKitchenById(id) {
     .findById(id)
     .populate({
       path: 'inventories',
-      select: '-items', // exclude the 'items' field
+      select: '-items',
     })
     .populate('owner');
 }
@@ -40,8 +40,9 @@ function addKitchen(kitchen) {
       const adminMembership = new memberModel({
         userId: kitchen.owner,
         kitchenId: kitchen._id,
-        role: 'admin',
+        role: 'owner',
         permissions: [],
+        createdBy: kitchen.owner,
       });
 
       return adminMembership.save();
