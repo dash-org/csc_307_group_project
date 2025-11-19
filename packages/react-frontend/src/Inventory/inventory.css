@@ -1,0 +1,443 @@
+.inventory-empty {
+  background-image: url(./rectangle-43.png);
+  background-size: 100% 100%;
+  border-radius: 2px;
+  height: 1345px;
+  overflow: hidden;
+  position: relative;
+  width: 2077px;
+}
+
+.inventory-empty .text-wrapper {
+  color: #000000;
+  font-family: 'Inter-ExtraBold', Helvetica;
+  font-size: 64px;
+  font-weight: 800;
+  left: 45px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 29px;
+}
+
+.inventory-empty .rectangle {
+  background-color: #ffffff;
+  border: 2px solid;
+  border-color: #ababab;
+  border-radius: 82px;
+  height: 67px;
+  left: 571px;
+  position: absolute;
+  top: 53px;
+  width: 273px;
+}
+
+.inventory-empty .div {
+  background-color: #ffffff;
+  border: 2px solid;
+  border-color: #ababab;
+  border-radius: 82px;
+  height: 67px;
+  left: 1177px;
+  position: absolute;
+  top: 53px;
+  width: 273px;
+}
+
+.inventory-empty .rectangle-2 {
+  background-color: #ffffff;
+  border: 2px solid;
+  border-color: #ababab;
+  border-radius: 82px;
+  height: 67px;
+  left: 874px;
+  position: absolute;
+  top: 53px;
+  width: 273px;
+}
+
+.inventory-empty .text-wrapper-2 {
+  color: #606060;
+  font-family: 'Inter-Medium', Helvetica;
+  font-size: 32px;
+  font-weight: 500;
+  left: 927px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 66px;
+  width: 331px;
+}
+
+.inventory-empty .text-wrapper-3 {
+  color: #606060;
+  font-family: 'Inter-Medium', Helvetica;
+  font-size: 32px;
+  font-weight: 500;
+  left: 659px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 66px;
+  width: 195px;
+}
+
+.inventory-empty .text-wrapper-4 {
+  color: #606060;
+  font-family: 'Inter-Medium', Helvetica;
+  font-size: 32px;
+  font-weight: 500;
+  left: 1275px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 68px;
+  width: 88px;
+}
+
+.inventory-empty .ellipse {
+  background-color: #8a8a8a;
+  border-radius: 50.5px / 50px;
+  height: 100px;
+  left: 45px;
+  position: absolute;
+  top: 227px;
+  width: 101px;
+}
+
+.inventory-empty .ellipse-2 {
+  background-color: #e2e2e2;
+  border: 1px solid;
+  border-color: #cdcdcd;
+  border-radius: 50.5px / 50px;
+  height: 100px;
+  left: 45px;
+  position: absolute;
+  top: 876px;
+  width: 101px;
+}
+
+.inventory-empty .ellipse-3 {
+  background-color: #e2e2e2;
+  border: 1px solid;
+  border-color: #cdcdcd;
+  border-radius: 50.5px / 50px;
+  height: 100px;
+  left: 45px;
+  position: absolute;
+  top: 1202px;
+  width: 101px;
+}
+
+.inventory-empty .ellipse-4 {
+  background-color: #e2e2e2;
+  border: 1px solid;
+  border-color: #cdcdcd;
+  border-radius: 50.5px / 50px;
+  height: 100px;
+  left: 45px;
+  position: absolute;
+  top: 738px;
+  width: 101px;
+}
+
+.inventory-empty .ellipse-5 {
+  background-color: #e2e2e2;
+  border: 1px solid;
+  border-color: #cdcdcd;
+  border-radius: 50.5px / 50px;
+  height: 100px;
+  left: 45px;
+  position: absolute;
+  top: 610px;
+  width: 101px;
+}
+
+.inventory-empty .ellipse-6 {
+  background-color: #e2e2e2;
+  border: 1px solid;
+  border-color: #cdcdcd;
+  border-radius: 50.5px / 50px;
+  height: 100px;
+  left: 45px;
+  position: absolute;
+  top: 483px;
+  width: 101px;
+}
+
+.inventory-empty .ellipse-7 {
+  background-color: #e2e2e2;
+  border: 1px solid;
+  border-color: #cdcdcd;
+  border-radius: 50.5px / 50px;
+  height: 100px;
+  left: 45px;
+  position: absolute;
+  top: 355px;
+  width: 101px;
+}
+
+.inventory-empty .control-panel {
+  height: 83px;
+  left: 54px;
+  position: absolute;
+  top: 236px;
+  width: 83px;
+}
+
+.inventory-empty .calendar {
+  height: 74px;
+  left: 58px;
+  position: absolute;
+  top: 368px;
+  width: 75px;
+}
+
+.inventory-empty .shopping-bag {
+  height: 74px;
+  left: 58px;
+  position: absolute;
+  top: 496px;
+  width: 75px;
+}
+
+.inventory-empty .playlist {
+  height: 83px;
+  left: 54px;
+  position: absolute;
+  top: 619px;
+  width: 83px;
+}
+
+.inventory-empty .chat {
+  height: 71px;
+  left: 62px;
+  position: absolute;
+  top: 753px;
+  width: 72px;
+}
+
+.inventory-empty .high-importance {
+  height: 83px;
+  left: 54px;
+  position: absolute;
+  top: 1210px;
+  width: 83px;
+}
+
+.inventory-empty .test-account {
+  height: 113px;
+  left: 1903px;
+  position: absolute;
+  top: 22px;
+  width: 140px;
+}
+
+.inventory-empty .rectangle-3 {
+  background-color: #e6e6e6;
+  border-radius: 82px;
+  height: 77px;
+  left: 424px;
+  position: absolute;
+  top: 210px;
+  width: 1580px;
+}
+
+.inventory-empty .search {
+  height: 67px;
+  left: 442px;
+  position: absolute;
+  top: 215px;
+  width: 91px;
+}
+
+.inventory-empty .text-wrapper-5 {
+  color: #606060;
+  font-family: 'Inter-Regular', Helvetica;
+  font-size: 24px;
+  font-weight: 400;
+  left: 557px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 234px;
+  width: 646px;
+}
+
+.inventory-empty .settings {
+  height: 83px;
+  left: 54px;
+  position: absolute;
+  top: 887px;
+  width: 83px;
+}
+
+.inventory-empty .rectangle-4 {
+  background-color: #f2f2f2;
+  border: 1px solid;
+  border-color: #7d7d7d;
+  border-radius: 20px;
+  height: 939px;
+  left: 424px;
+  position: absolute;
+  top: 328px;
+  width: 1580px;
+}
+
+.inventory-empty .text-wrapper-6 {
+  color: #8b8b8b;
+  font-family: 'Inter-Bold', Helvetica;
+  font-size: 40px;
+  font-weight: 700;
+  left: 473px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 368px;
+  width: 648px;
+}
+
+.inventory-empty .text-wrapper-7 {
+  color: #8b8b8b;
+  font-family: 'Inter-Medium', Helvetica;
+  font-size: 40px;
+  font-weight: 500;
+  left: 45px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 121px;
+  width: 896px;
+}
+
+.inventory-empty .rectangle-5 {
+  background-color: #c4c4c4;
+  border-radius: 20px;
+  height: 791px;
+  left: 1961px;
+  position: absolute;
+  top: 409px;
+  width: 12px;
+}
+
+.inventory-empty .rectangle-6 {
+  background-color: #505050;
+  border-radius: 20px;
+  height: 224px;
+  left: 1961px;
+  position: absolute;
+  top: 409px;
+  width: 12px;
+}
+
+.inventory-empty .plus {
+  height: 75px;
+  left: 1842px;
+  position: absolute;
+  top: 347px;
+  width: 76px;
+}
+
+.inventory-empty .text-wrapper-8 {
+  color: #8b8b8b;
+  font-family: 'Inter-Medium', Helvetica;
+  font-size: 30px;
+  font-weight: 500;
+  left: calc(50% + 58px);
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 483px;
+  width: 236px;
+}
+
+.inventory-empty .text-wrapper-9 {
+  color: #606060;
+  font-family: 'Inter-Medium', Helvetica;
+  font-size: 30px;
+  font-weight: 500;
+  left: 172px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 905px;
+  white-space: nowrap;
+}
+
+.inventory-empty .text-wrapper-10 {
+  color: #606060;
+  font-family: 'Inter-Medium', Helvetica;
+  font-size: 30px;
+  font-weight: 500;
+  left: 178px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 384px;
+  white-space: nowrap;
+}
+
+.inventory-empty .text-wrapper-11 {
+  color: #606060;
+  font-family: 'Inter-Medium', Helvetica;
+  font-size: 30px;
+  font-weight: 500;
+  left: 178px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 256px;
+  white-space: nowrap;
+}
+
+.inventory-empty .text-wrapper-12 {
+  color: #606060;
+  font-family: 'Inter-Medium', Helvetica;
+  font-size: 30px;
+  font-weight: 500;
+  left: 174px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 512px;
+  white-space: nowrap;
+}
+
+.inventory-empty .text-wrapper-13 {
+  color: #606060;
+  font-family: 'Inter-Medium', Helvetica;
+  font-size: 30px;
+  font-weight: 500;
+  left: 172px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 634px;
+  white-space: nowrap;
+}
+
+.inventory-empty .text-wrapper-14 {
+  color: #606060;
+  font-family: 'Inter-Medium', Helvetica;
+  font-size: 30px;
+  font-weight: 500;
+  left: 174px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 1231px;
+  white-space: nowrap;
+}
+
+.inventory-empty .text-wrapper-15 {
+  color: #606060;
+  font-family: 'Inter-Medium', Helvetica;
+  font-size: 30px;
+  font-weight: 500;
+  left: 178px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 771px;
+  white-space: nowrap;
+}

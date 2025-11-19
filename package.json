@@ -1,8 +1,22 @@
 {
   "name": "csc-307-app",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "To run the front end, run `npm run dev` from root",
+  "homepage": "https://github.com/dash-org/csc_307_group_project#readme",
+  "bugs": {
+    "url": "https://github.com/dash-org/csc_307_group_project/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dash-org/csc_307_group_project.git"
+  },
+  "license": "ISC",
+  "author": "",
   "type": "module",
+  "main": "index.js",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "test": "npm run test:backend --prefix packages/jest-unit-testing",
     "frontend": "npm run dev --workspace react-frontend",
@@ -21,11 +35,12 @@
     "outputDirectory": "reports/junit",
     "outputName": "jest-unit.xml"
   },
-  "license": "ISC",
-  "description": "",
-  "workspaces": [
-    "packages/*"
-  ],
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.3",
+    "jsonwebtoken": "^9.0.2",
+    "react-router-dom": "^7.9.5"
+  },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
     "eslint": "^9.36.0",
@@ -38,11 +53,5 @@
     "jest-junit": "^16.0.0",
     "nodemon": "^3.1.10",
     "prettier": "^3.6.2"
-  },
-  "dependencies": {
-    "bcrypt": "^6.0.0",
-    "dotenv": "^17.2.3",
-    "jsonwebtoken": "^9.0.2",
-    "react-router-dom": "^7.9.5"
   }
 }

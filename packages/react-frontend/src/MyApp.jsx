@@ -4,15 +4,24 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Table from './Table';
 import Form from './Form';
 import Login from './Login';
+import { DashboardEmpty } from './Dashboard/dash';
+import { InventoryEmpty } from './Inventory/inventory';
+import { HomepageBlank } from './Homepage/home';
+import { SignCentered } from './SignPage/Sign';
 import { LoginCentered } from './LoginPage/Login2';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { PantrySetupCreate } from './NewKitchen/newkitchen';
+import { PantrySetupInvited } from './ManageMember/managemember';
 
 function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
   const API_PREFIX = 'http://localhost:8000';
-  const [token, setToken] = useState(INVALID_TOKEN);
+  const [token, setToken] = useState(
+    localStorage.getItem('authToken') ?? INVALID_TOKEN
+  );
   const [, setMessage] = useState('');
   const [characters, setCharacters] = useState([]);
+  const [error, setError] = useState(0);
 
   const addAuthHeader = useCallback(
     (otherHeaders = {}) => {
@@ -67,11 +76,16 @@ function MyApp() {
           return response.json();
         } else {
           setMessage(`Login Error ${response.status}: ${response.data}`);
+          setError(1);
+          console.log('test12345');
         }
       })
       .then((json) => {
         setToken(json.token);
+        localStorage.setItem('authToken', json.token);
         setMessage(`Login successful; auth token saved`);
+        window.location.assign('/');
+        setError(0);
         console.log('sanity check');
       })
       .catch((error) => {
@@ -93,6 +107,7 @@ function MyApp() {
         if (response.status === 201) {
           response.json().then((payload) => {
             setToken(payload.token);
+            localStorage.setItem('authToken', payload.token);
             postUser({
               name: creds.username,
               hashpassword: payload.hashpassword,
@@ -162,6 +177,17 @@ function MyApp() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/dash" element={<DashboardEmpty></DashboardEmpty>} />
+        <Route path="/home" element={<HomepageBlank></HomepageBlank>} />
+        <Route path="/inventory" element={<InventoryEmpty></InventoryEmpty>} />
+        <Route
+          path="/kitchens/create"
+          element={<PantrySetupCreate></PantrySetupCreate>}
+        />
+        <Route
+          path="/kitchens/manage"
+          element={<PantrySetupInvited></PantrySetupInvited>}
+        />
         <Route
           path="/"
           element={
@@ -177,11 +203,12 @@ function MyApp() {
         {/* <Route path="/login" element={<Login handleSubmit={loginUser} />} />; */}
         <Route
           path="/login"
-          element={<LoginCentered handleSubmit={loginUser} />}
+          element={<LoginCentered handleSubmit={loginUser} error={error} />}
         />
         <Route
           path="/signup"
-          element={<Login handleSubmit={signupUser} buttonLabel="Sign Up" />}
+          // element={<Login handleSubmit={signupUser} buttonLabel="Sign Up" />}
+          element={<SignCentered handleSubmit={signupUser} />}
         />
       </Routes>
     </BrowserRouter>

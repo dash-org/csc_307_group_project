@@ -18,19 +18,22 @@ export function registerUser(req, res) {
           .genSalt(10)
           .then((salt) => bcrypt.hash(pwd, salt))
           .then((hashedPassword) => {
-            userServices
-              .addUser({
-                name: username,
-                hashpassword: hashedPassword,
-              })
-              .then((newUser) => {
-                generateAccessToken(newUser._id).then((token) => {
-                  console.log('Token:', token);
+            generateAccessToken(username).then((token) => {
+              console.log('Token:', token);
+              userServices
+                .addUser({
+                  name: username,
+                  hashpassword: hashedPassword,
+                })
+                .then(() =>
                   res
                     .status(201)
-                    .send({ token: token, hashpassword: hashedPassword });
-                });
-              });
+                    .send({ token: token, hashpassword: hashedPassword })
+                )
+                .catch(() =>
+                  res.status(400).send('Failed to add user to database')
+                );
+            });
           });
       }
     });

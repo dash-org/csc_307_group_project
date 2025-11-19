@@ -1,7 +1,9 @@
-import './login.css';
+import './sign.css';
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 
-export const LoginCentered = (props) => {
+export const SignCentered = (props) => {
+  const navigate = useNavigate();
   const [creds, setCreds] = useState({
     username: '',
     pwd: '',
@@ -15,14 +17,7 @@ export const LoginCentered = (props) => {
         <div className="div">Better kitchen management.</div>
 
         <div className="frame-2">
-          <div className="text-wrapper-2">Log In</div>
-
-          <div
-            className="error"
-            style={{ display: props.error ? 'block' : 'none' }}
-          >
-            Incorrect Password or Username
-          </div>
+          <div className="text-wrapper-2">Sign Up</div>
 
           <div className="frame-3">
             <div className="frame-4">
@@ -62,7 +57,7 @@ export const LoginCentered = (props) => {
                 </div>
               </div>
 
-              <div className="text-wrapper-5">Forgot Password?</div>
+              {/* <div className="text-wrapper-5">Forgot Password?</div> */}
             </div>
 
             {/* <div className="frame-8"> */}
@@ -70,20 +65,10 @@ export const LoginCentered = (props) => {
             <input
               type="button"
               className="frame-8"
-              value={props.buttonLabel || 'Log In'}
+              value={props.buttonLabel || 'Sign Up'}
               onClick={submitForm}
             />
             {/* </div> */}
-
-            <p className="don-t-have-an">
-              <span className="span">Don’t have an account? </span>
-              <a className="text-wrapper-7" href="http://localhost:5173/signup">
-                {' '}
-                Create an account{' '}
-              </a>
-
-              {/* <span className="text-wrapper-7">Create an account</span> */}
-            </p>
           </div>
         </div>
       </div>
@@ -103,7 +88,7 @@ export const LoginCentered = (props) => {
   }
 
   function submitForm() {
-    props.handleSubmit(creds);
+    props.handleSubmit(creds).then(() => navigate('/'));
     setCreds({ username: '', pwd: '' });
   }
 };
