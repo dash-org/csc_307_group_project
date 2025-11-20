@@ -13,11 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    env:
-      MONGODB_URI: ${{ secrets.MONGODB_URI }}
-      TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
-      NODE_ENV: test
-      PORT: 8000
+    #env:
+    #  MONGODB_URI: ${{ secrets.MONGODB_URI }}
+    #  TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
+    #  NODE_ENV: test
+    #  PORT: 8000
     steps:
       - uses: actions/checkout@v4
 
