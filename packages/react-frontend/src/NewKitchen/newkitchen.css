@@ -1,0 +1,153 @@
+.pantry-setup-create {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 832px;
+  width: 1280px;
+}
+
+.pantry-setup-create .text-wrapper {
+  color: #000000;
+  font-family: 'Inter-Bold', Helvetica;
+  font-size: 40px;
+  font-weight: 700;
+  height: 48px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 69px;
+  margin-top: 35px;
+  white-space: nowrap;
+  width: 118px;
+}
+
+.pantry-setup-create .div {
+  color: #000000;
+  font-family: 'Inter-Bold', Helvetica;
+  font-size: 32px;
+  font-weight: 700;
+  height: 39px;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 452px;
+  margin-top: 84px;
+  text-align: center;
+  width: 374px;
+}
+
+.pantry-setup-create .rectangle {
+  background-color: #e2e2e2;
+  height: 22px;
+  margin-left: 288px;
+  margin-top: 27px;
+  width: 703px;
+}
+
+.pantry-setup-create .frame {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  height: 188px;
+  margin-left: 288px;
+  margin-top: 51px;
+  position: relative;
+  width: 703px;
+}
+
+.pantry-setup-create .frame-2 {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  width: 100%;
+}
+
+.pantry-setup-create .text-wrapper-2 {
+  align-self: stretch;
+  color: #000000;
+  font-family: 'Inter-Regular', Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+}
+
+.pantry-setup-create .div-wrapper {
+  align-items: center;
+  align-self: stretch;
+  border: 2px solid;
+  border-color: #c3c3c3;
+  border-radius: 10px;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  padding: 10px;
+  position: relative;
+  width: 100%;
+}
+
+.pantry-setup-create .text-wrapper-3 {
+  color: #727272;
+  font-family: 'Inter-Regular', Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -2px;
+  position: relative;
+  width: fit-content;
+}
+
+.pantry-setup-create .frame-3 {
+  align-items: center;
+  display: flex;
+  height: 42px;
+  justify-content: space-between;
+  margin-left: 288px;
+  margin-top: 51px;
+  position: relative;
+  width: 703px;
+}
+
+.pantry-setup-create .frame-4 {
+  align-items: center;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  height: 42px;
+  justify-content: center;
+  padding: 10px;
+  position: relative;
+  width: 88px;
+}
+
+.pantry-setup-create .text-wrapper-4 {
+  color: #000000;
+  font-family: 'Inter-Regular', Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.pantry-setup-create .frame-5 {
+  align-items: center;
+  background-color: #888888;
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  height: 42px;
+  justify-content: center;
+  padding: 10px;
+  position: relative;
+  width: 178px;
+}
