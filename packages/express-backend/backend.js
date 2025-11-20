@@ -206,17 +206,8 @@ app.get('/kitchens/:id', (req, res) => {
       console.log(error);
       res.status(404).send('Resource not found.');
     });
-});
-
-app.get('/kitchens', (req, res) => {
-  // List all kitchens. Will not include inventories. Use kitchens/:id to get inventories
-  kitchenServices
-    .getKitchen(req.query.name, req.query.owner, req.query.createdAt)
-    .then((kitchens) => {
-      return res.send({ kitchen_list: kitchens });
-    })
-    .catch((error) => console.log(error));
-});
+  }
+);
 
 /**
  * POST ROUTES
