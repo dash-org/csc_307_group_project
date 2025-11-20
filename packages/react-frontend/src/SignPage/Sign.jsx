@@ -1,12 +1,10 @@
-import './login.css';
+import './sign.css';
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 
-export const LoginCentered = (props) => {
-  /*
-  This is very similar to a form, 
-  we need a useState to render what the user types
-  or when they submit
-  */
+export const SignCentered = (props) => {
+  // This format was derived from LoginPage, so checkout out the Login2.jsx for additional documentation
+  const navigate = useNavigate();
   const [creds, setCreds] = useState({
     username: '',
     pwd: '',
@@ -20,22 +18,7 @@ export const LoginCentered = (props) => {
         <div className="div">Better kitchen management.</div>
 
         <div className="frame-2">
-          <div className="text-wrapper-2">Log In</div>
-          {/* props.error is passed down from MyApp.jsx
-           after a failed login attempt, the page is rerendered to props.error = 1*/}
-          <div
-            className="error"
-            style={{ display: props.error ? 'block' : 'none' }}
-          >
-            Incorrect Password or Username
-          </div>
-
-          <div
-            className="error"
-            style={{ display: props.error ? 'block' : 'none' }}
-          >
-            Incorrect Password or Username
-          </div>
+          <div className="text-wrapper-2">Sign Up</div>
 
           <div className="frame-3">
             <div className="frame-4">
@@ -43,7 +26,7 @@ export const LoginCentered = (props) => {
                 <div className="frame-6">
                   <div className="text-wrapper-3">Username</div>
 
-                  <input // This is the username box that can be filled by the user
+                  <input
                     className="div-wrapper"
                     type="text"
                     name="username"
@@ -56,8 +39,7 @@ export const LoginCentered = (props) => {
 
                 <div className="frame-7">
                   <div className="text-wrapper-3">Password</div>
-
-                  <input // This is the password box that can be filled by the user
+                  <input
                     className="div-wrapper"
                     type="password"
                     name="password"
@@ -68,34 +50,18 @@ export const LoginCentered = (props) => {
                   />
                 </div>
               </div>
-
-              <div className="text-wrapper-5">Forgot Password?</div>
             </div>
-
-            <input // This is the submit button
+            <input
               type="button"
               className="frame-8"
-              value={props.buttonLabel || 'Log In'}
+              value={props.buttonLabel || 'Sign Up'}
               onClick={submitForm}
             />
-
-            <p className="don-t-have-an">
-              <span className="span">Don’t have an account? </span>
-              <a className="text-wrapper-7" href="http://localhost:5173/signup">
-                {' '}
-                Create an account{' '}
-              </a>
-            </p>
           </div>
         </div>
       </div>
     </div>
   );
-
-  /*
-  handleChange is called anytime the user types into either the username box or the password box,
-  so we handle the update by rendering the change with useState setCreds()
-   */
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -109,12 +75,8 @@ export const LoginCentered = (props) => {
     }
   }
 
-  /*
-  submitForm() resets the password and username boxes,
-  the function signupUser() is then ran as it was passed down as a prop from MyApp.jsx
-   */
   function submitForm() {
-    props.handleSubmit(creds);
+    props.handleSubmit(creds).then(() => navigate('/'));
     setCreds({ username: '', pwd: '' });
   }
 };
