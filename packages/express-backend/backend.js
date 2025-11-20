@@ -136,7 +136,12 @@ app.get('/users/:id', authenticateUser, authorizeSelfOnly, (req, res) => {
   userServices
     .findUserById(id)
     .then((user) => {
-      res.send(user);
+      if (!user) {
+        return res.status(404).send('Resource not found.');
+      }
+      // Remove hashpassword from response
+      const { hashpassword: _, ...userWithoutPassword } = user.toObject();
+      res.send(userWithoutPassword);
     })
     .catch((error) => {
       console.log(error);
@@ -148,7 +153,11 @@ app.get('/users', authenticateUser, (req, res) => {
   userServices
     .getUsers(req.query.name, req.query.createdAt)
     .then((users) => {
-      return res.send({ users_list: users });
+      const usersFiltered = users.map((user) => ({
+        _id: user._id,
+        name: user.name,
+      }));
+      return res.send({ users_list: usersFiltered });
     })
     .catch((error) => console.log(error));
 });
