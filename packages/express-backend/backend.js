@@ -11,6 +11,8 @@ import kitchenServices from './services/kitchen-services.js';
 import {
   authorizeMembershipCreation,
   authorizeMembershipDeletion,
+  authorizeUserDeletion,
+  authorizeMinRole,
 } from './kitchen-auth.js';
 import { registerUser, authenticateUser, loginUser } from './auth.js';
 
@@ -145,29 +147,35 @@ app.get('/users', authenticateUser, (req, res) => {
     .catch((error) => console.log(error));
 });
 
-app.get('/kitchens/:kitchenId/memberships', authenticateUser, (req, res) => {
-  const kitchenId = req.params.kitchenId;
+app.get(
+  '/kitchens/:kitchenId/memberships',
+  authenticateUser,
+  authorizeMinRole('viewer'),
+  (req, res) => {
+    const kitchenId = req.params.kitchenId;
 
-  kitchenServices
-    .findKitchenById(kitchenId)
-    .then((kitchen) => {
-      if (!kitchen) {
-        return res.status(404).send('Kitchen not found');
-      }
-      return memberServices.getMembersByKitchenId(kitchenId);
-    })
-    .then((memberships) => {
-      res.send({ members_list: memberships });
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).send('Error fetching memberships');
-    });
-});
+    kitchenServices
+      .findKitchenById(kitchenId)
+      .then((kitchen) => {
+        if (!kitchen) {
+          return res.status(404).send('Kitchen not found');
+        }
+        return memberServices.getMembersByKitchenId(kitchenId);
+      })
+      .then((memberships) => {
+        res.send({ members_list: memberships });
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send('Error fetching memberships');
+      });
+  }
+);
 
 app.get(
   '/kitchens/:kitchenId/inventories/:id',
   authenticateUser,
+  authorizeMinRole('viewer'),
   (req, res) => {
     const kitchenId = req.params.kitchenId;
     const id = req.params.id;
@@ -193,19 +201,23 @@ app.get(
   }
 );
 
-app.get('/kitchens/:id', (req, res) => {
-  // Includes list of inventories within this kitchen
-  const id = req.params['id'];
+app.get(
+  '/kitchens/:id',
+  authenticateUser,
+  authorizeMinRole('viewer'),
+  (req, res) => {
+    // Includes list of inventories within this kitchen
+    const id = req.params['id'];
 
-  kitchenServices
-    .findKitchenById(id)
-    .then((kitchen) => {
-      res.send(kitchen);
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(404).send('Resource not found.');
-    });
+    kitchenServices
+      .findKitchenById(id)
+      .then((kitchen) => {
+        res.send(kitchen);
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(404).send('Resource not found.');
+      });
   }
 );
 
@@ -250,6 +262,7 @@ app.post(
 app.post(
   '/kitchens/:kitchenId/inventories/:inventoryId/items',
   authenticateUser,
+  authorizeMinRole('editor'),
   (req, res) => {
     const kitchenId = req.params.kitchenId;
     const inventoryId = req.params.inventoryId;
@@ -275,34 +288,40 @@ app.post(
   }
 );
 
-app.post('/kitchens/:kitchenId/inventories', authenticateUser, (req, res) => {
-  const kitchenId = req.params.kitchenId;
-  let inventoryToAdd = req.body;
-  inventoryToAdd.createdBy = req.userId;
+app.post(
+  '/kitchens/:kitchenId/inventories',
+  authenticateUser,
+  authorizeMinRole('editor'),
+  (req, res) => {
+    const kitchenId = req.params.kitchenId;
+    let inventoryToAdd = req.body;
+    inventoryToAdd.createdBy = req.userId;
 
-  kitchenServices
-    .findKitchenById(kitchenId)
-    .then((kitchen) => {
-      if (!kitchen) {
-        return res.status(404).send('Kitchen not found');
-      }
+    kitchenServices
+      .findKitchenById(kitchenId)
+      .then((kitchen) => {
+        if (!kitchen) {
+          return res.status(404).send('Kitchen not found');
+        }
 
-      return inventoryServices.addInventory(inventoryToAdd);
-    })
-    .then((inventory) => {
-      return kitchenServices
-        .addInventoryToKitchen(kitchenId, inventory._id)
-        .then(() => inventory);
-    })
-    .then((inventory) => {
-      res.status(201).send(inventory);
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).send('Error creating inventory');
-    });
-});
+        return inventoryServices.addInventory(inventoryToAdd);
+      })
+      .then((inventory) => {
+        return kitchenServices
+          .addInventoryToKitchen(kitchenId, inventory._id)
+          .then(() => inventory);
+      })
+      .then((inventory) => {
+        res.status(201).send(inventory);
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send('Error creating inventory');
+      });
+  }
+);
 
+// Anybody is allowed to create their own kitchen
 app.post('/kitchens', authenticateUser, (req, res) => {
   let kitchenToAdd = req.body;
   kitchenToAdd.owner = req.userId;
@@ -320,19 +339,24 @@ app.post('/kitchens', authenticateUser, (req, res) => {
  * DELETE ROUTES
  */
 
-app.delete('/users/:id', authenticateUser, (req, res) => {
-  const id = req.params['id'];
-  userServices
-    .deleteUserById(id)
-    .then((user) => {
-      console.log(`Deleted user ${user._id}`);
-      res.status(204).send();
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(404).send();
-    });
-});
+app.delete(
+  '/users/:id',
+  authenticateUser,
+  authorizeUserDeletion,
+  (req, res) => {
+    const id = req.params['id'];
+    userServices
+      .deleteUserById(id)
+      .then((user) => {
+        console.log(`Deleted user ${user._id}`);
+        res.status(204).send();
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(404).send();
+      });
+  }
+);
 
 app.delete(
   '/memberships/:id',
@@ -356,6 +380,7 @@ app.delete(
 app.delete(
   '/kitchens/:kitchenId/inventories/:inventoryId/items/:id',
   authenticateUser,
+  authorizeMinRole('editor'),
   (req, res) => {
     const kitchenId = req.params.kitchenId;
     const inventoryId = req.params.inventoryId;
@@ -386,6 +411,7 @@ app.delete(
 app.delete(
   '/kitchens/:kitchenId/inventories/:id',
   authenticateUser,
+  authorizeMinRole('editor'),
   (req, res) => {
     const kitchenId = req.params.kitchenId;
     const id = req.params.id;
@@ -409,19 +435,24 @@ app.delete(
   }
 );
 
-app.delete('/kitchens/:id', (req, res) => {
-  const id = req.params['id'];
-  kitchenServices
-    .deleteKitchenById(id)
-    .then((kitchen) => {
-      console.log(`Deleted kitchen ${kitchen.id}`);
-      res.status(204).send();
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(404).send();
-    });
-});
+app.delete(
+  '/kitchens/:id',
+  authenticateUser,
+  authorizeMinRole('owner'),
+  (req, res) => {
+    const id = req.params['id'];
+    kitchenServices
+      .deleteKitchenById(id)
+      .then((kitchen) => {
+        console.log(`Deleted kitchen ${kitchen.id}`);
+        res.status(204).send();
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(404).send();
+      });
+  }
+);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
