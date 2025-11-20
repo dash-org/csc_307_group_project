@@ -34,6 +34,7 @@ jobs:
       - name: Build backend
         run: npm run -w express-backend build --if-present
 
+      # tests are currently commented out because they are not set to run well through Azure environment
       # - name: Test backend
       #  run: npm run -w express-backend test --if-present
       #  env:
@@ -50,6 +51,7 @@ jobs:
           name: node-app
           path: release.zip
 
+  # note this only runs if build is successful
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -61,10 +63,6 @@ jobs:
         with:
           name: node-app
           path: .
-
-      # Optional: sanity check the zip contents
-      - name: Inspect zip (optional)
-        run: unzip -l release.zip | head -n 50
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v2
