@@ -1,20 +1,5 @@
-// kitchen-authorization.js
+// kitchen-auth.js
 import memberServices from './services/member-services.js';
-import kitchenServices from './services/kitchen-services.js';
-
-// Check if user owns the kitchen
-export async function isKitchenOwner(userId, kitchenId) {
-  try {
-    const kitchen = await kitchenServices.findKitchenById(kitchenId);
-    if (!kitchen) {
-      return false;
-    }
-    return kitchen.owner._id.toString() === userId.toString();
-  } catch (error) {
-    console.error('Error checking kitchen owner:', error);
-    return false;
-  }
-}
 
 // Get user's role in a kitchen
 export async function getUserKitchenRole(userId, kitchenId) {
@@ -120,4 +105,52 @@ export async function authorizeMembershipDeletion(req, res, next) {
     console.error('Authorization error:', error);
     return res.status(500).send('Error checking permissions');
   }
+}
+
+// Users can only delete their own account
+export async function authorizeUserDeletion(req, res, next) {
+  const targetUserId = req.params.id;
+  const requesterId = req.userId;
+
+  if (targetUserId !== requesterId.toString()) {
+    return res.status(403).send('You can only delete your own account');
+  }
+
+  next();
+}
+
+// Role hierarchy from lowest to highest
+const roleHierarchy = {
+  viewer: 0,
+  editor: 1,
+  admin: 2,
+  owner: 3,
+};
+
+// General authorization function that checks minimum required role
+export function authorizeMinRole(minRole) {
+  return async (req, res, next) => {
+    const kitchenId = req.params.kitchenId || req.params.id;
+    const requesterId = req.userId;
+
+    try {
+      const requesterRole = await getUserKitchenRole(requesterId, kitchenId);
+
+      if (!requesterRole) {
+        return res.status(403).send('You must be a member of this kitchen');
+      }
+
+      const requesterLevel = roleHierarchy[requesterRole];
+      const requiredLevel = roleHierarchy[minRole];
+
+      if (requesterLevel >= requiredLevel) {
+        return next();
+      }
+
+      return res.status(403).send(`You must be at least a ${minRole}`);
+    } catch (error) {
+      console.error('Authorization error:', error);
+      return res.status(500).send('Error checking permissions');
+    }
+  };
 }
