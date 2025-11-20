@@ -11,7 +11,6 @@ import kitchenServices from './services/kitchen-services.js';
 import {
   authorizeMembershipCreation,
   authorizeMembershipDeletion,
-  authorizeUserDeletion,
   authorizeMinRole,
   authorizeSelfOnly,
 } from './kitchen-auth.js';
@@ -354,24 +353,19 @@ app.post('/kitchens', authenticateUser, (req, res) => {
  * DELETE ROUTES
  */
 
-app.delete(
-  '/users/:id',
-  authenticateUser,
-  authorizeUserDeletion,
-  (req, res) => {
-    const id = req.params['id'];
-    userServices
-      .deleteUserById(id)
-      .then((user) => {
-        console.log(`Deleted user ${user._id}`);
-        res.status(204).send();
-      })
-      .catch((error) => {
-        console.log(error);
-        res.status(404).send();
-      });
-  }
-);
+app.delete('/users/:id', authenticateUser, authorizeSelfOnly, (req, res) => {
+  const id = req.params['id'];
+  userServices
+    .deleteUserById(id)
+    .then((user) => {
+      console.log(`Deleted user ${user._id}`);
+      res.status(204).send();
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(404).send();
+    });
+});
 
 app.delete(
   '/memberships/:id',

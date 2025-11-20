@@ -132,18 +132,6 @@ export async function authorizeMembershipDeletion(req, res, next) {
   }
 }
 
-// Users can only delete their own account
-export async function authorizeUserDeletion(req, res, next) {
-  const targetUserId = req.params.id;
-  const requesterId = req.userId;
-
-  if (targetUserId !== requesterId.toString()) {
-    return res.status(403).send('You can only delete your own account');
-  }
-
-  next();
-}
-
 // Role hierarchy from lowest to highest
 const roleHierarchy = {
   viewer: 0,
