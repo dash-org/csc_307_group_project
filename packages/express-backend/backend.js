@@ -13,6 +13,7 @@ import {
   authorizeMembershipDeletion,
   authorizeUserDeletion,
   authorizeMinRole,
+  authorizeSelfOnly,
 } from './kitchen-auth.js';
 import { registerUser, authenticateUser, loginUser } from './auth.js';
 
@@ -105,27 +106,32 @@ app.get('/', (req, res) => {
  * GET ROUTES
  */
 
-app.get('/users/:userId/memberships', authenticateUser, (req, res) => {
-  const userId = req.params.userId;
+app.get(
+  '/users/:userId/memberships',
+  authenticateUser,
+  authorizeSelfOnly,
+  (req, res) => {
+    const userId = req.params.userId;
 
-  userServices
-    .findUserById(userId)
-    .then((user) => {
-      if (!user) {
-        return res.status(404).send('User not found');
-      }
-      return memberServices.getMembersByUserId(userId);
-    })
-    .then((memberships) => {
-      res.send({ members_list: memberships });
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).send('Error fetching memberships');
-    });
-});
+    userServices
+      .findUserById(userId)
+      .then((user) => {
+        if (!user) {
+          return res.status(404).send('User not found');
+        }
+        return memberServices.getMembersByUserId(userId);
+      })
+      .then((memberships) => {
+        res.send({ members_list: memberships });
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send('Error fetching memberships');
+      });
+  }
+);
 
-app.get('/users/:id', authenticateUser, (req, res) => {
+app.get('/users/:id', authenticateUser, authorizeSelfOnly, (req, res) => {
   const id = req.params['id'];
   userServices
     .findUserById(id)

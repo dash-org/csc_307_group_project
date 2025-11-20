@@ -15,6 +15,18 @@ export async function getUserKitchenRole(userId, kitchenId) {
   }
 }
 
+// Users can only access their own user data
+export async function authorizeSelfOnly(req, res, next) {
+  const targetUserId = req.params.userId || req.params.id;
+  const requesterId = req.userId;
+
+  if (targetUserId !== requesterId.toString()) {
+    return res.status(403).send('You can only access your own user data');
+  }
+
+  next();
+}
+
 // Owners and admins can create memberships
 // Owners can assign admin, editor, or viewer roles
 // Admins can only assign editor or viewer roles
