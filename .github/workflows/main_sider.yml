@@ -1,3 +1,9 @@
+# Purpose of this file is to build, test, and deploy the backend
+# currently zips backend into a release.zip and give it to Azure to deploy
+# reports errors on GitHub Actions tab
+# assumes you have code to be deployed
+# important to be valid in order to actually deploy the web app
+# tests should be valid otherwise code will deploy even if code is broken
 name: Build and deploy Node.js app to Azure Web App - SIDER
 
 on:
@@ -13,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+    # env from tests left over, not needed for azure connection
     #env:
     #  MONGODB_URI: ${{ secrets.MONGODB_URI }}
     #  TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
@@ -30,7 +37,7 @@ jobs:
       - name: Install backend deps
         working-directory: packages/express-backend
         run: npm ci --omit=dev --workspaces=false
-
+      # omit dev dependencies, working in directory already
       - name: Build backend
         run: npm run -w express-backend build --if-present
 
