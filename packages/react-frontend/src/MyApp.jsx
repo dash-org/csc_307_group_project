@@ -174,6 +174,47 @@ function MyApp() {
       });
   }
 
+  function createKitchenWithInventory({ kitchenName, inventoryName }) {
+    if (token === INVALID_TOKEN) {
+      setMessage('unauthorized');
+      return;
+    }
+    const headers = addAuthHeader({ 'Content-Type': 'application/json' });
+    const promise = fetch(`${API_PREFIX}/kitchens`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ name: kitchenName }),
+    })
+      .then((response) => {
+        if (response.status !== 201) {
+          setMessage(`Kitchen Error ${response.status}: ${response.data}`);
+          throw new Error('Kitchen creation failed');
+        }
+        return response.json();
+      })
+      .then((kitchen) => {
+        return fetch(`${API_PREFIX}/kitchens/${kitchen._id}/inventories`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ name: inventoryName }),
+        });
+      })
+      .then((response) => {
+        if (response.status !== 201) {
+          setMessage(`Inventory Error ${response.status}`);
+          throw new Error('Inventory creation failed');
+        }
+        return response.json();
+      })
+      .then(() => {
+        setMessage('Kitchen and inventory created successfully');
+      })
+      .catch((error) => {
+        setMessage(`Creation Error: ${error.message}`);
+      });
+    return promise;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -182,7 +223,12 @@ function MyApp() {
         <Route path="/inventory" element={<InventoryEmpty></InventoryEmpty>} />
         <Route
           path="/kitchens/create"
-          element={<PantrySetupCreate></PantrySetupCreate>}
+          element={
+            <PantrySetupCreate
+              handleSubmit={createKitchenWithInventory}
+              error={error}
+            />
+          }
         />
         <Route
           path="/kitchens/manage"

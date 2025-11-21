@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './newkitchen.css';
 
-export const PantrySetupCreate = () => {
+export const PantrySetupCreate = (props) => {
+  const [kitchenName, setKitchenName] = useState('');
+  const [inventoryName, setInventoryName] = useState('');
+
   return (
     <div className="pantry-setup-create">
       <div className="text-wrapper">SIDER</div>
@@ -12,19 +15,38 @@ export const PantrySetupCreate = () => {
 
       <div className="frame">
         <div className="frame-2">
-          <div className="text-wrapper-2">Pantry Name</div>
+          <label className="text-wrapper-2" htmlFor="kitchenName">
+            Pantry Name
+          </label>
 
-          <div className="div-wrapper">
-            <div className="text-wrapper-3">e.g. 1st Floor Kitchen</div>
-          </div>
+          <input
+            className="div-wrapper"
+            type="text"
+            name="kitchenName"
+            id="kitchenName"
+            placeholder="Pantry Name"
+            value={kitchenName}
+            onChange={handleChange}
+          />
+
+          {/* <div className="text-wrapper-3">e.g. 1st Floor Kitchen</div> */}
         </div>
 
         <div className="frame-2">
-          <div className="text-wrapper-2">Inventory Name</div>
+          <label className="text-wrapper-2">Inventory Name</label>
 
-          <div className="div-wrapper">
+          <input
+            className="div-wrapper"
+            type="text"
+            name="inventoryName"
+            id="inventoryName"
+            placeholder="Inventory Name"
+            value={inventoryName}
+            onChange={handleChange}
+          />
+          {/* <div className="div-wrapper">
             <div className="text-wrapper-3">e.g. Fridge</div>
-          </div>
+          </div> */}
         </div>
       </div>
 
@@ -33,10 +55,34 @@ export const PantrySetupCreate = () => {
           <div className="text-wrapper-4">Back</div>
         </div>
 
-        <div className="frame-5">
-          <div className="text-wrapper-4">Next</div>
-        </div>
+        {/* <div className="frame-5"> */}
+        {/* <div className="text-wrapper-4">Next</div> */}
+        <input
+          type="button"
+          className="frame-5"
+          value={props.buttonLabel || 'Next'}
+          onClick={submitForm}
+        />
+        {/* </div> */}
       </div>
     </div>
   );
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    if (name === 'kitchenName') {
+      setKitchenName(value);
+    } else if (name === 'inventoryName') {
+      setInventoryName(value);
+    }
+  }
+
+  function submitForm() {
+    props.handleSubmit({
+      kitchenName,
+      inventoryName,
+    });
+    setKitchenName('');
+    setInventoryName('');
+  }
 };
