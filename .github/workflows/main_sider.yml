@@ -8,7 +8,7 @@ name: Build and deploy Node.js app to Azure Web App - SIDER
 
 on:
   push:
-    branches: [Cd-dev]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
