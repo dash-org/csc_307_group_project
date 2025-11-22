@@ -7,8 +7,10 @@ and amount of what they have in their real kitchen.
 For users with roommates, they can add others to their kitchens to track who is the owner of items
 
 ## Project URL
+
 Frontend: https://yellow-flower-0dfae081e.3.azurestaticapps.net/
 Backend: https://sider.azurewebsites.net/
+
 ## Setup
 
 To run the front end, run `npm run frontend` from root
