@@ -15,7 +15,7 @@ import { PantrySetupInvited } from './ManageMember/managemember';
 
 function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
-  const API_PREFIX = 'http://localhost:8000';
+  const API_PREFIX = 'https://sider.azurewebsites.net';
   /*
   The value of token upon booting the frontend is what is stored in local storage, 
   if its not found in local storage then it is set to INVALID_TOKEN
@@ -166,7 +166,7 @@ function MyApp() {
   Which causes a page reload anyways allowing us to render the new user.
   */
   function postUser(person) {
-    const promise = fetch('http://localhost:8000/users', {
+    const promise = fetch(`${API_PREFIX}/users`, {
       method: 'POST',
       headers: addAuthHeader({
         'Content-Type': 'application/json',
@@ -183,7 +183,7 @@ function MyApp() {
   */
   function removeOneCharacter(index) {
     const trash = characters.at(index);
-    const promise = fetch(`http://localhost:8000/users/${trash._id}`, {
+    const promise = fetch(`${API_PREFIX}/users/${trash._id}`, {
       method: `DELETE`,
       headers: addAuthHeader(),
     });
