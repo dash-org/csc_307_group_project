@@ -13,94 +13,139 @@ import testAccount from '../Images/test-account.png';
 export const HomepageBlank = () => {
   return (
     <div className="homepage-blank">
-      <div className="text-wrapper">SIDER</div>
+      {/* Top bar */}
+      <header className="hb-header">
+        <div className="hb-logo">SIDER</div>
 
-      <div className="rectangle" />
+        <nav className="hb-top-nav">
+          <button className="hb-top-nav-item hb-top-nav-item-active">
+            Home
+          </button>
 
-      <div className="div" />
+          <button
+            className="hb-top-nav-item"
+            onClick={() => {
+              window.location.href = '/dash';
+            }}
+          >
+            Dashboard
+          </button>
 
-      <div className="rectangle-2" />
+          <button className="hb-top-nav-item">Supplies</button>
+        </nav>
 
-      <div className="text-wrapper-2">Home</div>
+        <div className="hb-user">
+          <span className="hb-user-name">Anyone</span>
+          <img className="hb-user-avatar" src={testAccount} alt="User avatar" />
+        </div>
+      </header>
 
-      <button
-        className="text-wrapper-3"
-        onClick={() => {
-          window.location.href = '/dash';
-        }} //Fix css issue later
-      >
-        Dashboard
-      </button>
+      {/* Main layout */}
+      <div className="hb-body">
+        {/* Sidebar */}
+        <aside className="hb-sidebar">
+          <ul className="hb-sidebar-list">
+            <li className="hb-sidebar-item hb-sidebar-item-active">
+              <div className="hb-sidebar-icon-pill hb-sidebar-icon-pill-active">
+                <img
+                  src={controlPanel}
+                  alt="Home"
+                  className="hb-sidebar-icon"
+                />
+              </div>
+              <span>Home</span>
+            </li>
 
-      <div className="text-wrapper-4">Supplies</div>
+            <li className="hb-sidebar-item">
+              <div className="hb-sidebar-icon-pill">
+                <img
+                  src={calendar}
+                  alt="Reminders"
+                  className="hb-sidebar-icon"
+                />
+              </div>
+              <span>Reminders</span>
+            </li>
 
-      <div className="ellipse" />
+            <li className="hb-sidebar-item">
+              <div className="hb-sidebar-icon-pill">
+                <img
+                  src={shoppingBag}
+                  alt="Shopping List"
+                  className="hb-sidebar-icon"
+                />
+              </div>
+              <span>Shopping List</span>
+            </li>
 
-      <div className="ellipse-2" />
+            <li className="hb-sidebar-item">
+              <div className="hb-sidebar-icon-pill">
+                <img src={playlist} alt="Members" className="hb-sidebar-icon" />
+              </div>
+              <span>Members</span>
+            </li>
 
-      <div className="ellipse-3" />
+            <li className="hb-sidebar-item">
+              <div className="hb-sidebar-icon-pill">
+                <img src={chat} alt="Chat" className="hb-sidebar-icon" />
+              </div>
+              <span>Chat</span>
+            </li>
 
-      <div className="ellipse-4" />
+            <li className="hb-sidebar-item">
+              <div className="hb-sidebar-icon-pill">
+                <img
+                  src={settings}
+                  alt="Settings"
+                  className="hb-sidebar-icon"
+                />
+              </div>
+              <span>Settings</span>
+            </li>
 
-      <div className="ellipse-5" />
+            <li className="hb-sidebar-item">
+              <div className="hb-sidebar-icon-pill">
+                <img
+                  src={highImportance}
+                  alt="About"
+                  className="hb-sidebar-icon"
+                />
+              </div>
+              <span>About</span>
+            </li>
+          </ul>
+        </aside>
 
-      <div className="ellipse-6" />
+        {/* Main content */}
+        <main className="hb-main">
+          <div className="hb-main-header">
+            <div>
+              <h1 className="hb-title">Kitchens</h1>
+              <p className="hb-subtitle">
+                Couldn’t find any kitchens. Start one now.
+              </p>
+            </div>
 
-      <div className="ellipse-7" />
+            <button
+              className="hb-add-button"
+              onClick={() => {
+                window.location.href = '/kitchens/create';
+              }}
+            >
+              <img src={plus} alt="" className="hb-add-icon" />
+              <span>Start a kitchen</span>
+            </button>
+          </div>
 
-      <img className="control-panel" alt="Control panel" src={controlPanel} />
-
-      <img className="calendar" alt="Calendar" src={calendar} />
-
-      <img className="shopping-bag" alt="Shopping bag" src={shoppingBag} />
-
-      <img className="playlist" alt="Playlist" src={playlist} />
-
-      <img className="chat" alt="Chat" src={chat} />
-
-      <img
-        className="high-importance"
-        alt="High importance"
-        src={highImportance}
-      />
-
-      <img className="test-account" alt="Test account" src={testAccount} />
-
-      <img className="settings" alt="Settings" src={settings} />
-
-      <div className="text-wrapper-5">Pantries</div>
-
-      <p className="p">Couldn’t find any pantries. Start one now.</p>
-
-      <div className="rectangle-3" />
-
-      <div className="rectangle-4" />
-
-      <img className="plus" alt="Plus" src={plus} />
-
-      <div className="rounded-rectangle" />
-
-      <div className="rounded-rectangle-2" />
-
-      <div className="text-wrapper-6">Anyone</div>
-
-      <div className="rounded-rectangle" />
-
-      <div className="text-wrapper-7">Anyone</div>
-
-      <div className="text-wrapper-8">Settings</div>
-
-      <div className="text-wrapper-9">Reminders</div>
-
-      <div className="text-wrapper-10">Home</div>
-
-      <div className="text-wrapper-11">Shopping List</div>
-
-      <div className="text-wrapper-12">Members</div>
-
-      <div className="text-wrapper-13">About</div>
-
-      <div className="text-wrapper-14">Chat</div>
+          {/* Content card / empty state */}
+          <section className="hb-card">
+            <p className="hb-card-text">
+              You don’t have any kitchens set up. Create one to start tracking
+              supplies, members, and shopping lists.
+            </p>
+          </section>
+        </main>
+      </div>
     </div>
   );
 };

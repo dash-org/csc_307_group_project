@@ -15,7 +15,8 @@ import { PantrySetupInvited } from './ManageMember/managemember';
 
 function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
-  const API_PREFIX = 'https://sider.azurewebsites.net';
+  // const API_PREFIX = 'https://sider.azurewebsites.net';
+  const API_PREFIX = 'http://localhost:8000';
   /*
   The value of token upon booting the frontend is what is stored in local storage, 
   if its not found in local storage then it is set to INVALID_TOKEN
@@ -216,6 +217,28 @@ function MyApp() {
       });
   }
 
+  function postKitchen(creds) {
+    const promise = fetch(`${API_PREFIX}/kitchens`, {
+      method: 'POST',
+      headers: addAuthHeader({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(creds),
+    })
+      .then((response) => {
+        if (response.status === 201) {
+          console.log('sanity check');
+          window.location.assign('/home');
+        } else {
+          console.log('test12345');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return promise;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -224,7 +247,9 @@ function MyApp() {
         <Route path="/inventory" element={<InventoryEmpty></InventoryEmpty>} />
         <Route
           path="/kitchens/create"
-          element={<PantrySetupCreate></PantrySetupCreate>}
+          element={
+            <PantrySetupCreate handleSubmit={postKitchen}></PantrySetupCreate>
+          }
         />
         <Route
           path="/kitchens/manage"
