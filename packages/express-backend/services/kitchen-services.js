@@ -27,7 +27,7 @@ async function filterAccecibleKitchens(promise, viewingUser) {
     .select('kitchenId');
   const kitchenIds = validMemberships.map((m) => m.kitchenId);
 
-  return promise.find({ _id: { $in: kitchenIds } });
+  return promise.find({ _id: { $in: kitchenIds } }).populate('owner');
 }
 
 function findKitchenById(id) {

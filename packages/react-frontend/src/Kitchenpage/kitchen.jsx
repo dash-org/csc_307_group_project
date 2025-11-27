@@ -21,7 +21,7 @@ import { useParams } from 'react-router-dom';
 export const KitchenPage = (props) => {
   const { id } = useParams();
   const kitchenId = id;
-  const [inventories, setInventories] = useState([]);
+  const [kitchen, setKitchen] = useState(null);
 
   const fetchInventories = useCallback(() => {
     // adjust the endpoint if your backend uses a different path
@@ -36,9 +36,9 @@ export const KitchenPage = (props) => {
       .then((json) => {
         if (json) {
           // adjust key if your backend returns something like { inventories: [...] }
-          setInventories(json.inventories || []);
+          setKitchen(json);
         } else {
-          setInventories([]);
+          setKitchen(null);
         }
       })
       .catch((error) => {
@@ -58,8 +58,10 @@ export const KitchenPage = (props) => {
     promise
       .then((res) => {
         if (res.status === 204) {
-          const updated = inventories.filter((inv) => inv._id !== _id);
-          setInventories(updated);
+          setKitchen((prev) => ({
+            ...prev,
+            inventories: prev.inventories.filter((inv) => inv._id !== _id),
+          }));
         }
       })
       .catch((error) => console.log(error));
@@ -180,6 +182,25 @@ export const KitchenPage = (props) => {
         {/* Main content */}
         <main className="hb-main">
           <div className="hb-main-header">
+            <div className="hb-kitchen-info-row">
+              <h1 className="hb-title">
+                Name: {kitchen?.name || 'NAME NOT FOUND'}
+              </h1>
+
+              <h1 className="hb-title">
+                Owner: {kitchen?.owner?.name || 'OWNER NOT FOUND'}
+              </h1>
+
+              <h1 className="hb-title">
+                Created:{' '}
+                {kitchen?.createdAt
+                  ? new Date(kitchen.createdAt).toLocaleDateString()
+                  : 'DATE NOT FOUND'}
+              </h1>
+            </div>
+          </div>
+
+          <div className="hb-main-header">
             <div>
               <h1 className="hb-title">Inventories</h1>
             </div>
@@ -196,7 +217,7 @@ export const KitchenPage = (props) => {
           </div>
 
           <KitchenGrid
-            inventories={inventories}
+            inventories={kitchen ? kitchen.inventories : []}
             removeInventory={deleteOneInventory}
             kitchenId={kitchenId}
           />

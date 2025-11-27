@@ -9,6 +9,7 @@ export const HomeGrid = (props) => {
             <p className="hb-kitchen-created">
               Created: {new Date(kitchen.createdAt).toLocaleDateString()}
             </p>
+            <p className="hb-kitchen-created"> Owner: {kitchen.owner.name}</p>
 
             <div className="hb-kitchen-actions">
               <button
