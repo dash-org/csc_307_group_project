@@ -62,7 +62,9 @@ export const HomepageBlank = () => {
         <div className="top-nav">
           <div className="nav-buttons">
             <button className="active">Home</button>
-            <button>Dashboard</button>
+            <button 
+              onClick={() => { window.location.href = '/dash';}}> 
+              Dashboard </button>
             <button>Supplies</button>
           </div>
 
