@@ -243,7 +243,15 @@ function MyApp() {
     <BrowserRouter>
       <Routes>
         <Route path="/dash" element={<DashboardEmpty></DashboardEmpty>} />
-        <Route path="/home" element={<HomepageBlank></HomepageBlank>} />
+        <Route
+          path="/home"
+          element={
+            <HomepageBlank
+              addAuthHeader={addAuthHeader}
+              API_PREFIX={API_PREFIX}
+            ></HomepageBlank>
+          }
+        />
         <Route path="/inventory" element={<InventoryEmpty></InventoryEmpty>} />
         <Route
           path="/kitchens/create"

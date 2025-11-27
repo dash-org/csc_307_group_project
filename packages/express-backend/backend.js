@@ -162,6 +162,26 @@ app.get('/users', authenticateUser, (req, res) => {
     .catch((error) => console.log(error));
 });
 
+app.get('/kitchens', authenticateUser, (req, res) => {
+  kitchenServices
+    .getKitchen(
+      req.query.name,
+      req.query.owner,
+      req.query.createdAt,
+      req.userId
+    )
+    .then((kitchens) => {
+      const kitchensFiltered = kitchens.map((kitchen) => ({
+        _id: kitchen._id,
+        name: kitchen.name,
+        owner: kitchen.owner,
+        createdAt: kitchen.createdAt,
+      }));
+      return res.send({ kitchens_list: kitchensFiltered });
+    })
+    .catch((error) => console.log(error));
+});
+
 app.get(
   '/kitchens/:kitchenId/memberships',
   authenticateUser,

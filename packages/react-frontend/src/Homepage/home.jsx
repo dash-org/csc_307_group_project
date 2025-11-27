@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import calendar from '../Images/calendar.png';
 import chat from '../Images/chat.png';
 import controlPanel from '../Images/control-panel.png';
@@ -9,8 +9,53 @@ import settings from '../Images/settings.png';
 import shoppingBag from '../Images/shopping-bag.png';
 import './home.css';
 import testAccount from '../Images/test-account.png';
+import { HomeGrid } from './homeGrid';
 
-export const HomepageBlank = () => {
+export const HomepageBlank = (props) => {
+  const [kitchens, setKitchens] = useState([]);
+
+  const fetchKitchens = useCallback(() => {
+    const promise = fetch(`${props.API_PREFIX}/kitchens`, {
+      headers: props.addAuthHeader(),
+    });
+    return promise;
+  }, [props]);
+
+  useEffect(() => {
+    console.log('jofifd');
+    fetchKitchens()
+      .then((res) => (res.status === 200 ? res.json() : undefined))
+      .then((json) => {
+        if (json) {
+          setKitchens(json['kitchens_list']);
+        } else {
+          setKitchens(null);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [fetchKitchens]);
+
+  function deleteOneKitchen(_id) {
+    // const trash = kitchens.at(index);
+    const promise = fetch(`${props.API_PREFIX}/kitchens/${_id}`, {
+      method: `DELETE`,
+      headers: props.addAuthHeader(),
+    });
+
+    promise
+      .then((res) => {
+        if (res.status == 204) {
+          const updated = kitchens.filter((kitchen) => {
+            return kitchen._id !== _id;
+          });
+          setKitchens(updated);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
   return (
     <div className="homepage-blank">
       {/* Top bar */}
@@ -121,9 +166,9 @@ export const HomepageBlank = () => {
           <div className="hb-main-header">
             <div>
               <h1 className="hb-title">Kitchens</h1>
-              <p className="hb-subtitle">
+              {/* <p className="hb-subtitle">
                 Couldn’t find any kitchens. Start one now.
-              </p>
+              </p> */}
             </div>
 
             <button
@@ -136,14 +181,18 @@ export const HomepageBlank = () => {
               <span>Start a kitchen</span>
             </button>
           </div>
+          <HomeGrid
+            kitchens={kitchens}
+            removeKitchen={deleteOneKitchen}
+          ></HomeGrid>
 
           {/* Content card / empty state */}
-          <section className="hb-card">
+          {/* <section className="hb-card">
             <p className="hb-card-text">
               You don’t have any kitchens set up. Create one to start tracking
               supplies, members, and shopping lists.
             </p>
-          </section>
+          </section> */}
         </main>
       </div>
     </div>
