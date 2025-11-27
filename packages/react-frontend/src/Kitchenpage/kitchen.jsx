@@ -13,6 +13,7 @@ import testAccount from '../Images/test-account.png';
 import rightArrowBracket from '../Images/rightarrowbracket.png';
 import { KitchenGrid } from './kitchenGrid';
 import { useParams } from 'react-router-dom';
+import { MembershipGrid } from './membershipGrid';
 
 // Expecting props:
 // - API_PREFIX
@@ -22,6 +23,13 @@ export const KitchenPage = (props) => {
   const { id } = useParams();
   const kitchenId = id;
   const [kitchen, setKitchen] = useState(null);
+  const [memberships, setMemberships] = useState([]);
+
+  const fetchMemberships = useCallback(() => {
+    return fetch(`${props.API_PREFIX}/kitchens/${kitchenId}/memberships`, {
+      headers: props.addAuthHeader(),
+    });
+  }, [props, kitchenId]);
 
   const fetchInventories = useCallback(() => {
     // adjust the endpoint if your backend uses a different path
@@ -46,6 +54,22 @@ export const KitchenPage = (props) => {
       });
   }, [fetchInventories]);
 
+  useEffect(() => {
+    fetchMemberships()
+      .then((res) => (res.status === 200 ? res.json() : undefined))
+      .then((json) => {
+        if (json) {
+          // adjust key if your backend returns something like { inventories: [...] }
+          setMemberships(json.members_list);
+        } else {
+          setMemberships([]);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [fetchMemberships]);
+
   function deleteOneInventory(_id) {
     const promise = fetch(
       `${props.API_PREFIX}/kitchens/${kitchenId}/inventories/${_id}`,
@@ -62,6 +86,24 @@ export const KitchenPage = (props) => {
             ...prev,
             inventories: prev.inventories.filter((inv) => inv._id !== _id),
           }));
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
+  function deleteOneMembership(_id) {
+    const promise = fetch(`${props.API_PREFIX}/memberships/${_id}`, {
+      method: 'DELETE',
+      headers: props.addAuthHeader(),
+    });
+
+    promise
+      .then((res) => {
+        if (res.status === 204) {
+          const updated = memberships.filter((character) => {
+            return _id !== character._id;
+          });
+          setMemberships(updated);
         }
       })
       .catch((error) => console.log(error));
@@ -199,6 +241,27 @@ export const KitchenPage = (props) => {
               </h1>
             </div>
           </div>
+
+          <div className="hb-main-header">
+            <div>
+              <h1 className="hb-title">Memberships</h1>
+            </div>
+
+            <button
+              className="hb-add-button"
+              onClick={() => {
+                window.location.href = `/kitchens/${kitchenId}/memberships/create`;
+              }}
+            >
+              <img src={plus} alt="" className="hb-add-icon" />
+              <span>Add User</span>
+            </button>
+          </div>
+
+          <MembershipGrid
+            memberships={memberships ? memberships : []}
+            removeMembership={deleteOneMembership}
+          />
 
           <div className="hb-main-header">
             <div>

@@ -28,7 +28,10 @@ function getMembersByUserId(userId) {
 }
 
 function getMembersByKitchenId(kitchenId) {
-  return memberModel.find({ kitchenId: kitchenId });
+  return memberModel
+    .find({ kitchenId: kitchenId })
+    .populate('userId')
+    .populate('createdBy');
 }
 
 function addMember(member) {

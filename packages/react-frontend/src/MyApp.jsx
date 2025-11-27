@@ -315,7 +315,7 @@ function MyApp() {
           }
         />
         <Route
-          path="/kitchens/manage"
+          path="/kitchens/:kitchenId/memberships/create"
           element={<PantrySetupInvited></PantrySetupInvited>}
         />
         <Route
