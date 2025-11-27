@@ -23,6 +23,10 @@ function MyApp() {
   const [characters, setCharacters] = useState([]);
   const [error, setError] = useState(0);
 
+  const windowSize = useWindowResize();
+
+  console.log("Resizing:", windowSize);
+
   const addAuthHeader = useCallback(
     (otherHeaders = {}) => {
       if (token === INVALID_TOKEN) {
@@ -216,11 +220,18 @@ function MyApp() {
   }
 
   return (
+    <div style = {{width: windowSize.width, height: windowSize.height}}>
     <BrowserRouter>
       <Routes>
-        <Route path="/dash" element={<DashboardEmpty></DashboardEmpty>} />
-        <Route path="/home" element={<HomepageBlank></HomepageBlank>} />
-        <Route path="/inventory" element={<InventoryEmpty></InventoryEmpty>} />
+        <Route 
+          path="/dash" 
+          element={<DashboardEmpty></DashboardEmpty>} />
+        <Route 
+          path="/home" 
+          element={<HomepageBlank></HomepageBlank>} />
+        <Route 
+          path="/inventory" 
+          element={<InventoryEmpty></InventoryEmpty>} />
         <Route
           path="/kitchens/create"
           element={
@@ -258,7 +269,30 @@ function MyApp() {
         />
       </Routes>
     </BrowserRouter>
+
+  </div>
   );
+}
+
+function useWindowResize() {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowSize;
 }
 
 export default MyApp;
