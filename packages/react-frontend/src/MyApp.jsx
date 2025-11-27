@@ -14,6 +14,7 @@ import { PantrySetupCreate } from './NewKitchen/newkitchen';
 import { PantrySetupInvited } from './ManageMember/managemember';
 import { KitchenPage } from './Kitchenpage/kitchen';
 import { InventorySetupCreate } from './NewInventory/newiventory';
+import { Navigate } from 'react-router-dom';
 
 function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
@@ -195,24 +196,24 @@ function MyApp() {
   Refer to this for future api calls
   Based on the response status, we utilize setCharacters to rerender the table with the updated set of users
   */
-  function removeOneCharacter(index) {
-    const trash = characters.at(index);
-    const promise = fetch(`${API_PREFIX}/users/${trash._id}`, {
-      method: `DELETE`,
-      headers: addAuthHeader(),
-    });
+  // function removeOneCharacter(index) {
+  //   const trash = characters.at(index);
+  //   const promise = fetch(`${API_PREFIX}/users/${trash._id}`, {
+  //     method: `DELETE`,
+  //     headers: addAuthHeader(),
+  //   });
 
-    promise
-      .then((res) => {
-        if (res.status == 204) {
-          const updated = characters.filter((character, i) => {
-            return i !== index;
-          });
-          setCharacters(updated);
-        }
-      })
-      .catch((error) => console.log(error));
-  }
+  //   promise
+  //     .then((res) => {
+  //       if (res.status == 204) {
+  //         const updated = characters.filter((character, i) => {
+  //           return i !== index;
+  //         });
+  //         setCharacters(updated);
+  //       }
+  //     })
+  //     .catch((error) => console.log(error));
+  // }
 
   function _updateList(person) {
     postUser(person)
@@ -319,17 +320,17 @@ function MyApp() {
         />
         <Route
           path="/"
-          element={
-            <div className="container">
-              <Table
-                characterData={characters}
-                removeCharacter={removeOneCharacter}
-              />
-              {/* <Form handleSubmit={updateList} /> */}
-            </div>
-          }
+          // element={
+          //   <div className="container">
+          //     <Table
+          //       characterData={characters}
+          //       removeCharacter={removeOneCharacter}
+          //     />
+          //     {/* <Form handleSubmit={updateList} /> */}
+          //   </div>
+          // }
+          element={<Navigate to="/home" replace />}
         />
-        {/* <Route path="/login" element={<Login handleSubmit={loginUser} />} />; */}
         <Route
           path="/login"
           element={<LoginCentered handleSubmit={loginUser} error={error} />}
