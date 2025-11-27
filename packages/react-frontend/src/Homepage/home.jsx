@@ -3,7 +3,7 @@ import calendar from '../Images/calendar.png';
 import chat from '../Images/chat.png';
 import controlPanel from '../Images/control-panel.png';
 import highImportance from '../Images/high-importance.png';
-import playlist from '../Images/playlist.png';
+// import playlist from '../Images/playlist.png';
 import plus from '../Images/plus.png';
 import settings from '../Images/settings.png';
 import shoppingBag from '../Images/shopping-bag.png';
@@ -67,7 +67,7 @@ export const HomepageBlank = (props) => {
             Home
           </button>
 
-          <button
+          {/* <button
             className="hb-top-nav-item"
             onClick={() => {
               window.location.href = '/dash';
@@ -76,13 +76,18 @@ export const HomepageBlank = (props) => {
             Dashboard
           </button>
 
-          <button className="hb-top-nav-item">Supplies</button>
+          <button className="hb-top-nav-item">Supplies</button> */}
         </nav>
 
-        <div className="hb-user">
-          <span className="hb-user-name">Anyone</span>
+        <button
+          className="hb-user-button"
+          onClick={() => {
+            window.location.href = '/login';
+          }}
+        >
+          <span className="hb-user-name">{props.currentUser}</span>
           <img className="hb-user-avatar" src={testAccount} alt="User avatar" />
-        </div>
+        </button>
       </header>
 
       {/* Main layout */}
@@ -123,12 +128,12 @@ export const HomepageBlank = (props) => {
               <span>Shopping List</span>
             </li>
 
-            <li className="hb-sidebar-item">
+            {/* <li className="hb-sidebar-item">
               <div className="hb-sidebar-icon-pill">
                 <img src={playlist} alt="Members" className="hb-sidebar-icon" />
               </div>
               <span>Members</span>
-            </li>
+            </li> */}
 
             <li className="hb-sidebar-item">
               <div className="hb-sidebar-icon-pill">

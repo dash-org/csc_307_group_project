@@ -195,3 +195,39 @@
   font-size: 18px;
   color: #606060;
 }
+
+/* Make hb-user into a clickable button */
+.hb-user-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  padding: 0;
+  margin: 0;
+
+  /* Prevent shrinking/layout shifts */
+  font: inherit;
+  color: inherit;
+
+  /* You had .hb-user with display flex → replicate it here */
+}
+
+/* Reuse the existing styling for name + avatar */
+.hb-user-button .hb-user-name {
+  font-size: 18px;
+  color: #fffbfb;
+  background-color: #d4d4d4;
+  border-radius: 8px;
+  padding: 6px 14px;
+}
+
+.hb-user-button .hb-user-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}

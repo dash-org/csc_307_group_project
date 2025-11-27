@@ -12,9 +12,12 @@ import { LoginCentered } from './LoginPage/Login2';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PantrySetupCreate } from './NewKitchen/newkitchen';
 import { PantrySetupInvited } from './ManageMember/managemember';
+import { KitchenPage } from './Kitchenpage/kitchen';
+import { InventorySetupCreate } from './NewInventory/newiventory';
 
 function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
+  const INVALID_USER = 'INVALID_USER';
   // const API_PREFIX = 'https://sider.azurewebsites.net';
   const API_PREFIX = 'http://localhost:8000';
   /*
@@ -23,6 +26,9 @@ function MyApp() {
    */
   const [token, setToken] = useState(
     localStorage.getItem('authToken') ?? INVALID_TOKEN
+  );
+  const [user, setUser] = useState(
+    localStorage.getItem('user') ?? INVALID_USER
   );
   const [, setMessage] = useState(''); // Errors are currently not being displayed
 
@@ -115,6 +121,10 @@ function MyApp() {
       .then((json) => {
         setToken(json.token);
         localStorage.setItem('authToken', json.token);
+
+        setUser(json.name);
+        localStorage.setItem('user', json.name);
+
         setMessage(`Login successful; auth token saved`);
         window.location.assign('/');
         setError(0);
@@ -143,6 +153,9 @@ function MyApp() {
           response.json().then((payload) => {
             setToken(payload.token);
             localStorage.setItem('authToken', payload.token);
+
+            setUser(payload.token);
+            localStorage.setItem('user', payload.name);
             postUser({
               name: creds.username,
               hashpassword: payload.hashpassword,
@@ -239,6 +252,28 @@ function MyApp() {
     return promise;
   }
 
+  function postInventory(creds, kitchenId) {
+    const promise = fetch(`${API_PREFIX}/kitchens/${kitchenId}/inventories`, {
+      method: 'POST',
+      headers: addAuthHeader({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify(creds),
+    })
+      .then((response) => {
+        if (response.status === 201) {
+          console.log('sanity check');
+          window.location.assign(`/kitchens/${kitchenId}`);
+        } else {
+          console.log('test12345');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return promise;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -249,7 +284,26 @@ function MyApp() {
             <HomepageBlank
               addAuthHeader={addAuthHeader}
               API_PREFIX={API_PREFIX}
+              currentUser={user}
             ></HomepageBlank>
+          }
+        />
+        <Route
+          path="/kitchens/:id"
+          element={
+            <KitchenPage
+              addAuthHeader={addAuthHeader}
+              API_PREFIX={API_PREFIX}
+              currentUser={user}
+            />
+          }
+        />
+        <Route
+          path="/kitchens/:id/inventories/create"
+          element={
+            <InventorySetupCreate
+              handleSubmit={postInventory}
+            ></InventorySetupCreate>
           }
         />
         <Route path="/inventory" element={<InventoryEmpty></InventoryEmpty>} />

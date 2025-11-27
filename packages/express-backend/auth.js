@@ -31,6 +31,7 @@ export function registerUser(req, res) {
                 res.status(201).send({
                   token: token,
                   hashpassword: newuser.hashedPassword,
+                  name: newuser.name,
                 });
               })
               .catch(() =>
