@@ -278,14 +278,33 @@ app.post(
   authenticateUser,
   authorizeMembershipCreation,
   (req, res) => {
-    let memberToAdd = req.body;
-    memberToAdd.createdBy = req.userId;
+    let potentialname = req.body.userName;
+    userServices
+      .getUsers(potentialname)
+      .then((users) => {
+        if (users.length > 0) {
+          const user = users[0];
+          let memberToAdd = {
+            kitchenId: req.body.kitchenId,
+            role: req.body.role,
+            userId: user._id,
+          };
+          memberToAdd.createdBy = req.userId;
 
-    memberServices
-      .addMember(memberToAdd)
-      .then((item) => {
-        memberToAdd = item;
-        res.status(201).send(memberToAdd);
+          memberServices
+            .addMember(memberToAdd)
+            .then((item) => {
+              memberToAdd = item;
+              res.status(201).send(memberToAdd);
+            })
+            .catch((error) => {
+              console.log(error);
+              res.status(500).send('Error creating membership');
+            });
+        } else {
+          res.status(404).send('No user found to create membership');
+          console.log('No users found.');
+        }
       })
       .catch((error) => {
         console.log(error);

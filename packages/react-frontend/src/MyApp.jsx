@@ -44,6 +44,8 @@ function MyApp() {
   */
   const [error, setError] = useState(0);
 
+  const [membershipError, setMembershipError] = useState(0);
+
   /*
   Populates the header of your request automatically
   Info such as the token is required by the backend for requests all requests aside from signup/login
@@ -155,7 +157,7 @@ function MyApp() {
             setToken(payload.token);
             localStorage.setItem('authToken', payload.token);
 
-            setUser(payload.token);
+            setUser(payload.name);
             localStorage.setItem('user', payload.name);
             postUser({
               name: creds.username,
@@ -275,6 +277,35 @@ function MyApp() {
     return promise;
   }
 
+  function postMembership(username, role, kitchenId) {
+    const promise = fetch(`${API_PREFIX}/memberships`, {
+      method: 'POST',
+      headers: addAuthHeader({
+        'Content-Type': 'application/json',
+      }),
+      body: JSON.stringify({
+        kitchenId: kitchenId,
+        role: role,
+        userName: username,
+      }),
+    })
+      .then((response) => {
+        if (response.status === 201) {
+          console.log('sanity check');
+          setMembershipError(0);
+          window.location.assign(`/kitchens/${kitchenId}`);
+        } else {
+          setMembershipError(1);
+          console.log('test12345');
+        }
+      })
+      .catch((error) => {
+        setMembershipError(1);
+        console.log(error);
+      });
+    return promise;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
@@ -316,7 +347,12 @@ function MyApp() {
         />
         <Route
           path="/kitchens/:kitchenId/memberships/create"
-          element={<PantrySetupInvited></PantrySetupInvited>}
+          element={
+            <PantrySetupInvited
+              handleSubmit={postMembership}
+              error={membershipError}
+            ></PantrySetupInvited>
+          }
         />
         <Route
           path="/"
