@@ -231,3 +231,43 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+/* Row for Name / Owner / Created fields */
+.hb-kitchen-info-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 40px; /* spacing between the three items */
+}
+
+/* Override hb-title color only inside this row */
+.hb-kitchen-info-row .hb-title {
+  color: #000000 !important;
+  font-weight: 600;
+  margin: 0;
+  font-size: 24px; /* optional: adjust size if needed */
+}
+
+.hb-kitchen-info-row {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.hb-kitchen-info-row .hb-title {
+  color: #000 !important;
+  font-weight: 600;
+  margin: 0;
+  position: relative;
+}
+
+.hb-kitchen-info-row .hb-title:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: -16px; /* spacing from the text */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2px;
+  height: 24px;
+  background-color: #cfcfcf;
+}

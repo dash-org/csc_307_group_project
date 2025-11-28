@@ -313,3 +313,82 @@
   position: relative;
   width: 178px;
 }
+
+/* Make the username input look like the old placeholder text */
+.pantry-setup-invited .username-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+/* Remove default button styles but keep your frame-* layout/colors */
+.pantry-setup-invited button.frame-5,
+.pantry-setup-invited button.frame-11,
+.pantry-setup-invited button.frame-12 {
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  background: none; /* background-color is handled by .frame-5/11/12 above */
+}
+
+.pantry-setup-invited button.frame-5:focus,
+.pantry-setup-invited button.frame-11:focus,
+.pantry-setup-invited button.frame-12:focus {
+  outline: none;
+}
+
+/* Make the select blend into the existing frame-4 box */
+.pantry-setup-invited .role-select {
+  border: none;
+  outline: none;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* Ensure button elements keep the frame styling */
+.pantry-setup-invited button.frame-11 {
+  background-color: #f1f1f1 !important; /* light gray original */
+  border-radius: 10px;
+}
+
+.pantry-setup-invited button.frame-12 {
+  background-color: #888888 !important; /* darker gray original */
+  border-radius: 10px;
+}
+
+/* Remove browser default button appearance */
+.pantry-setup-invited button.frame-11,
+.pantry-setup-invited button.frame-12 {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.error {
+  color: #ff0000;
+  font-family: 'Inter', Helvetica;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}

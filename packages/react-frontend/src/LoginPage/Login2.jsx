@@ -30,13 +30,6 @@ export const LoginCentered = (props) => {
             Incorrect Password or Username
           </div>
 
-          <div
-            className="error"
-            style={{ display: props.error ? 'block' : 'none' }}
-          >
-            Incorrect Password or Username
-          </div>
-
           <div className="frame-3">
             <div className="frame-4">
               <div className="frame-5">

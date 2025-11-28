@@ -31,6 +31,7 @@ export function registerUser(req, res) {
                 res.status(201).send({
                   token: token,
                   hashpassword: newuser.hashedPassword,
+                  name: newuser.name,
                 });
               })
               .catch(() =>
@@ -92,7 +93,7 @@ export function loginUser(req, res) {
         .then((matched) => {
           if (matched) {
             generateAccessToken(user._id).then((token) => {
-              res.status(200).send({ token: token });
+              res.status(200).send({ token: token, name: user.name });
             });
           } else {
             res.status(401).send('Unauthorized');

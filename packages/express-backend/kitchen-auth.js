@@ -6,7 +6,7 @@ export async function getUserKitchenRole(userId, kitchenId) {
   try {
     const memberships = await memberServices.getMembersByKitchenId(kitchenId);
     const userMembership = memberships.find(
-      (m) => m.userId.toString() === userId.toString()
+      (m) => m.userId._id.toString() === userId.toString()
     );
     return userMembership ? userMembership.role : null;
   } catch (error) {

@@ -1,8 +1,9 @@
 import kitchenModel from '../schemas/kitchen.js';
 import inventoryModel from '../schemas/inventory.js';
 import memberModel from '../schemas/membership.js';
+import memberServices from './member-services.js';
 
-function getKitchen(name, owner, createdAt) {
+function getKitchen(name, owner, createdAt, viewingUser) {
   let promise = kitchenModel.find().select('-inventories');
 
   if (name) {
@@ -15,7 +16,18 @@ function getKitchen(name, owner, createdAt) {
     promise = promise.find({ createdAt });
   }
 
+  promise = filterAccecibleKitchens(promise, viewingUser);
+
   return promise;
+}
+
+async function filterAccecibleKitchens(promise, viewingUser) {
+  const validMemberships = await memberServices
+    .getMembersByUserId(viewingUser)
+    .select('kitchenId');
+  const kitchenIds = validMemberships.map((m) => m.kitchenId);
+
+  return promise.find({ _id: { $in: kitchenIds } }).populate('owner');
 }
 
 function findKitchenById(id) {
