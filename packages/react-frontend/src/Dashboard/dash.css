@@ -116,18 +116,34 @@
 .cards-layout {
   display: grid;
   grid-template-columns: 2fr 1fr;
+  grid-template-rows: repeat(2, 1fr); /* two equal rows */
   height: calc(100% - 20px);
   gap: 28px;
 }
 
 /* BIG INVENTORY CARD */
 .card-inventory {
-  grid-row: span 2;
+  grid-row: 1 / span 2; 
+}
+
+.card-inventory h3 {
+  cursor: pointer;           /* shows the hand pointer */
+  transition: all 0.2s ease; /* smooth transition */
+}
+
+.card-inventory h3:hover {
+  text-decoration: underline; /* underline on hover */
+  color: #333;             /* optional: blue color on hover */
 }
 
 /* RIGHT COLUMN */
-.card-todo,
+.card-todo {
+  grid-row: 1;
+  min-height: 240px;
+  height: auto;
+}
 .card-lowstock {
+  grid-row: 2;
   min-height: 240px;
   height: auto;
 }

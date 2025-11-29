@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./dash.css";
 
 import calendar from "../Images/calendar.png";
@@ -14,9 +14,18 @@ import shoppingBag from "../Images/shopping-bag.png";
 import testAccount from "../Images/test-account.png";
 
 export const DashboardEmpty = () => {
+  const [showAddTodo, setShowAddTodo] = useState(false);
+  const [todoText, setTodoText] = useState("");
+
+  const handleAddTodo = () => {
+    if (!todoText.trim()) return;
+    alert("Reminder added: " + todoText);
+    setTodoText("");
+    setShowAddTodo(false);
+  };
+
   return (
     <div className="dashboard-root">
-
       {/* SIDEBAR */}
       <aside className="sidebar">
         <div className="sidebar-brand">SIDER</div>
@@ -24,7 +33,6 @@ export const DashboardEmpty = () => {
         <div className="sidebar-subtitle">Inventory Dashboard</div>
 
         <nav className="sidebar-nav" aria-label="Main">
-
           <button className="nav-item" onClick={() => (window.location.href = "/home")}>
             <img src={controlPanel} alt="" />
             <span>Home</span>
@@ -35,8 +43,7 @@ export const DashboardEmpty = () => {
             <span>Reminders</span>
           </button>
 
-          {/* change later */}
-          <button className="nav-item" onClick={() => (window.location.href = "/inventory")}>
+          <button className="nav-item" onClick={() => (window.location.href = "")}>
             <img src={shoppingBag} alt="" />
             <span>Shopping List</span>
           </button>
@@ -65,10 +72,8 @@ export const DashboardEmpty = () => {
         </div>
       </aside>
 
-      {/* MAIN CONTENT */}
+      {/* MAIN */}
       <main className="dashboard-main">
-
-        {/* NEW TOP NAV (MATCHING HOMEPAGE) */}
         <header className="top-nav">
           <div className="nav-buttons">
             <button onClick={() => (window.location.href = "/home")}>Home</button>
@@ -83,8 +88,8 @@ export const DashboardEmpty = () => {
           {/* INVENTORY */}
           <div className="card card-inventory">
             <div className="card-header">
-              <h3>Inventory</h3>
-              <button className="icon-btn">
+              <h3 onClick={() => (window.location.href = "/inventory")}>Inventory</h3>
+              <button className="icon-btn" onClick={() => (window.location.href = "/inventory")}>
                 <img src={googleWebSearch} alt="" />
               </button>
             </div>
@@ -104,12 +109,25 @@ export const DashboardEmpty = () => {
           <div className="card card-todo">
             <div className="card-header">
               <h3>To-Do</h3>
-              <button className="icon-btn">
+              <button className="icon-btn" onClick={() => setShowAddTodo(!showAddTodo)}>
                 <img src={plus} alt="" />
               </button>
             </div>
+
             <div className="card-body center">
-              <div className="empty-text">Nothing to do..</div>
+              {!showAddTodo ? (
+                <div className="empty-text">Nothing to do..</div>
+              ) : (
+                <div className="todo-input-row">
+                  <input
+                    type="text"
+                    placeholder="Add reminder..."
+                    value={todoText}
+                    onChange={(e) => setTodoText(e.target.value)}
+                  />
+                  <button onClick={handleAddTodo}>Add</button>
+                </div>
+              )}
             </div>
           </div>
 

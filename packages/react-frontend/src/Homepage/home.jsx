@@ -17,43 +17,49 @@ export const HomepageBlank = () => {
 
       {/* SIDEBAR */}
       <aside className="sidebar">
-        <div className="sidebar-title">SIDER</div>
+        <div className="sidebar-brand">SIDER</div>
+        <div className="sidebar-subtitle">Home</div>
 
-        <div className="sidebar-item">
-          <img src={controlPanel} alt="Home" />
-          <span>Home</span>
-        </div>
+        <nav className="sidebar-nav" aria-label="Main">
+          <button className="nav-item" onClick={() => (window.location.href = "/home")}>
+            <img src={controlPanel} alt="Home" />
+            <span>Home</span>
+          </button>
 
-        <div className="sidebar-item">
-          <img src={calendar} alt="Reminders" />
-          <span>Reminders</span>
-        </div>
+          <button className="nav-item">
+            <img src={calendar} alt="Reminders" />
+            <span>Reminders</span>
+          </button>
 
-        <div className="sidebar-item">
-          <img src={shoppingBag} alt="Shopping List" />
-          <span>Shopping List</span>
-        </div>
+          <button className="nav-item" onClick={() => (window.location.href = "/inventory")}>
+            <img src={shoppingBag} alt="Shopping List" />
+            <span>Shopping List</span>
+          </button>
 
-        <div className="sidebar-item">
-          <img src={playlist} alt="Members" />
-          <span>Members</span>
-        </div>
+          <button className="nav-item">
+            <img src={playlist} alt="Members" />
+            <span>Members</span>
+          </button>
 
-        <div className="sidebar-item">
-          <img src={chat} alt="Chat" />
-          <span>Chat</span>
-        </div>
+          <button className="nav-item">
+            <img src={chat} alt="Chat" />
+            <span>Chat</span>
+          </button>
 
-        <div className="sidebar-item">
-          <img src={settings} alt="Settings" />
-          <span>Settings</span>
-        </div>
+          <button className="nav-item">
+            <img src={settings} alt="Settings" />
+            <span>Settings</span>
+          </button>
+        </nav>
 
-        <div className="sidebar-item bottom">
-          <img src={highImportance} alt="About" />
-          <span>About</span>
+        <div className="sidebar-bottom">
+          <button className="nav-item">
+            <img src={highImportance} alt="About" />
+            <span>About</span>
+          </button>
         </div>
       </aside>
+
 
       {/* MAIN SECTION */}
       <main className="main-content">
