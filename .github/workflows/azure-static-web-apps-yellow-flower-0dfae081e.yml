@@ -31,7 +31,7 @@ jobs:
           # Tell SWA where the built Vite assets end up
           output_location: 'packages/react-frontend/dist'
 
-          production_branch: 'Cd-dev'
+          production_branch: 'main'
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
