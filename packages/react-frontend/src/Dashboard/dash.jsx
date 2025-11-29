@@ -1,168 +1,141 @@
-import React from 'react';
-import calendar from '../Images/calendar.png';
-import chat from '../Images/chat.png';
-import controlPanel from '../Images/control-panel.png';
-import googleWebSearch from '../Images/google-web-search.png';
-import highImportance from '../Images/high-importance.png';
-// import image from '../Images/image.png';
-import playlist from '../Images/playlist.png';
-import plus from '../Images/plus.png';
-import search from '../Images/search.png';
-import settings from '../Images/settings.png';
-import shoppingBag from '../Images/shopping-bag.png';
-import './dash.css';
-import testAccount from '../Images/test-account.png';
+import React from "react";
+import "./dash.css";
+
+import calendar from "../Images/calendar.png";
+import chat from "../Images/chat.png";
+import controlPanel from "../Images/control-panel.png";
+import googleWebSearch from "../Images/google-web-search.png";
+import highImportance from "../Images/high-importance.png";
+import playlist from "../Images/playlist.png";
+import plus from "../Images/plus.png";
+import search from "../Images/search.png";
+import settings from "../Images/settings.png";
+import shoppingBag from "../Images/shopping-bag.png";
+import testAccount from "../Images/test-account.png";
 
 export const DashboardEmpty = () => {
   return (
-    <div className="dashboard-empty">
-      <div className="text-wrapper">SIDER</div>
+    <div className="dashboard-root">
+      {/* SIDEBAR */}
+      <aside className="sidebar">
+        <div className="sidebar-brand">SIDER</div>
 
-      <div className="rectangle" />
+        <nav className="sidebar-nav" aria-label="Main">
+          <button className="nav-item" onClick={() => (window.location.href = "/")}>
+            <img src={controlPanel} alt="" />
+            <span>Home</span>
+          </button>
 
-      <div className="div" />
+          <button className="nav-item">
+            <img src={calendar} alt="" />
+            <span>Reminders</span>
+          </button>
 
-      <div className="rectangle-2" />
+          <button className="nav-item" onClick={() => (window.location.href = "/inventory")}>
+            <img src={shoppingBag} alt="" />
+            <span>Shopping List</span>
+          </button>
 
-      <div className="text-wrapper-2">Dashboard</div>
+          <button className="nav-item">
+            <img src={playlist} alt="" />
+            <span>Members</span>
+          </button>
 
-      <div className="dashboard-empty">
-        <button
-          className="text-wrapper-3"
-          onClick={() => {
-            window.location.href = '/home';
-          }} //Fix css issue later
-        >
-          Home
-        </button>
-      </div>
+          <button className="nav-item">
+            <img src={chat} alt="" />
+            <span>Chat</span>
+          </button>
 
-      <div className="text-wrapper-4">Supplies</div>
+          <button className="nav-item">
+            <img src={settings} alt="" />
+            <span>Settings</span>
+          </button>
+        </nav>
 
-      <div className="ellipse" />
+        <div className="sidebar-bottom">
+          <button className="nav-item">
+            <img src={highImportance} alt="" />
+            <span>About</span>
+          </button>
+        </div>
+      </aside>
 
-      <div className="ellipse-2" />
+      {/* MAIN */}
+      <main className="dashboard-main">
+        {/* TOP NAV */}
+        <header className="topnav">
+          <div className="topnav-left">
+            <h1 className="site-title">SIDER</h1>
+            <div className="tabs">
+              <button className="tab">Home</button>
+              <button className="tab active">Dashboard</button>
+              <button className="tab">Supplies</button>
+            </div>
+          </div>
 
-      <div className="ellipse-3" />
+          <div className="topnav-right">
+            <div className="search-wrapper">
+              <img src={search} alt="" className="search-icon" />
+              <input className="search-input" placeholder="Search Tasks" />
+            </div>
+            <img className="profile" src={testAccount} alt="Profile" />
+          </div>
+        </header>
 
-      <div className="ellipse-4" />
+        {/* SUBTITLE */}
+        <div className="page-subtitle">Inventory Dashboard</div>
 
-      <div className="ellipse-5" />
+        {/* CARDS GRID */}
+        <section className="cards-layout">
+          {/* BIG INVENTORY CARD */}
+          <div className="card card-inventory">
+            <div className="card-header">
+              <h3>Inventory</h3>
+              <button className="icon-btn">
+                <img src={googleWebSearch} alt="" />
+              </button>
+            </div>
 
-      <div className="ellipse-6" />
+            <div className="card-body center">
+              <div className="empty-text">Empty cabinets..</div>
+            </div>
 
-      <div className="ellipse-7" />
+            <div className="card-footer">
+              <button className="footer-add">
+                <img src={plus} alt="" />
+              </button>
+            </div>
+          </div>
 
-      <img className="control-panel" alt="Control panel" src={controlPanel} />
+          {/* TODO CARD */}
+          <div className="card card-todo">
+            <div className="card-header">
+              <h3>To-Do</h3>
+              <button className="icon-btn">
+                <img src={plus} alt="" />
+              </button>
+            </div>
 
-      <img className="calendar" alt="Calendar" src={calendar} />
+            <div className="card-body center">
+              <div className="empty-text">Nothing to do..</div>
+            </div>
+          </div>
 
-      <img className="shopping-bag" alt="Shopping bag" src={shoppingBag} />
+          {/* LOW STOCK CARD */}
+          <div className="card card-lowstock">
+            <div className="card-header">
+              <h3>Low Stock Alerts</h3>
+              <button className="icon-btn">
+                <img src={highImportance} alt="" />
+              </button>
+            </div>
 
-      <img className="playlist" alt="Playlist" src={playlist} />
-
-      <img className="chat" alt="Chat" src={chat} />
-
-      <img
-        className="high-importance"
-        alt="High importance"
-        src={highImportance}
-      />
-
-      <img className="test-account" alt="Test account" src={testAccount} />
-
-      <div className="rectangle-3" />
-
-      <img className="search" alt="Search" src={search} />
-
-      <div className="text-wrapper-5">Search Tasks</div>
-
-      <img className="settings" alt="Settings" src={settings} />
-
-      <div className="rectangle-4" />
-
-      <div className="rectangle-5" />
-
-      <div className="rectangle-6" />
-
-      <div className="rectangle-7" />
-
-      <div className="text-wrapper-6">To-Do List</div>
-
-      <div className="dashboard-empty">
-        <button
-          className="text-wrapper-7"
-          onClick={() => {
-            window.location.href = '/inventory';
-          }} //Fix css issue later
-        >
-          Inventory
-        </button>
-      </div>
-
-      <div className="text-wrapper-8">Activity</div>
-
-      <div className="text-wrapper-9">Reminder</div>
-
-      <div className="text-wrapper-10">Inventory Dashboard</div>
-
-      <div className="rectangle-8" />
-
-      <div className="rectangle-9" />
-
-      <div className="rectangle-10" />
-
-      <div className="rectangle-11" />
-
-      <div className="wallet-wanted">
-        Wallet: $0
-        <br />
-        <br />
-        Wanted Items: $0
-      </div>
-
-      <img className="plus" alt="Plus" src={plus} />
-
-      <img className="img" alt="Plus" src={plus} />
-
-      <img className="plus-2" alt="Plus" src={plus} />
-
-      <img
-        className="google-web-search"
-        alt="Google web search"
-        src={googleWebSearch}
-      />
-
-      <div className="text-wrapper-11">Nothing to do..</div>
-
-      <div className="text-wrapper-12">Empty cabinets..</div>
-
-      <div className="text-wrapper-13">No reminders..</div>
-
-      <div className="text-wrapper-14">No activity to report..</div>
-
-      <div className="text-wrapper-15">Settings</div>
-
-      <div className="text-wrapper-16">Reminders</div>
-
-      <div className="dashboard-empty">
-        <button
-          className="text-wrapper-17"
-          onClick={() => {
-            window.location.href = '/home';
-          }} //Fix css issue later
-        >
-          Home
-        </button>
-      </div>
-
-      <div className="text-wrapper-18">Shopping List</div>
-
-      <div className="text-wrapper-19">Members</div>
-
-      <div className="text-wrapper-20">About</div>
-
-      <div className="text-wrapper-21">Chat</div>
+            <div className="card-body center">
+              <div className="empty-text">No low-stock items..</div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 };
