@@ -16,12 +16,16 @@ import testAccount from "../Images/test-account.png";
 export const DashboardEmpty = () => {
   return (
     <div className="dashboard-root">
+
       {/* SIDEBAR */}
       <aside className="sidebar">
         <div className="sidebar-brand">SIDER</div>
 
+        <div className="sidebar-subtitle">Inventory Dashboard</div>
+
         <nav className="sidebar-nav" aria-label="Main">
-          <button className="nav-item" onClick={() => (window.location.href = "/")}>
+
+          <button className="nav-item" onClick={() => (window.location.href = "/home")}>
             <img src={controlPanel} alt="" />
             <span>Home</span>
           </button>
@@ -31,6 +35,7 @@ export const DashboardEmpty = () => {
             <span>Reminders</span>
           </button>
 
+          {/* change later */}
           <button className="nav-item" onClick={() => (window.location.href = "/inventory")}>
             <img src={shoppingBag} alt="" />
             <span>Shopping List</span>
@@ -60,34 +65,22 @@ export const DashboardEmpty = () => {
         </div>
       </aside>
 
-      {/* MAIN */}
+      {/* MAIN CONTENT */}
       <main className="dashboard-main">
-        {/* TOP NAV */}
-        <header className="topnav">
-          <div className="topnav-left">
-            <h1 className="site-title">SIDER</h1>
-            <div className="tabs">
-              <button className="tab">Home</button>
-              <button className="tab active">Dashboard</button>
-              <button className="tab">Supplies</button>
-            </div>
-          </div>
 
-          <div className="topnav-right">
-            <div className="search-wrapper">
-              <img src={search} alt="" className="search-icon" />
-              <input className="search-input" placeholder="Search Tasks" />
-            </div>
-            <img className="profile" src={testAccount} alt="Profile" />
+        {/* NEW TOP NAV (MATCHING HOMEPAGE) */}
+        <header className="top-nav">
+          <div className="nav-buttons">
+            <button onClick={() => (window.location.href = "/home")}>Home</button>
+            <button className="active">Dashboard</button>
+            <button>Supplies</button>
           </div>
+          <img className="profile-icon" src={testAccount} alt="Profile" />
         </header>
 
-        {/* SUBTITLE */}
-        <div className="page-subtitle">Inventory Dashboard</div>
-
-        {/* CARDS GRID */}
         <section className="cards-layout">
-          {/* BIG INVENTORY CARD */}
+
+          {/* INVENTORY */}
           <div className="card card-inventory">
             <div className="card-header">
               <h3>Inventory</h3>
@@ -107,7 +100,7 @@ export const DashboardEmpty = () => {
             </div>
           </div>
 
-          {/* TODO CARD */}
+          {/* TO-DO */}
           <div className="card card-todo">
             <div className="card-header">
               <h3>To-Do</h3>
@@ -115,13 +108,12 @@ export const DashboardEmpty = () => {
                 <img src={plus} alt="" />
               </button>
             </div>
-
             <div className="card-body center">
               <div className="empty-text">Nothing to do..</div>
             </div>
           </div>
 
-          {/* LOW STOCK CARD */}
+          {/* LOW STOCK */}
           <div className="card card-lowstock">
             <div className="card-header">
               <h3>Low Stock Alerts</h3>
@@ -129,11 +121,11 @@ export const DashboardEmpty = () => {
                 <img src={highImportance} alt="" />
               </button>
             </div>
-
             <div className="card-body center">
               <div className="empty-text">No low-stock items..</div>
             </div>
           </div>
+
         </section>
       </main>
     </div>

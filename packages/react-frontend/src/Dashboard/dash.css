@@ -20,7 +20,14 @@
 .sidebar-brand {
   font-size: 28px;
   font-weight: 700;
-  margin-bottom: 40px;
+  margin-bottom: 10px;
+}
+
+.sidebar-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 25px;
+  font-weight: 500;
 }
 
 .sidebar-nav {
@@ -34,14 +41,16 @@
   display: flex;
   align-items: center;
   gap: 12px;
-
   padding: 10px 8px;
   background: none;
   border: none;
   cursor: pointer;
-
   font-size: 18px;
   color: #444;
+}
+
+.nav-item:hover {
+  color: black;
 }
 
 .nav-item img {
@@ -49,122 +58,88 @@
   opacity: 0.8;
 }
 
-.nav-item:hover {
-  color: black;
-}
-
 .sidebar-bottom {
   margin-top: auto;
 }
 
-/* MAIN AREA */
+/* MAIN */
 .dashboard-main {
   flex: 1;
   display: flex;
   flex-direction: column;
   padding: 25px 40px;
+  background: white;
   overflow-y: auto;
 }
 
-/* TOP NAV BAR */
-.topnav {
+/* --- NEW TOP NAV (MATCHES HOMEPAGE) --- */
+.top-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 25px;
 }
 
-.site-title {
-  font-size: 28px;
-  font-weight: 700;
-}
-
-.tabs {
+.nav-buttons {
   display: flex;
-  gap: 12px;
-  margin-top: 10px;
-}
-
-.tab {
-  background: none;
-  border: none;
-  font-size: 16px;
-  padding: 6px 12px;
-  cursor: pointer;
-  color: #666;
-}
-
-.tab.active {
-  color: black;
-  font-weight: 600;
-  border-bottom: 2px solid black;
-}
-
-/* SEARCH + PROFILE */
-.topnav-right {
-  display: flex;
-  align-items: center;
   gap: 20px;
 }
 
-.search-wrapper {
+.nav-buttons button {
+  padding: 10px 30px;
+  border-radius: 20px;
+  border: 1px solid #aaa;
   background: white;
-  border-radius: 14px;
-  padding: 6px 12px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border: 1px solid #ddd;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: #333;
 }
 
-.search-icon {
-  width: 18px;
+.nav-buttons button.active {
+  background: #444;
+  color: white;
 }
 
-.search-input {
-  border: none;
-  outline: none;
-  font-size: 14px;
+.nav-buttons button:hover {
+  background: #f0f0f0;
 }
 
-.profile {
-  width: 42px;
+.profile-icon {
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
+  object-fit: contain;
 }
 
-/* PAGE SUBTITLE */
-.page-subtitle {
-  font-size: 20px;
-  margin: 25px 0 15px 0;
-  color: #555;
-}
-
-/* MAIN CARDS LAYOUT */
+/* CARDS LAYOUT */
 .cards-layout {
   display: grid;
   grid-template-columns: 2fr 1fr;
+  height: calc(100% - 20px);
   gap: 28px;
-  height: calc(100% - 120px);
 }
 
-/* LEFT COLUMN — INVENTORY BIG CARD */
+/* BIG INVENTORY CARD */
 .card-inventory {
   grid-row: span 2;
 }
 
-/* RIGHT COLUMN — TODO + LOW STOCK STACKED */
+/* RIGHT COLUMN */
 .card-todo,
 .card-lowstock {
-  min-height: 260px;
+  min-height: 240px;
+  height: auto;
 }
 
-/* CARD BASE STYLE */
+/* CARD */
 .card {
   background: white;
   border-radius: 20px;
   padding: 20px 22px;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
 }
 
 .card-header {
@@ -179,29 +154,46 @@
 }
 
 .icon-btn {
-  background: none;
-  border: none;
+  background: none !important;
+  border: none !important;
+  padding: 6px !important;       /* small padding so it sits in the corner */
+  border-radius: 8px;            /* subtle rounded corner */
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.15s ease;
 }
 
 .icon-btn img {
-  width: 22px;
-  opacity: 0.8;
+  width: 28px;
+  opacity: 0.85;
+  filter: none; /* ensures no extra styling applied */
+}
+
+/* Hover effect */
+.icon-btn:hover {
+  background: #f3f3f3;
+  transform: scale(1.05);  /* small pop effect */
+}
+
+.icon-btn:hover img {
+  opacity: 1;
 }
 
 .card-body {
   flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .empty-text {
-  font-size: 16px;
   color: #777;
+  font-size: 16px;
 }
 
-/* INVENTORY FOOTER */
+/* FOOTER */
 .card-footer {
   margin-top: 12px;
   display: flex;
