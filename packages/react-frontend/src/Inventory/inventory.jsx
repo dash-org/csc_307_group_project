@@ -1,18 +1,40 @@
-import React from "react";
-import "./inventory.css"; // separate CSS for inventory
+import React, { useState, useRef, useEffect } from "react";
+import "./inventory.css";
 
 import calendar from "../Images/calendar.png";
 import controlPanel from "../Images/control-panel.png";
 import highImportance from "../Images/high-importance.png";
 import playlist from "../Images/playlist.png";
 import plus from "../Images/plus.png";
-import search from "../Images/search.png";
+import searchIcon from "../Images/search.png";
 import settings from "../Images/settings.png";
 import shoppingBag from "../Images/shopping-bag.png";
 import chat from "../Images/chat.png";
 import testAccount from "../Images/test-account.png";
 
 export const InventoryEmpty = () => {
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const searchRef = useRef(null);
+
+  const handleSearch = () => {
+    alert("Searching for: " + searchText);
+    setSearchText("");
+  };
+
+  // Close search if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setShowSearch(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="dashboard-root">
       {/* SIDEBAR */}
@@ -76,9 +98,25 @@ export const InventoryEmpty = () => {
           <div className="card card-inventory">
             <div className="card-header">
               <h3>Inventory</h3>
-              <button className="icon-btn">
-                <img src={search} alt="Search" />
-              </button>
+              <div className="search-container" ref={searchRef}>
+                {showSearch ? (
+                  <div className="search-input-wrapper">
+                    <input
+                      type="text"
+                      placeholder="Search items..."
+                      value={searchText}
+                      onChange={(e) => setSearchText(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                      autoFocus
+                    />
+                    <button onClick={handleSearch}>Go</button>
+                  </div>
+                ) : (
+                  <button className="icon-btn" onClick={() => setShowSearch(true)}>
+                    <img src={searchIcon} alt="Search" />
+                  </button>
+                )}
+              </div>
             </div>
 
             <div className="card-body center">

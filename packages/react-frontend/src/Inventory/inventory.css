@@ -198,3 +198,49 @@
 .card-inventory {
   min-height: 400px;
 }
+
+/* Search container */
+.search-container {
+  position: relative;
+}
+
+/* Search input wrapper */
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.search-input-wrapper input {
+  padding: 6px 10px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  width: 180px;
+  transition: 0.2s;
+}
+
+.search-input-wrapper input:focus {
+  outline: none;
+  border-color: #888;
+}
+
+.search-input-wrapper button {
+  padding: 6px 10px;
+  border: none;
+  border-radius: 12px;
+  background: #ddd;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.search-input-wrapper button:hover {
+  background: #ccc;
+}
+
+/* Optional: Smooth expand animation */
+.search-input-wrapper input {
+  transform-origin: right center;
+  transition: all 0.2s ease;
+}
