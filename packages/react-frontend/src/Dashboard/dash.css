@@ -146,11 +146,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-top: 0px;
+  margin-bottom: 6px;
 }
 
 .card-header h3 {
   font-size: 20px;
   font-weight: 600;
+  margin-top: 12px;
 }
 
 .icon-btn {
@@ -163,6 +166,7 @@
   align-items: center;
   justify-content: center;
   transition: 0.15s ease;
+  margin-top: -4px;
 }
 
 .icon-btn img {
