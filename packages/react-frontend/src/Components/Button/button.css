@@ -25,7 +25,6 @@
 }
 
 .button.disabled {
-  background-color: var(--cooling-500);
   border-radius: 12px;
   left: 850px;
   opacity: 0.5;
@@ -45,7 +44,6 @@
 }
 
 .button.focus {
-  background-color: var(--cooling-500);
   border: 1px solid;
   border-color: var(--cooling-200);
   left: 248px;
@@ -60,7 +58,6 @@
 }
 
 .button.tertiary {
-  background-color: var(--cooling-500);
   border-radius: 12px;
 }
 
@@ -71,6 +68,7 @@
 }
 
 .button.primary.disabled {
+  background-color: var(--cooling-500);
   top: 8px;
 }
 
