@@ -33,10 +33,7 @@ export const HomepageBlank = () => {
             <span>Reminders</span>
           </button>
 
-          <button
-            className="nav-item"
-            onClick={() => (window.location.href = '/inventory')}
-          >
+          <button className="nav-item">
             <img src={shoppingBag} alt="Shopping List" />
             <span>Shopping List</span>
           </button>
