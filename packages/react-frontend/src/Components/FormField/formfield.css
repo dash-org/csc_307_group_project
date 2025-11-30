@@ -1,0 +1,51 @@
+@import url('../../styleguide.css');
+
+.form-field {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+  position: relative;
+  top: 164px;
+}
+
+.form-field .label {
+  color: var(--neutral-900);
+  font-family: var(--body-b1-bold-font-family);
+  font-size: var(--body-b1-bold-font-size);
+  font-style: var(--body-b1-bold-font-style);
+  font-weight: var(--body-b1-bold-font-weight);
+  letter-spacing: var(--body-b1-bold-letter-spacing);
+  line-height: var(--body-b1-bold-line-height);
+  margin-top: -1px;
+  position: relative;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.form-field .input {
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  align-self: stretch;
+  background: none;
+  border: 1px solid;
+  border-color: var(--neutral-300);
+  border-radius: 10px;
+  color: var(--neutral-600);
+  display: -webkit-box;
+  flex: 1;
+  font-family: var(--caption-regular-font-family);
+  font-size: var(--caption-regular-font-size);
+  font-style: var(--caption-regular-font-style);
+  font-weight: var(--caption-regular-font-weight);
+  letter-spacing: var(--caption-regular-letter-spacing);
+  line-height: var(--caption-regular-line-height);
+  margin-top: -1px;
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  text-overflow: ellipsis;
+  width: 100%;
+}

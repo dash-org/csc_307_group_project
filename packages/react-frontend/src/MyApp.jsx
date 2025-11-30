@@ -25,7 +25,7 @@ function MyApp() {
 
   const windowSize = useWindowResize();
 
-  console.log("Resizing:", windowSize);
+  console.log('Resizing:', windowSize);
 
   const addAuthHeader = useCallback(
     (otherHeaders = {}) => {
@@ -220,57 +220,53 @@ function MyApp() {
   }
 
   return (
-    <div style = {{width: windowSize.width, height: windowSize.height}}>
-    <BrowserRouter>
-      <Routes>
-        <Route 
-          path="/dash" 
-          element={<DashboardEmpty></DashboardEmpty>} />
-        <Route 
-          path="/home" 
-          element={<HomepageBlank></HomepageBlank>} />
-        <Route 
-          path="/inventory" 
-          element={<InventoryEmpty></InventoryEmpty>} />
-        <Route
-          path="/kitchens/create"
-          element={
-            <PantrySetupCreate
-              handleSubmit={createKitchenWithInventory}
-              error={error}
-            />
-          }
-        />
-        <Route
-          path="/kitchens/manage"
-          element={<PantrySetupInvited></PantrySetupInvited>}
-        />
-        <Route
-          path="/"
-          element={
-            <div className="container">
-              <Table
-                characterData={characters}
-                removeCharacter={removeOneCharacter}
+    <div style={{ width: windowSize.width, height: windowSize.height }}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/dash" element={<DashboardEmpty></DashboardEmpty>} />
+          <Route path="/home" element={<HomepageBlank></HomepageBlank>} />
+          <Route
+            path="/inventory"
+            element={<InventoryEmpty></InventoryEmpty>}
+          />
+          <Route
+            path="/kitchens/create"
+            element={
+              <PantrySetupCreate
+                handleSubmit={createKitchenWithInventory}
+                error={error}
               />
-              {/* <Form handleSubmit={updateList} /> */}
-            </div>
-          }
-        />
-        {/* <Route path="/login" element={<Login handleSubmit={loginUser} />} />; */}
-        <Route
-          path="/login"
-          element={<LoginCentered handleSubmit={loginUser} error={error} />}
-        />
-        <Route
-          path="/signup"
-          // element={<Login handleSubmit={signupUser} buttonLabel="Sign Up" />}
-          element={<SignCentered handleSubmit={signupUser} />}
-        />
-      </Routes>
-    </BrowserRouter>
-
-  </div>
+            }
+          />
+          <Route
+            path="/kitchens/manage"
+            element={<PantrySetupInvited></PantrySetupInvited>}
+          />
+          <Route
+            path="/"
+            element={
+              <div className="container">
+                <Table
+                  characterData={characters}
+                  removeCharacter={removeOneCharacter}
+                />
+                {/* <Form handleSubmit={updateList} /> */}
+              </div>
+            }
+          />
+          {/* <Route path="/login" element={<Login handleSubmit={loginUser} />} />; */}
+          <Route
+            path="/login"
+            element={<LoginCentered handleSubmit={loginUser} error={error} />}
+          />
+          <Route
+            path="/signup"
+            // element={<Login handleSubmit={signupUser} buttonLabel="Sign Up" />}
+            element={<SignCentered handleSubmit={signupUser} />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </div>
   );
 }
 

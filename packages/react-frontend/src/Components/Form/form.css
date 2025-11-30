@@ -1,0 +1,43 @@
+@import url('../../styleguide.css');
+
+* {
+  box-sizing: border-box;
+}
+
+.form {
+  align-items: flex-end;
+  background-color: var(--neutral-200);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 640px;
+  padding: 24px;
+  position: relative;
+  top: 354px;
+}
+
+.form .form-field-instance {
+  align-self: stretch !important;
+  flex: 0 0 auto !important;
+  left: unset !important;
+  top: unset !important;
+  width: 100% !important;
+}
+
+.form .button-instance {
+  flex: 0 0 auto !important;
+  left: unset !important;
+  top: unset !important;
+}
+
+.form .form-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.form .form-buttons .button-instance {
+  flex: 0 0 auto !important;
+}

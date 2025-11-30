@@ -1,27 +1,29 @@
-import React from "react";
-import "./home.css";
+import React from 'react';
+import './home.css';
 
-import calendar from "../Images/calendar.png";
-import chat from "../Images/chat.png";
-import controlPanel from "../Images/control-panel.png";
-import highImportance from "../Images/high-importance.png";
-import playlist from "../Images/playlist.png";
-import plus from "../Images/plus.png";
-import settings from "../Images/settings.png";
-import shoppingBag from "../Images/shopping-bag.png";
-import testAccount from "../Images/test-account.png";
+import calendar from '../Images/calendar.png';
+import chat from '../Images/chat.png';
+import controlPanel from '../Images/control-panel.png';
+import highImportance from '../Images/high-importance.png';
+import playlist from '../Images/playlist.png';
+import plus from '../Images/plus.png';
+import settings from '../Images/settings.png';
+import shoppingBag from '../Images/shopping-bag.png';
+import testAccount from '../Images/test-account.png';
 
 export const HomepageBlank = () => {
   return (
     <div className="home-container">
-
       {/* SIDEBAR */}
       <aside className="sidebar">
         <div className="sidebar-brand">SIDER</div>
         <div className="sidebar-subtitle">Home</div>
 
         <nav className="sidebar-nav" aria-label="Main">
-          <button className="nav-item" onClick={() => (window.location.href = "/home")}>
+          <button
+            className="nav-item"
+            onClick={() => (window.location.href = '/home')}
+          >
             <img src={controlPanel} alt="Home" />
             <span>Home</span>
           </button>
@@ -31,7 +33,10 @@ export const HomepageBlank = () => {
             <span>Reminders</span>
           </button>
 
-          <button className="nav-item" onClick={() => (window.location.href = "/inventory")}>
+          <button
+            className="nav-item"
+            onClick={() => (window.location.href = '/inventory')}
+          >
             <img src={shoppingBag} alt="Shopping List" />
             <span>Shopping List</span>
           </button>
@@ -60,17 +65,19 @@ export const HomepageBlank = () => {
         </div>
       </aside>
 
-
       {/* MAIN SECTION */}
       <main className="main-content">
-
         {/* TOP NAV */}
         <div className="top-nav">
           <div className="nav-buttons">
             <button className="active">Home</button>
-            <button 
-              onClick={() => { window.location.href = '/dash';}}> 
-              Dashboard </button>
+            <button
+              onClick={() => {
+                window.location.href = '/dash';
+              }}
+            >
+              Dashboard{' '}
+            </button>
             <button>Supplies</button>
           </div>
 
@@ -82,11 +89,19 @@ export const HomepageBlank = () => {
 
         {/* FILTER BAR */}
         <div className="filter-bar">
-          <select><option>Anyone</option></select>
+          <select>
+            <option>Anyone</option>
+          </select>
           <input placeholder="Search..." />
           <input placeholder="Filter..." />
           <button className="add-btn">
-            <img src={plus} alt="Add" />
+            <img
+              src={plus}
+              alt="Add"
+              onClick={() => {
+                window.location.href = '/kitchens/create';
+              }}
+            />
           </button>
         </div>
 
@@ -94,9 +109,7 @@ export const HomepageBlank = () => {
         <div className="empty-message">
           Couldn’t find any pantries. Start one now.
         </div>
-
       </main>
-
     </div>
   );
 };
