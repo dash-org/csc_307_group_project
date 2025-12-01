@@ -135,7 +135,7 @@
 }
 
 .sign-up .text-wrapper-3 {
-  color: #000000;
+  color: var(--neutral-900);
   font-family: var(--body-b1-bold-font-family);
   font-size: var(--body-b1-bold-font-size);
   font-style: var(--body-b1-bold-font-style);

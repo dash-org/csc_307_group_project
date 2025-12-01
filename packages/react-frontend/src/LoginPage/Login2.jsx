@@ -1,4 +1,7 @@
 import './login.css';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../Components/Button/button';
+import { FormField } from '../Components/FormField/formfield';
 import React, { useState } from 'react';
 
 export const LoginCentered = (props) => {
@@ -7,78 +10,75 @@ export const LoginCentered = (props) => {
   we need a useState to render what the user types
   or when they submit
   */
+  const navigate = useNavigate();
   const [creds, setCreds] = useState({
     username: '',
     pwd: '',
   });
 
   return (
-    <div className="login-centered" data-model-id="1:26">
-      <div className="text-wrapper">SIDER</div>
+    <div className="log-in">
+      <header className="header">
+        <div className="div">SIDER</div>
+      </header>
 
-      <div className="frame">
-        <div className="div">Better kitchen management.</div>
-
-        <div className="frame-2">
+      <div className="main">
+        <div className="section-header">
           <div className="text-wrapper-2">Log In</div>
+          <p className="p">Pick up where you left off managing your kitchen.</p>
+        </div>
+
+        <div className="form">
           {/* props.error is passed down from MyApp.jsx
            after a failed login attempt, the page is rerendered to props.error = 1*/}
           <div
-            className="error"
+            className="error-dialog"
             style={{ display: props.error ? 'block' : 'none' }}
           >
-            Incorrect Password or Username
+            <p className="dialog-text">
+              The username or password you entered is incorrect.
+            </p>
+          </div>
+          <div className="form-fields">
+            <FormField
+              className="form-field-instance"
+              label="Username"
+              name="username"
+              value={creds.username}
+              placeholder="Username"
+              onChange={handleChange}
+            />
+            <FormField
+              className="form-field-instance"
+              label="Password"
+              inputType="password"
+              name="password"
+              value={creds.pwd}
+              placeholder="Password"
+              onChange={handleChange}
+            />
+            <Button
+              buttonText="Forgot Password?"
+              className="button-instance"
+              hierarchy="tertiary"
+            />
           </div>
 
-          <div className="frame-3">
-            <div className="frame-4">
-              <div className="frame-5">
-                <div className="frame-6">
-                  <div className="text-wrapper-3">Username</div>
+          <Button
+            buttonText={props.buttonLabel || 'Log In'}
+            className="design-component-instance-node"
+            hierarchy="primary"
+            onClick={submitForm}
+          />
+          <div className="redirect">
+            <div className="text-wrapper-3">Don’t have an account?</div>
 
-                  <input // This is the username box that can be filled by the user
-                    className="div-wrapper"
-                    type="text"
-                    name="username"
-                    id="username"
-                    placeholder="Username"
-                    value={creds.username}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                <div className="frame-7">
-                  <div className="text-wrapper-3">Password</div>
-
-                  <input // This is the password box that can be filled by the user
-                    className="div-wrapper"
-                    type="password"
-                    name="password"
-                    id="password"
-                    value={creds.pwd}
-                    placeholder="Password"
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-
-              <div className="text-wrapper-5">Forgot Password?</div>
-            </div>
-
-            <input // This is the submit button
-              type="button"
-              className="frame-8"
-              value={props.buttonLabel || 'Log In'}
-              onClick={submitForm}
+            <Button
+              buttonText="Sign Up"
+              className="button-instance"
+              hierarchy="tertiary"
+              onClick={() => navigate('/signup')}
             />
-
-            <p className="don-t-have-an">
-              <span className="span">Don’t have an account? </span>
-              <a className="text-wrapper-7" href="http://localhost:5173/signup">
-                {' '}
-                Create an account{' '}
-              </a>
-            </p>
           </div>
         </div>
       </div>
@@ -98,6 +98,8 @@ export const LoginCentered = (props) => {
         break;
       case 'password':
         setCreds({ ...creds, pwd: value });
+        break;
+      default:
         break;
     }
   }
