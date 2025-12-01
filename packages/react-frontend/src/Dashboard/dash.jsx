@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import "./dash.css";
 
 import calendar from "../Images/calendar.png";
@@ -12,10 +12,41 @@ import search from "../Images/search.png";
 import settings from "../Images/settings.png";
 import shoppingBag from "../Images/shopping-bag.png";
 import testAccount from "../Images/test-account.png";
+import { useParams } from "react-router-dom";
 
 export const DashboardEmpty = () => {
   const [showAddTodo, setShowAddTodo] = useState(false);
   const [todoText, setTodoText] = useState("");
+
+  const { kitchenId, inventoryId } = useParams();
+
+  {/*Store inventory*/}
+  const [inventory, setInventory] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  console.log("Kitchen ID:", kitchenId);
+  console.log("Inventory ID:", inventoryId);
+
+  {/*Fetch inventory data*/}
+  const fetchInventory = useCallback(() => {
+    fetch(`${PropTypes.API_PREFIX}/kitchens/${kitchenId}/inventories/${inventoryId}`, {
+      headers: props.addAuthHeader(),
+    }); 
+  }, [kitchenId, inventoryId]);
+
+  useEffect(() => {
+    fetchInventory()
+      .then((res) => (res.status === 200 ? res.json() : undefined))
+      .then((json) => {
+        if (json) {
+          setInventory(json);
+        } else {
+          setLoading(false);}
+      })
+      .catch((error) => {
+        console.error("Error fetching inventory:", error);
+      });
+  }, [fetchInventory]);
 
   const handleAddTodo = () => {
     if (!todoText.trim()) return;
@@ -88,16 +119,41 @@ export const DashboardEmpty = () => {
           {/* INVENTORY */}
           <div className="card card-inventory">
             <div className="card-header">
-              <h3 onClick={() => (window.location.href = "/inventory")}>Inventory</h3>
+              <h3 onClick={() => (window.location.href = "/inventory")}>
+                Inventory
+              </h3>
               <button className="icon-btn" onClick={() => (window.location.href = "/inventory")}>
                 <img src={googleWebSearch} alt="" />
               </button>
             </div>
 
+            {/* Inventory content */}
             <div className="card-body center">
-              <div className="empty-text">Empty cabinets..</div>
+              {loading ? (
+                <div className="empty-text">Loading inventory...</div>
+              ) : !inventory ? (
+                <div className="empty-text"> Inventory not found. </div>
+              ) : (
+                <div className="inventory-info">
+                  <h3>{inventory.name}</h3>
+                  <p>
+                  Created:{" "}
+                  {new Date(inventory.createdAt).toLocaleDateString()}
+                  </p>
+                  {inventory.items?.length > 0 ? (
+                    inventory.items.map((item) => (
+                      <div key={item._id} className="inventory-item">
+                        <strong>{item.name}</strong> : {item.quantity}
+                      </div>
+                    ))
+                  ) : (
+                    <p>No items in this inventory.</p>
+                  )}
+                </div>
+              )}
             </div>
 
+            {/* Plus for quick add of inventory items for later implementation, ignore for now */}
             <div className="card-footer">
               <button className="footer-add">
                 <img src={plus} alt="" />

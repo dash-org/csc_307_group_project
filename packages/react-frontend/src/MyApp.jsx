@@ -314,6 +314,11 @@ function MyApp() {
     <BrowserRouter>
       <Routes>
         <Route path="/dash" element={<DashboardEmpty></DashboardEmpty>} />
+        {/* Goes to Dashboard when click on view in inventories under kitchen */}
+        <Route 
+          path="/kitchens/:kitchenId/inventories/:inventoryId"
+          element={<DashboardEmpty />}
+        />
         <Route
           path="/home"
           element={
