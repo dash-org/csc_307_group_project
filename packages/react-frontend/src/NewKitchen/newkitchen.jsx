@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { Form } from '../Components/Form/form';
 import './newkitchen.css';
-import React, { useState } from 'react';
 
 export const PantrySetupCreate = (props) => {
   const navigate = useNavigate();
