@@ -82,6 +82,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 25px;
+  padding: 0 5px;
 }
 
 .nav-buttons {
@@ -188,8 +189,9 @@
 .hb-logo {
   color: #000000;
   font-family: 'Inter-ExtraBold', Helvetica, Arial, sans-serif;
-  font-size: 40px; /* toned down from 64px */
-  font-weight: 800;
+  font-size: 28px; /* toned down from 64px */
+  font-weight: 700;
+  margin-bottom: 10px;
   letter-spacing: 0.05em;
 }
 
@@ -247,7 +249,11 @@
 /* Sidebar */
 .hb-sidebar {
   width: 220px;
-  padding-top: 12px;
+  background: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .hb-sidebar-list {

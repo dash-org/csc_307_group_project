@@ -113,7 +113,7 @@ export const KitchenPage = (props) => {
     <div className="homepage-blank">
       {/* Top bar */}
       <header className="hb-header">
-        <div className="hb-logo">SIDER</div>
+        <div className="sidebar-brand">SIDER</div>
 
         <nav className="hb-top-nav">
           <button
@@ -148,78 +148,47 @@ export const KitchenPage = (props) => {
       {/* Main layout */}
       <div className="hb-body">
         {/* Sidebar */}
-        <aside className="hb-sidebar">
-          <ul className="hb-sidebar-list">
-            <li className="hb-sidebar-item hb-sidebar-item-active">
-              <div className="hb-sidebar-icon-pill hb-sidebar-icon-pill-active">
-                <img
-                  src={controlPanel}
-                  alt="Inventories"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+        <aside className="sidebar">
+          <nav className="sidebar-nav" aria-label="Main">
+            <button className="nav-item" onClick={() => (window.location.href = "/home")}>
+              <img src={controlPanel} alt="Home" />
               <span>Home</span>
-            </li>
+            </button>
 
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img
-                  src={calendar}
-                  alt="Reminders"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+            <button className="nav-item">
+              <img src={calendar} alt="Reminders" />
               <span>Reminders</span>
-            </li>
+            </button>
 
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img
-                  src={shoppingBag}
-                  alt="Shopping List"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+            <button className="nav-item" onClick={() => (window.location.href = "/inventory")}>
+              <img src={shoppingBag} alt="Inventory" />
               <span>Shopping List</span>
-            </li>
+            </button>
 
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img src={playlist} alt="Members" className="hb-sidebar-icon" />
-              </div>
+            <button className="nav-item">
+              <img src={playlist} alt="Members" />
               <span>Members</span>
-            </li>
+            </button>
 
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img src={chat} alt="Chat" className="hb-sidebar-icon" />
-              </div>
+            <button className="nav-item">
+              <img src={chat} alt="Chat" />
               <span>Chat</span>
-            </li>
+            </button>
 
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img
-                  src={settings}
-                  alt="Settings"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+            <button className="nav-item">
+              <img src={settings} alt="Settings" />
               <span>Settings</span>
-            </li>
+            </button>
+          </nav>
 
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img
-                  src={highImportance}
-                  alt="About"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+          <div className="sidebar-bottom">
+            <button className="nav-item">
+              <img src={highImportance} alt="About" />
               <span>About</span>
-            </li>
-          </ul>
+            </button>
+          </div>
         </aside>
+
 
         {/* Main content */}
         <main className="hb-main">

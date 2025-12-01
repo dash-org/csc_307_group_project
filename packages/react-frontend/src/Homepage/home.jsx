@@ -60,25 +60,7 @@ export const HomepageBlank = (props) => {
     <div className="homepage-blank">
       {/* Top bar */}
       <header className="hb-header">
-        <div className="hb-logo">SIDER</div>
-
-        <nav className="hb-top-nav">
-          <button className="hb-top-nav-item hb-top-nav-item-active">
-            Home
-          </button>
-
-          {/* <button
-            className="hb-top-nav-item"
-            onClick={() => {
-              window.location.href = '/dash';
-            }}
-          >
-            Dashboard
-          </button>
-
-          <button className="hb-top-nav-item">Supplies</button> */}
-        </nav>
-
+        <div className="sidebar-brand">SIDER</div>
         <button
           className="hb-user-button"
           onClick={() => {
@@ -93,81 +75,53 @@ export const HomepageBlank = (props) => {
       {/* Main layout */}
       <div className="hb-body">
         {/* Sidebar */}
-        <aside className="hb-sidebar">
-          <ul className="hb-sidebar-list">
-            <li className="hb-sidebar-item hb-sidebar-item-active">
-              <div className="hb-sidebar-icon-pill hb-sidebar-icon-pill-active">
-                <img
-                  src={controlPanel}
-                  alt="Home"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+        <aside className="sidebar">
+
+          <nav className="sidebar-nav" aria-label="Main">
+            <button className="nav-item" onClick={() => (window.location.href = "/home")}>
+              <img src={controlPanel} alt="Home" />
               <span>Home</span>
-            </li>
+            </button>
 
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img
-                  src={calendar}
-                  alt="Reminders"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+            <button className="nav-item">
+              <img src={calendar} alt="Reminders" />
               <span>Reminders</span>
-            </li>
+            </button>
 
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img
-                  src={shoppingBag}
-                  alt="Shopping List"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+            <button className="nav-item" onClick={() => (window.location.href = "/inventory")}>
+              <img src={shoppingBag} alt="Inventory" />
               <span>Shopping List</span>
-            </li>
+            </button>
 
-            {/* <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img src={playlist} alt="Members" className="hb-sidebar-icon" />
-              </div>
-              <span>Members</span>
-            </li> */}
-
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img src={chat} alt="Chat" className="hb-sidebar-icon" />
-              </div>
+            <button className="nav-item">
+              <img src={chat} alt="Chat" />
               <span>Chat</span>
-            </li>
+            </button>
 
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img
-                  src={settings}
-                  alt="Settings"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+            <button className="nav-item">
+              <img src={settings} alt="Settings" />
               <span>Settings</span>
-            </li>
+            </button>
+          </nav>
 
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img
-                  src={highImportance}
-                  alt="About"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+          <div className="sidebar-bottom">
+            <button className="nav-item">
+              <img src={highImportance} alt="About" />
               <span>About</span>
-            </li>
-          </ul>
+            </button>
+          </div>
         </aside>
+
 
         {/* Main content */}
         <main className="hb-main">
+          <nav className="top-nav">
+            <div className="nav-buttons">
+              <button className="active" onClick={() => (window.location.href = "/home")}>
+              Home
+              </button>
+            </div>
+          </nav>
           <div className="hb-main-header">
             <div>
               <h1 className="hb-title">Kitchens</h1>

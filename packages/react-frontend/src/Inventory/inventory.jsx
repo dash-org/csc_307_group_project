@@ -36,7 +36,7 @@ export const InventoryEmpty = () => {
   }, []);
 
   return (
-    <div className="dashboard-root">
+    <div className="home-container">
       {/* SIDEBAR */}
       <aside className="sidebar">
         <div className="sidebar-brand">SIDER</div>
