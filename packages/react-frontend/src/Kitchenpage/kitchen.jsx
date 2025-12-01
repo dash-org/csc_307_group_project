@@ -111,44 +111,12 @@ export const KitchenPage = (props) => {
 
   return (
     <div className="homepage-blank">
-      {/* Top bar */}
-      <header className="hb-header">
-        <div className="sidebar-brand">SIDER</div>
-
-        <nav className="hb-top-nav">
-          <button
-            className="hb-top-nav-item"
-            onClick={() => {
-              window.location.href = '/home';
-            }}
-          >
-            Home
-          </button>
-          <img
-            src={rightArrowBracket}
-            alt="firstbracket"
-            className="hb-sidebar-icon"
-          />
-          <button className="hb-top-nav-item hb-top-nav-item-active">
-            Kitchen
-          </button>
-        </nav>
-
-        <button
-          className="hb-user-button"
-          onClick={() => {
-            window.location.href = '/login';
-          }}
-        >
-          <span className="hb-user-name">{props.currentUser}</span>
-          <img className="hb-user-avatar" src={testAccount} alt="User avatar" />
-        </button>
-      </header>
-
       {/* Main layout */}
       <div className="hb-body">
         {/* Sidebar */}
         <aside className="sidebar">
+          <div className="sidebar-brand">SIDER</div>
+          <div className="sidebar-subtitle">Kitchen</div>
           <nav className="sidebar-nav" aria-label="Main">
             <button className="nav-item" onClick={() => (window.location.href = "/home")}>
               <img src={controlPanel} alt="Home" />
@@ -192,6 +160,38 @@ export const KitchenPage = (props) => {
 
         {/* Main content */}
         <main className="hb-main">
+          {/* Top navigation */}
+          <header className="top-nav">
+            <nav className="nav-buttons">
+              <button
+                className="hb-top-nav-item"
+                onClick={() => {
+                  window.location.href = '/home';
+                }}
+              >
+                Home
+              </button>
+              <img
+                src={rightArrowBracket}
+                alt="firstbracket"
+                className="hb-sidebar-icon"
+              />
+              <button className="active">
+                Kitchen
+              </button>
+            </nav>
+            {/* User profile*/}
+            <button
+              className="home-profile"
+              onClick={() => {
+                window.location.href = '/login';
+              }}
+            >
+              <span className="hb-user-name">{props.currentUser}</span>
+              <img className="profile-icon" src={testAccount} alt="User avatar" />
+            </button>
+          </header>
+          {/* Kitchen Info */}
           <div className="hb-main-header">
             <div className="hb-kitchen-info-row">
               <h1 className="hb-title">

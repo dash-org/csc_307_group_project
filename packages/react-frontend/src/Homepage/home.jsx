@@ -104,11 +104,11 @@ export const HomepageBlank = (props) => {
         <main className="main-content">
           {/* Top navigation */}
           <header className="top-nav">
-            <div className="nav-buttons">
+            <nav className="nav-buttons">
               <button className="active" onClick={() => (window.location.href = "/home")}>
               Home
               </button>
-            </div>
+            </nav>
             {/* User profile*/}
             <button
               className="home-profile"
