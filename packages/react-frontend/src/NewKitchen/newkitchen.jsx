@@ -1,8 +1,10 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { Form } from '../Components/Form/form';
 import './newkitchen.css';
 
 export const PantrySetupCreate = (props) => {
+  const navigate = useNavigate();
   const [kitchenName, setKitchenName] = useState('');
   const [inventoryName, setInventoryName] = useState('');
 
@@ -20,10 +22,12 @@ export const PantrySetupCreate = (props) => {
   };
 
   const submitForm = () => {
-    props.handleSubmit({
-      kitchenName,
-      inventoryName,
-    });
+    props
+      .handleSubmit({
+        kitchenName,
+        inventoryName,
+      })
+      .then(() => navigate('/home'));
     setKitchenName('');
     setInventoryName('');
   };

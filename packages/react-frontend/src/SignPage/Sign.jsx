@@ -1,5 +1,7 @@
 import './sign.css';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '../Components/Button/button';
+import { FormField } from '../Components/FormField/formfield';
 import React, { useState } from 'react';
 
 export const SignCentered = (props) => {
@@ -10,65 +12,57 @@ export const SignCentered = (props) => {
   });
 
   return (
-    <div className="login-centered" data-model-id="1:26">
-      <div className="text-wrapper">SIDER</div>
+    <div className="sign-up">
+      <header className="header">
+        <div className="div">SIDER</div>
+      </header>
 
-      <div className="frame">
-        <div className="div">Better kitchen management.</div>
-
-        <div className="frame-2">
+      <div className="main">
+        <div className="section-header">
           <div className="text-wrapper-2">Sign Up</div>
 
-          <div className="frame-3">
-            <div className="frame-4">
-              <div className="frame-5">
-                <div className="frame-6">
-                  <div className="text-wrapper-3">Username</div>
+          <p className="p">
+            Let's get your kitchen organized. It only takes a minute to set up
+            your first pantry.
+          </p>
+        </div>
 
-                  {/* <div className="div-wrapper"> */}
-                  <input
-                    className="div-wrapper"
-                    type="text"
-                    name="username"
-                    id="username"
-                    placeholder="Username"
-                    value={creds.username}
-                    onChange={handleChange}
-                  />
-                  {/* <div className="text-wrapper-4">Username</div> */}
-                  {/* </div> */}
-                </div>
-
-                <div className="frame-7">
-                  <div className="text-wrapper-3">Password</div>
-
-                  {/* <div className="div-wrapper">
-                    <div className="text-wrapper-4">Password</div>
-                  </div> */}
-                  <input
-                    className="div-wrapper"
-                    type="password"
-                    name="password"
-                    id="password"
-                    value={creds.pwd}
-                    placeholder="Password"
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
-
-              {/* <div className="text-wrapper-5">Forgot Password?</div> */}
-            </div>
-
-            {/* <div className="frame-8"> */}
-            {/* <div className="text-wrapper-6">Log In</div> */}
-            <input
-              type="button"
-              className="frame-8"
-              value={props.buttonLabel || 'Sign Up'}
-              onClick={submitForm}
+        <div className="form">
+          <div className="form-fields">
+            <FormField
+              className="form-field-instance"
+              label="Username"
+              name="username"
+              value={creds.username}
+              placeholder="Username"
+              onChange={handleChange}
             />
-            {/* </div> */}
+            <FormField
+              className="form-field-instance"
+              label="Password"
+              inputType="password"
+              name="password"
+              value={creds.pwd}
+              placeholder="Password"
+              onChange={handleChange}
+            />
+          </div>
+
+          <Button
+            buttonText="Sign Up"
+            className="button-instance"
+            hierarchy="primary"
+            onClick={submitForm}
+          />
+          <div className="log-in-prompt">
+            <div className="text-wrapper-3">Already have an account?</div>
+
+            <Button
+              buttonText="Log In"
+              className="design-component-instance-node"
+              hierarchy="tertiary"
+              onClick={() => navigate('/login')}
+            />
           </div>
         </div>
       </div>
@@ -84,11 +78,13 @@ export const SignCentered = (props) => {
       case 'password':
         setCreds({ ...creds, pwd: value });
         break;
+      default:
+        break;
     }
   }
 
   function submitForm() {
-    props.handleSubmit(creds).then(() => navigate('/'));
+    props.handleSubmit(creds).then(() => navigate('/login'));
     setCreds({ username: '', pwd: '' });
   }
 };
