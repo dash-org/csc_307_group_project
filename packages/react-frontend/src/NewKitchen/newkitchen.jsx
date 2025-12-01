@@ -4,39 +4,13 @@ import { Form } from '../Components/Form/form';
 import './newkitchen.css';
 
 export const PantrySetupCreate = (props) => {
-  const navigate = useNavigate();
-  const [kitchenName, setKitchenName] = useState('');
-  const [inventoryName, setInventoryName] = useState('');
-
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    if (name === 'kitchenName') {
-      setKitchenName(value);
-    } else if (name === 'inventoryName') {
-      setInventoryName(value);
-    }
-  };
-
-  const handleBack = () => {
-    window.location.href = '/home';
-  };
-
-  const submitForm = () => {
-    props
-      .handleSubmit({
-        kitchenName,
-        inventoryName,
-      })
-      .then(() => navigate('/home'));
-    setKitchenName('');
-    setInventoryName('');
-  };
+  const [creds, setCreds] = useState({
+    name: '',
+  });
 
   return (
-    <div className="new-kitchen">
-      <header className="header">
-        <div className="div">SIDER</div>
-      </header>
+    <div className="pantry-setup-create">
+      <div className="text-wrapper">SIDER</div>
 
       <div className="div">Create Your New Kitchen</div>
 
