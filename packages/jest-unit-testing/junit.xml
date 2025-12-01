@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="3" failures="0" errors="0" time="1.467">
-  <testsuite name="Backend live server tests base functions" errors="0" failures="0" skipped="0" timestamp="2025-11-14T22:31:07" time="1.432" tests="3">
-    <testcase classname="Backend live server tests base functions GET / should return Hello World!" name="Backend live server tests base functions GET / should return Hello World!" time="0.013">
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="1.166">
+  <testsuite name="Backend live server tests base functions" errors="0" failures="0" skipped="0" timestamp="2025-11-19T04:28:18" time="1.12" tests="3">
+    <testcase classname="Backend live server tests base functions GET / should return Hello World!" name="Backend live server tests base functions GET / should return Hello World!" time="0.018">
     </testcase>
-    <testcase classname="Backend live server tests base functions GET /users should return users" name="Backend live server tests base functions GET /users should return users" time="0.54">
+    <testcase classname="Backend live server tests base functions GET /users should return users" name="Backend live server tests base functions GET /users should return users" time="0.262">
     </testcase>
-    <testcase classname="Backend live server tests base functions GET /users/id should return error (no user exists for this test)" name="Backend live server tests base functions GET /users/id should return error (no user exists for this test)" time="0.236">
+    <testcase classname="Backend live server tests base functions GET /users/id should return error (no user exists for this test)" name="Backend live server tests base functions GET /users/id should return error (no user exists for this test)" time="0.221">
     </testcase>
   </testsuite>
 </testsuites>

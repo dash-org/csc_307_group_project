@@ -1,112 +1,205 @@
-import React from 'react';
 import './home.css';
-
+import React, { useState, useEffect, useCallback } from 'react';
 import calendar from '../Images/calendar.png';
 import chat from '../Images/chat.png';
 import controlPanel from '../Images/control-panel.png';
 import highImportance from '../Images/high-importance.png';
-import playlist from '../Images/playlist.png';
+// import playlist from '../Images/playlist.png';
 import plus from '../Images/plus.png';
 import settings from '../Images/settings.png';
 import shoppingBag from '../Images/shopping-bag.png';
 import testAccount from '../Images/test-account.png';
+import { HomeGrid } from './homeGrid';
 
-export const HomepageBlank = () => {
+export const HomepageBlank = (props) => {
+  const [kitchens, setKitchens] = useState([]);
+
+  const fetchKitchens = useCallback(() => {
+    const promise = fetch(`${props.API_PREFIX}/kitchens`, {
+      headers: props.addAuthHeader(),
+    });
+    return promise;
+  }, [props]);
+
+  useEffect(() => {
+    console.log('jofifd');
+    fetchKitchens()
+      .then((res) => (res.status === 200 ? res.json() : undefined))
+      .then((json) => {
+        if (json) {
+          setKitchens(json['kitchens_list']);
+        } else {
+          setKitchens(null);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [fetchKitchens]);
+
+  function deleteOneKitchen(_id) {
+    // const trash = kitchens.at(index);
+    const promise = fetch(`${props.API_PREFIX}/kitchens/${_id}`, {
+      method: `DELETE`,
+      headers: props.addAuthHeader(),
+    });
+
+    promise
+      .then((res) => {
+        if (res.status == 204) {
+          const updated = kitchens.filter((kitchen) => {
+            return kitchen._id !== _id;
+          });
+          setKitchens(updated);
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
   return (
-    <div className="home-container">
-      {/* SIDEBAR */}
-      <aside className="sidebar">
-        <div className="sidebar-brand">SIDER</div>
-        <div className="sidebar-subtitle">Home</div>
+    <div className="homepage-blank">
+      {/* Top bar */}
+      <header className="hb-header">
+        <div className="hb-logo">SIDER</div>
 
-        <nav className="sidebar-nav" aria-label="Main">
-          <button
-            className="nav-item"
-            onClick={() => (window.location.href = '/home')}
+        <nav className="hb-top-nav">
+          <button className="hb-top-nav-item hb-top-nav-item-active">
+            Home
+          </button>
+
+          {/* <button
+            className="hb-top-nav-item"
+            onClick={() => {
+              window.location.href = '/dash';
+            }}
           >
-            <img src={controlPanel} alt="Home" />
-            <span>Home</span>
+            Dashboard
           </button>
 
-          <button className="nav-item">
-            <img src={calendar} alt="Reminders" />
-            <span>Reminders</span>
-          </button>
-
-          <button className="nav-item">
-            <img src={shoppingBag} alt="Shopping List" />
-            <span>Shopping List</span>
-          </button>
-
-          <button className="nav-item">
-            <img src={playlist} alt="Members" />
-            <span>Members</span>
-          </button>
-
-          <button className="nav-item">
-            <img src={chat} alt="Chat" />
-            <span>Chat</span>
-          </button>
-
-          <button className="nav-item">
-            <img src={settings} alt="Settings" />
-            <span>Settings</span>
-          </button>
+          <button className="hb-top-nav-item">Supplies</button> */}
         </nav>
 
-        <div className="sidebar-bottom">
-          <button className="nav-item">
-            <img src={highImportance} alt="About" />
-            <span>About</span>
-          </button>
-        </div>
-      </aside>
+        <button
+          className="hb-user-button"
+          onClick={() => {
+            window.location.href = '/login';
+          }}
+        >
+          <span className="hb-user-name">{props.currentUser}</span>
+          <img className="hb-user-avatar" src={testAccount} alt="User avatar" />
+        </button>
+      </header>
 
-      {/* MAIN SECTION */}
-      <main className="main-content">
-        {/* TOP NAV */}
-        <div className="top-nav">
-          <div className="nav-buttons">
-            <button className="active">Home</button>
+      {/* Main layout */}
+      <div className="hb-body">
+        {/* Sidebar */}
+        <aside className="hb-sidebar">
+          <ul className="hb-sidebar-list">
+            <li className="hb-sidebar-item hb-sidebar-item-active">
+              <div className="hb-sidebar-icon-pill hb-sidebar-icon-pill-active">
+                <img
+                  src={controlPanel}
+                  alt="Home"
+                  className="hb-sidebar-icon"
+                />
+              </div>
+              <span>Home</span>
+            </li>
+
+            <li className="hb-sidebar-item">
+              <div className="hb-sidebar-icon-pill">
+                <img
+                  src={calendar}
+                  alt="Reminders"
+                  className="hb-sidebar-icon"
+                />
+              </div>
+              <span>Reminders</span>
+            </li>
+
+            <li className="hb-sidebar-item">
+              <div className="hb-sidebar-icon-pill">
+                <img
+                  src={shoppingBag}
+                  alt="Shopping List"
+                  className="hb-sidebar-icon"
+                />
+              </div>
+              <span>Shopping List</span>
+            </li>
+
+            {/* <li className="hb-sidebar-item">
+              <div className="hb-sidebar-icon-pill">
+                <img src={playlist} alt="Members" className="hb-sidebar-icon" />
+              </div>
+              <span>Members</span>
+            </li> */}
+
+            <li className="hb-sidebar-item">
+              <div className="hb-sidebar-icon-pill">
+                <img src={chat} alt="Chat" className="hb-sidebar-icon" />
+              </div>
+              <span>Chat</span>
+            </li>
+
+            <li className="hb-sidebar-item">
+              <div className="hb-sidebar-icon-pill">
+                <img
+                  src={settings}
+                  alt="Settings"
+                  className="hb-sidebar-icon"
+                />
+              </div>
+              <span>Settings</span>
+            </li>
+
+            <li className="hb-sidebar-item">
+              <div className="hb-sidebar-icon-pill">
+                <img
+                  src={highImportance}
+                  alt="About"
+                  className="hb-sidebar-icon"
+                />
+              </div>
+              <span>About</span>
+            </li>
+          </ul>
+        </aside>
+
+        {/* Main content */}
+        <main className="hb-main">
+          <div className="hb-main-header">
+            <div>
+              <h1 className="hb-title">Kitchens</h1>
+              {/* <p className="hb-subtitle">
+                Couldn’t find any kitchens. Start one now.
+              </p> */}
+            </div>
+
             <button
-              onClick={() => {
-                window.location.href = '/dash';
-              }}
-            >
-              Dashboard{' '}
-            </button>
-            <button>Supplies</button>
-          </div>
-
-          <img className="profile-icon" src={testAccount} alt="Profile" />
-        </div>
-
-        {/* PANTRIES HEADER */}
-        <h2 className="section-title">Pantries</h2>
-
-        {/* FILTER BAR */}
-        <div className="filter-bar">
-          <select>
-            <option>Anyone</option>
-          </select>
-          <input placeholder="Search..." />
-          <input placeholder="Filter..." />
-          <button className="add-btn">
-            <img
-              src={plus}
-              alt="Add"
+              className="hb-add-button"
               onClick={() => {
                 window.location.href = '/kitchens/create';
               }}
-            />
-          </button>
-        </div>
+            >
+              <img src={plus} alt="" className="hb-add-icon" />
+              <span>Start a kitchen</span>
+            </button>
+          </div>
+          <HomeGrid
+            kitchens={kitchens}
+            removeKitchen={deleteOneKitchen}
+          ></HomeGrid>
 
-        {/* EMPTY MESSAGE */}
-        <div className="empty-message">
-          Couldn’t find any pantries. Start one now.
-        </div>
-      </main>
+          {/* Content card / empty state */}
+          {/* <section className="hb-card">
+            <p className="hb-card-text">
+              You don’t have any kitchens set up. Create one to start tracking
+              supplies, members, and shopping lists.
+            </p>
+          </section> */}
+        </main>
+      </div>
     </div>
   );
 };

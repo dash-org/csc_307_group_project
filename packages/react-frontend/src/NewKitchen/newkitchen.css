@@ -81,6 +81,7 @@
   line-height: var(--heading-h4-line-height);
   position: relative;
   text-align: center;
+  width: 400px;
 }
 
 .new-kitchen .form-instance {

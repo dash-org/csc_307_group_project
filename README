@@ -1,11 +1,28 @@
-To run the front end, run `npm run dev` from root
+# Project Blurb
+
+Our project is an is an inventory web app that aims to make kitchens more organized. 
+Users can create a kitchens with spaces such as fridges, cabinets etc.
+Within each of the spaces, they can add items so that they can track the expiration date 
+and amount of what they have in their real kitchen.
+For users with roommates, they can add others to their kitchens to track who is the owner of items
+
+## Project URL
+
+Frontend: https://yellow-flower-0dfae081e.3.azurestaticapps.net/
+Backend: https://sider.azurewebsites.net/
+
+## Setup
+
+To run the front end, run `npm run frontend` from root
 
 To run the backend end for the first time,
 first create your .env file in express-backend
-past in and then fill out
+past in and then fill out:
+
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.x4pm7rc.mongodb.net/<dbname>?retryWrites=true&w=majority
 TOKEN_SECRET=change-this-to-a-long-random-string
-then run the cmd `npm run dev` from the express-backend directory
+
+then run the cmd `npm run backend` from root
 
 ## Contributing
 

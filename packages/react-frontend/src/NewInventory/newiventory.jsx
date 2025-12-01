@@ -1,31 +1,33 @@
-import './newkitchen.css';
+import './newinventory.css';
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-export const PantrySetupCreate = (props) => {
+export const InventorySetupCreate = (props) => {
+  const { id } = useParams();
+  const kitchenId = id;
+
   const [creds, setCreds] = useState({
     name: '',
   });
 
   return (
-    <div className="new-kitchen">
-      <header className="header">
-        <div className="div">SIDER</div>
-      </header>
+    <div className="pantry-setup-create">
+      <div className="text-wrapper">SIDER</div>
 
-      <div className="div">Create Your New Kitchen</div>
+      <div className="div">Create Your New Inventory</div>
 
       <div className="rectangle" />
 
       <div className="frame">
         <div className="frame-2">
-          <div className="text-wrapper-2">Kitchen Name</div>
+          <div className="text-wrapper-2">Inventory Name</div>
 
           <input
             className="div-wrapper"
             type="text"
-            name="kitchenName"
-            id="kitchenName"
-            placeholder="e.g. 1st Floor Kitchen"
+            name="inventoryName"
+            id="iventoryName"
+            placeholder="e.g. Fridge"
             value={creds.name}
             onChange={handleChange}
           ></input>
@@ -47,7 +49,7 @@ export const PantrySetupCreate = (props) => {
         <button
           className="frame-4"
           onClick={() => {
-            window.location.href = '/home';
+            window.location.href = `/kitchens/${kitchenId}`;
           }}
         >
           <div className="text-wrapper-4">Back</div>
@@ -65,14 +67,14 @@ export const PantrySetupCreate = (props) => {
   function handleChange(event) {
     const { name, value } = event.target;
     switch (name) {
-      case 'kitchenName':
+      case 'inventoryName':
         setCreds({ ...creds, name: value });
         break;
     }
   }
 
   function submitForm() {
-    props.handleSubmit(creds);
+    props.handleSubmit(creds, kitchenId);
     setCreds({ name: '' });
   }
 };
