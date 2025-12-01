@@ -7,6 +7,16 @@
   overflow: hidden;
 }
 
+/* Wrap username + profile icon */
+.home-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8f8f8;
+  border: none;
+  transform: translateX(20px);
+}
+
 /* SIDEBAR */
 .sidebar {
   width: 220px;
@@ -71,7 +81,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 30px 50px;
+  padding: 25px 40px;
   overflow-y: auto;
   background: white;
 }
@@ -82,7 +92,9 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 25px;
-  padding: 0 5px;
+  width: 100%;
+  padding-right: 20px;
+  transform: translateY(-15px);
 }
 
 .nav-buttons {
@@ -179,12 +191,11 @@
 }
 
 /* Top header */
-.hb-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 24px 40px;
+.hb-header,
+.hb-top-nav {
+  display: none;
 }
+
 
 .hb-logo {
   color: #000000;
@@ -196,11 +207,6 @@
 }
 
 /* Top nav */
-.hb-top-nav {
-  display: flex;
-  gap: 16px;
-}
-
 .hb-top-nav-item {
   border-radius: 82px;
   border: 2px solid #ababab;
@@ -309,7 +315,9 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  padding: 20px 30px 20px 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Main header row */
@@ -317,6 +325,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: -10px;
 }
 
 .hb-title {
@@ -364,26 +373,6 @@
   margin: 0;
   font-size: 18px;
   color: #606060;
-}
-
-/* Make hb-user into a clickable button */
-.hb-user-button {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-
-  background: none;
-  border: none;
-  cursor: pointer;
-
-  padding: 0;
-  margin: 0;
-
-  /* Prevent shrinking/layout shifts */
-  font: inherit;
-  color: inherit;
-
-  /* You had .hb-user with display flex → replicate it here */
 }
 
 /* Reuse the existing styling for name + avatar */

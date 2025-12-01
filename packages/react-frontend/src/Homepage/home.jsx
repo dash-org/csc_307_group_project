@@ -58,25 +58,12 @@ export const HomepageBlank = (props) => {
 
   return (
     <div className="homepage-blank">
-      {/* Top bar */}
-      <header className="hb-header">
-        <div className="sidebar-brand">SIDER</div>
-        <button
-          className="hb-user-button"
-          onClick={() => {
-            window.location.href = '/login';
-          }}
-        >
-          <span className="hb-user-name">{props.currentUser}</span>
-          <img className="hb-user-avatar" src={testAccount} alt="User avatar" />
-        </button>
-      </header>
-
       {/* Main layout */}
-      <div className="hb-body">
+      <div className="home-container">
         {/* Sidebar */}
         <aside className="sidebar">
-
+          <div className="sidebar-brand">SIDER</div>
+          <div className="sidebar-subtitle">Homepage</div>
           <nav className="sidebar-nav" aria-label="Main">
             <button className="nav-item" onClick={() => (window.location.href = "/home")}>
               <img src={controlPanel} alt="Home" />
@@ -114,14 +101,26 @@ export const HomepageBlank = (props) => {
 
 
         {/* Main content */}
-        <main className="hb-main">
-          <nav className="top-nav">
+        <main className="main-content">
+          {/* Top navigation */}
+          <header className="top-nav">
             <div className="nav-buttons">
               <button className="active" onClick={() => (window.location.href = "/home")}>
               Home
               </button>
             </div>
-          </nav>
+            {/* User profile*/}
+            <button
+              className="home-profile"
+              onClick={() => {
+                window.location.href = '/login';
+              }} >
+              <span className="hb-user-name">{props.currentUser}</span>
+              <img className="profile-icon" src={testAccount} alt="User avatar" />
+            </button>
+          </header>
+          
+          {/* Main header */}
           <div className="hb-main-header">
             <div>
               <h1 className="hb-title">Kitchens</h1>
