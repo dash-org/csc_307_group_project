@@ -19,8 +19,8 @@ import { Navigate } from 'react-router-dom';
 function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
   const INVALID_USER = 'INVALID_USER';
-  const API_PREFIX = 'https://sider.azurewebsites.net';
-  // const API_PREFIX = 'http://localhost:8000';
+  // const API_PREFIX = 'https://sider.azurewebsites.net';
+  const API_PREFIX = 'http://localhost:8000';
   /*
   The value of token upon booting the frontend is what is stored in local storage, 
   if its not found in local storage then it is set to INVALID_TOKEN
@@ -313,11 +313,16 @@ function MyApp() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/dash" element={<DashboardEmpty></DashboardEmpty>} />
+        {/* <Route path="/dash" element={<DashboardEmpty></DashboardEmpty>} /> */}
         {/* Goes to Dashboard when click on view in inventories under kitchen */}
-        <Route 
+        <Route
           path="/kitchens/:kitchenId/inventories/:inventoryId"
-          element={<DashboardEmpty />}
+          element={
+            <DashboardEmpty
+              API_PREFIX={API_PREFIX}
+              addAuthHeader={addAuthHeader}
+            />
+          }
         />
         <Route
           path="/home"

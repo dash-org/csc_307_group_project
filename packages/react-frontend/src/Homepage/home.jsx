@@ -65,7 +65,10 @@ export const HomepageBlank = (props) => {
           <div className="sidebar-brand">SIDER</div>
           <div className="sidebar-subtitle">Homepage</div>
           <nav className="sidebar-nav" aria-label="Main">
-            <button className="nav-item" onClick={() => (window.location.href = "/home")}>
+            <button
+              className="nav-item"
+              onClick={() => (window.location.href = '/home')}
+            >
               <img src={controlPanel} alt="Home" />
               <span>Home</span>
             </button>
@@ -75,7 +78,10 @@ export const HomepageBlank = (props) => {
               <span>Reminders</span>
             </button>
 
-            <button className="nav-item" onClick={() => (window.location.href = "/inventory")}>
+            <button
+              className="nav-item"
+              onClick={() => (window.location.href = '/inventory')}
+            >
               <img src={shoppingBag} alt="Inventory" />
               <span>Shopping List</span>
             </button>
@@ -99,14 +105,16 @@ export const HomepageBlank = (props) => {
           </div>
         </aside>
 
-
         {/* Main content */}
         <main className="main-content">
           {/* Top navigation */}
           <header className="top-nav">
             <nav className="nav-buttons">
-              <button className="active" onClick={() => (window.location.href = "/home")}>
-              Home
+              <button
+                className="active"
+                onClick={() => (window.location.href = '/home')}
+              >
+                Home
               </button>
             </nav>
             {/* User profile*/}
@@ -114,12 +122,17 @@ export const HomepageBlank = (props) => {
               className="home-profile"
               onClick={() => {
                 window.location.href = '/login';
-              }} >
+              }}
+            >
               <span className="hb-user-name">{props.currentUser}</span>
-              <img className="profile-icon" src={testAccount} alt="User avatar" />
+              <img
+                className="profile-icon"
+                src={testAccount}
+                alt="User avatar"
+              />
             </button>
           </header>
-          
+
           {/* Main header */}
           <div className="hb-main-header">
             <div>

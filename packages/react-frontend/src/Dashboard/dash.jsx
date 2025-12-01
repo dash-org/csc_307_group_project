@@ -1,38 +1,46 @@
-import React, { useEffect, useCallback, useState } from "react";
-import "./dash.css";
+import React, { useEffect, useCallback, useState } from 'react';
+import './dash.css';
 
-import calendar from "../Images/calendar.png";
-import chat from "../Images/chat.png";
-import controlPanel from "../Images/control-panel.png";
-import googleWebSearch from "../Images/google-web-search.png";
-import highImportance from "../Images/high-importance.png";
-import playlist from "../Images/playlist.png";
-import plus from "../Images/plus.png";
-import search from "../Images/search.png";
-import settings from "../Images/settings.png";
-import shoppingBag from "../Images/shopping-bag.png";
-import testAccount from "../Images/test-account.png";
-import { useParams } from "react-router-dom";
+import calendar from '../Images/calendar.png';
+import chat from '../Images/chat.png';
+import controlPanel from '../Images/control-panel.png';
+import googleWebSearch from '../Images/google-web-search.png';
+import highImportance from '../Images/high-importance.png';
+import playlist from '../Images/playlist.png';
+import plus from '../Images/plus.png';
+// import search from '../Images/search.png';
+import settings from '../Images/settings.png';
+import shoppingBag from '../Images/shopping-bag.png';
+import testAccount from '../Images/test-account.png';
+import { useParams } from 'react-router-dom';
 
-export const DashboardEmpty = () => {
+export const DashboardEmpty = (props) => {
   const [showAddTodo, setShowAddTodo] = useState(false);
-  const [todoText, setTodoText] = useState("");
+  const [todoText, setTodoText] = useState('');
 
   const { kitchenId, inventoryId } = useParams();
 
-  {/*Store inventory*/}
+  {
+    /*Store inventory*/
+  }
   const [inventory, setInventory] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  console.log("Kitchen ID:", kitchenId);
-  console.log("Inventory ID:", inventoryId);
+  console.log('Kitchen ID:', kitchenId);
+  console.log('Inventory ID:', inventoryId);
 
-  {/*Fetch inventory data*/}
+  {
+    /*Fetch inventory data*/
+  }
   const fetchInventory = useCallback(() => {
-    fetch(`${PropTypes.API_PREFIX}/kitchens/${kitchenId}/inventories/${inventoryId}`, {
-      headers: props.addAuthHeader(),
-    }); 
-  }, [kitchenId, inventoryId]);
+    const promise = fetch(
+      `${props.API_PREFIX}/kitchens/${kitchenId}/inventories/${inventoryId}`,
+      {
+        headers: props.addAuthHeader(),
+      }
+    );
+    return promise;
+  }, [kitchenId, inventoryId, props]);
 
   useEffect(() => {
     fetchInventory()
@@ -41,17 +49,18 @@ export const DashboardEmpty = () => {
         if (json) {
           setInventory(json);
         } else {
-          setLoading(false);}
+          setLoading(false);
+        }
       })
       .catch((error) => {
-        console.error("Error fetching inventory:", error);
+        console.error('Error fetching inventory:', error);
       });
   }, [fetchInventory]);
 
   const handleAddTodo = () => {
     if (!todoText.trim()) return;
-    alert("Reminder added: " + todoText);
-    setTodoText("");
+    alert('Reminder added: ' + todoText);
+    setTodoText('');
     setShowAddTodo(false);
   };
 
@@ -64,7 +73,10 @@ export const DashboardEmpty = () => {
         <div className="sidebar-subtitle">Inventory Dashboard</div>
 
         <nav className="sidebar-nav" aria-label="Main">
-          <button className="nav-item" onClick={() => (window.location.href = "/home")}>
+          <button
+            className="nav-item"
+            onClick={() => (window.location.href = '/home')}
+          >
             <img src={controlPanel} alt="" />
             <span>Home</span>
           </button>
@@ -74,7 +86,10 @@ export const DashboardEmpty = () => {
             <span>Reminders</span>
           </button>
 
-          <button className="nav-item" onClick={() => (window.location.href = "")}>
+          <button
+            className="nav-item"
+            onClick={() => (window.location.href = '')}
+          >
             <img src={shoppingBag} alt="" />
             <span>Shopping List</span>
           </button>
@@ -107,7 +122,9 @@ export const DashboardEmpty = () => {
       <main className="dashboard-main">
         <header className="top-nav">
           <div className="nav-buttons">
-            <button onClick={() => (window.location.href = "/home")}>Home</button>
+            <button onClick={() => (window.location.href = '/home')}>
+              Home
+            </button>
             <button className="active">Dashboard</button>
             <button>Supplies</button>
           </div>
@@ -115,14 +132,16 @@ export const DashboardEmpty = () => {
         </header>
 
         <section className="cards-layout">
-
           {/* INVENTORY */}
           <div className="card card-inventory">
             <div className="card-header">
-              <h3 onClick={() => (window.location.href = "/inventory")}>
+              <h3 onClick={() => (window.location.href = '/inventory')}>
                 Inventory
               </h3>
-              <button className="icon-btn" onClick={() => (window.location.href = "/inventory")}>
+              <button
+                className="icon-btn"
+                onClick={() => (window.location.href = '/inventory')}
+              >
                 <img src={googleWebSearch} alt="" />
               </button>
             </div>
@@ -137,8 +156,8 @@ export const DashboardEmpty = () => {
                 <div className="inventory-info">
                   <h3>{inventory.name}</h3>
                   <p>
-                  Created:{" "}
-                  {new Date(inventory.createdAt).toLocaleDateString()}
+                    Created:{' '}
+                    {new Date(inventory.createdAt).toLocaleDateString()}
                   </p>
                   {inventory.items?.length > 0 ? (
                     inventory.items.map((item) => (
@@ -165,7 +184,10 @@ export const DashboardEmpty = () => {
           <div className="card card-todo">
             <div className="card-header">
               <h3>To-Do</h3>
-              <button className="icon-btn" onClick={() => setShowAddTodo(!showAddTodo)}>
+              <button
+                className="icon-btn"
+                onClick={() => setShowAddTodo(!showAddTodo)}
+              >
                 <img src={plus} alt="" />
               </button>
             </div>
@@ -199,7 +221,6 @@ export const DashboardEmpty = () => {
               <div className="empty-text">No low-stock items..</div>
             </div>
           </div>
-
         </section>
       </main>
     </div>
