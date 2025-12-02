@@ -14,13 +14,14 @@ import { PantrySetupCreate } from './NewKitchen/newkitchen';
 import { PantrySetupInvited } from './ManageMember/managemember';
 import { KitchenPage } from './Kitchenpage/kitchen';
 import { InventorySetupCreate } from './NewInventory/newiventory';
+import { ItemSetupCreate } from './NewItem/newitem';
 import { Navigate } from 'react-router-dom';
 
 function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
   const INVALID_USER = 'INVALID_USER';
-  const API_PREFIX = 'https://sider.azurewebsites.net';
-  // const API_PREFIX = 'http://localhost:8000';
+  // const API_PREFIX = 'https://sider.azurewebsites.net';
+  const API_PREFIX = 'http://localhost:8000';
   /*
   The value of token upon booting the frontend is what is stored in local storage, 
   if its not found in local storage then it is set to INVALID_TOKEN
@@ -43,6 +44,10 @@ function MyApp() {
   For now this is just the login page and rerenders whenever the login request fails
   */
   const [error, setError] = useState(0);
+
+  const windowSize = useWindowResize();
+
+  console.log('Resizing:', windowSize);
 
   const [membershipError, setMembershipError] = useState(0);
 
@@ -306,10 +311,51 @@ function MyApp() {
     return promise;
   }
 
+  function postItem(creds, kitchenId, inventoryId) {
+    const promise = fetch(
+      `${API_PREFIX}/kitchens/${kitchenId}/inventories/${inventoryId}/items`,
+      {
+        method: 'POST',
+        headers: addAuthHeader({
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify(creds),
+      }
+    )
+      .then((response) => {
+        if (response.status === 201) {
+          console.log('sanity check');
+          window.location.assign(
+            `/kitchens/${kitchenId}/inventories/${inventoryId}`
+          );
+        } else {
+          console.log('test12345');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return promise;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/dash" element={<DashboardEmpty></DashboardEmpty>} />
+        <Route
+          path="/kitchens/:kitchenId/inventories/:inventoryId/item/create"
+          element={<ItemSetupCreate handleSubmit={postItem} />}
+        />
+        {/* Goes to Dashboard when click on view in inventories under kitchen */}
+        <Route
+          path="/kitchens/:kitchenId/inventories/:inventoryId"
+          element={
+            <DashboardEmpty
+              API_PREFIX={API_PREFIX}
+              addAuthHeader={addAuthHeader}
+              currentUser={user}
+            />
+          }
+        />
         <Route
           path="/home"
           element={
@@ -379,6 +425,27 @@ function MyApp() {
       </Routes>
     </BrowserRouter>
   );
+}
+
+function useWindowResize() {
+  const [windowSize, setWindowSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowSize;
 }
 
 export default MyApp;

@@ -1,3 +1,4 @@
+import './home.css';
 import React, { useState, useEffect, useCallback } from 'react';
 import calendar from '../Images/calendar.png';
 import chat from '../Images/chat.png';
@@ -7,7 +8,6 @@ import highImportance from '../Images/high-importance.png';
 import plus from '../Images/plus.png';
 import settings from '../Images/settings.png';
 import shoppingBag from '../Images/shopping-bag.png';
-import './home.css';
 import testAccount from '../Images/test-account.png';
 import { HomeGrid } from './homeGrid';
 
@@ -58,116 +58,82 @@ export const HomepageBlank = (props) => {
 
   return (
     <div className="homepage-blank">
-      {/* Top bar */}
-      <header className="hb-header">
-        <div className="hb-logo">SIDER</div>
-
-        <nav className="hb-top-nav">
-          <button className="hb-top-nav-item hb-top-nav-item-active">
-            Home
-          </button>
-
-          {/* <button
-            className="hb-top-nav-item"
-            onClick={() => {
-              window.location.href = '/dash';
-            }}
-          >
-            Dashboard
-          </button>
-
-          <button className="hb-top-nav-item">Supplies</button> */}
-        </nav>
-
-        <button
-          className="hb-user-button"
-          onClick={() => {
-            window.location.href = '/login';
-          }}
-        >
-          <span className="hb-user-name">{props.currentUser}</span>
-          <img className="hb-user-avatar" src={testAccount} alt="User avatar" />
-        </button>
-      </header>
-
       {/* Main layout */}
-      <div className="hb-body">
+      <div className="home-container">
         {/* Sidebar */}
-        <aside className="hb-sidebar">
-          <ul className="hb-sidebar-list">
-            <li className="hb-sidebar-item hb-sidebar-item-active">
-              <div className="hb-sidebar-icon-pill hb-sidebar-icon-pill-active">
-                <img
-                  src={controlPanel}
-                  alt="Home"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+        <aside className="sidebar">
+          <div className="sidebar-brand">SIDER</div>
+          <div className="sidebar-subtitle">Homepage</div>
+          <nav className="sidebar-nav" aria-label="Main">
+            <button
+              className="nav-item"
+              onClick={() => (window.location.href = '/home')}
+            >
+              <img src={controlPanel} alt="Home" />
               <span>Home</span>
-            </li>
+            </button>
 
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img
-                  src={calendar}
-                  alt="Reminders"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+            <button className="nav-item">
+              <img src={calendar} alt="Reminders" />
               <span>Reminders</span>
-            </li>
+            </button>
 
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img
-                  src={shoppingBag}
-                  alt="Shopping List"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+            <button
+              className="nav-item"
+              onClick={() => (window.location.href = '/inventory')}
+            >
+              <img src={shoppingBag} alt="Inventory" />
               <span>Shopping List</span>
-            </li>
+            </button>
 
-            {/* <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img src={playlist} alt="Members" className="hb-sidebar-icon" />
-              </div>
-              <span>Members</span>
-            </li> */}
-
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img src={chat} alt="Chat" className="hb-sidebar-icon" />
-              </div>
+            <button className="nav-item">
+              <img src={chat} alt="Chat" />
               <span>Chat</span>
-            </li>
+            </button>
 
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img
-                  src={settings}
-                  alt="Settings"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+            <button className="nav-item">
+              <img src={settings} alt="Settings" />
               <span>Settings</span>
-            </li>
+            </button>
+          </nav>
 
-            <li className="hb-sidebar-item">
-              <div className="hb-sidebar-icon-pill">
-                <img
-                  src={highImportance}
-                  alt="About"
-                  className="hb-sidebar-icon"
-                />
-              </div>
+          <div className="sidebar-bottom">
+            <button className="nav-item">
+              <img src={highImportance} alt="About" />
               <span>About</span>
-            </li>
-          </ul>
+            </button>
+          </div>
         </aside>
 
         {/* Main content */}
-        <main className="hb-main">
+        <main className="main-content">
+          {/* Top navigation */}
+          <header className="top-nav">
+            <nav className="nav-buttons">
+              <button
+                className="active"
+                onClick={() => (window.location.href = '/home')}
+              >
+                Home
+              </button>
+            </nav>
+            {/* User profile*/}
+            <button
+              className="home-profile"
+              onClick={() => {
+                window.location.href = '/login';
+              }}
+            >
+              <span className="hb-user-name">{props.currentUser}</span>
+              <img
+                className="profile-icon"
+                src={testAccount}
+                alt="User avatar"
+              />
+            </button>
+          </header>
+
+          {/* Main header */}
           <div className="hb-main-header">
             <div>
               <h1 className="hb-title">Kitchens</h1>

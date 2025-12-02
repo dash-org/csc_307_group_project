@@ -1,6 +1,6 @@
-.sign-up {
+.new-kitchen {
   align-items: flex-start;
-  background-color: var(--neutral-100);
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   height: 832px;
@@ -8,7 +8,7 @@
   position: relative;
 }
 
-.sign-up .header {
+.new-kitchen .header {
   align-items: center;
   align-self: stretch;
   background-color: transparent;
@@ -20,7 +20,7 @@
   width: 100%;
 }
 
-.sign-up .div {
+.new-kitchen .div {
   color: var(--neutral-900);
   font-family: 'Inter-Bold', Helvetica;
   font-size: 40px;
@@ -33,7 +33,7 @@
   width: fit-content;
 }
 
-.sign-up .main {
+.new-kitchen .main {
   align-items: center;
   align-self: stretch;
   display: flex;
@@ -45,7 +45,7 @@
   width: 100%;
 }
 
-.sign-up .section-header {
+.new-kitchen .section-header {
   align-items: center;
   align-self: stretch;
   display: flex;
@@ -56,7 +56,7 @@
   width: 100%;
 }
 
-.sign-up .text-wrapper-2 {
+.new-kitchen .text-wrapper-2 {
   color: var(--neutral-900);
   font-family: var(--heading-h1-font-family);
   font-size: var(--heading-h1-font-size);
@@ -70,7 +70,7 @@
   width: fit-content;
 }
 
-.sign-up .p {
+.new-kitchen .p {
   align-self: stretch;
   color: var(--neutral-900);
   font-family: var(--heading-h4-font-family);
@@ -81,80 +81,75 @@
   line-height: var(--heading-h4-line-height);
   position: relative;
   text-align: center;
+  width: 400px;
 }
 
-.sign-up .form {
-  align-items: center;
-  background-color: var(--neutral-200);
+.new-kitchen .form-instance {
+  flex: 0 0 auto !important;
+  left: unset !important;
+  top: unset !important;
+  width: 100% !important;
+}
+
+/* Wrapper for inputs */
+.form-wrapper {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Each row */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.label {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ccc;
   border-radius: 10px;
-  display: flex;
-  flex: 0 0 auto;
-  flex-direction: column;
-  gap: 24px;
-  max-width: 640px;
-  padding: 24px;
-  position: relative;
-  width: 100%;
+  font-size: 16px;
 }
 
-.sign-up .form-fields {
-  align-items: flex-start;
-  align-self: stretch;
+.textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+/* Button row layout */
+.button-row {
   display: flex;
-  flex: 0 0 auto;
-  flex-direction: column;
   gap: 16px;
-  position: relative;
-  width: 100%;
+  margin-top: 20px;
 }
 
-.sign-up .form-field-instance {
-  align-self: stretch !important;
-  flex: 0 0 auto !important;
-  left: unset !important;
-  top: unset !important;
-  width: 100% !important;
+.btn {
+  padding: 12px 28px;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  border: none;
 }
 
-.sign-up .button-instance {
-  align-self: stretch !important;
-  display: flex !important;
-  flex: 0 0 auto !important;
-  left: unset !important;
-  top: unset !important;
-  width: 100% !important;
+.btn.primary {
+  background-color: #444;
+  color: white;
 }
 
-.sign-up .log-in-prompt {
-  align-items: center;
-  display: inline-flex;
-  flex: 0 0 auto;
-  gap: 4px;
-  justify-content: center;
-  position: relative;
-}
-
-.sign-up .text-wrapper-3 {
-  color: var(--neutral-900);
-  font-family: var(--body-b1-bold-font-family);
-  font-size: var(--body-b1-bold-font-size);
-  font-style: var(--body-b1-bold-font-style);
-  font-weight: var(--body-b1-bold-font-weight);
-  letter-spacing: var(--body-b1-bold-letter-spacing);
-  line-height: var(--body-b1-bold-line-height);
-  margin-top: -1px;
-  position: relative;
-  white-space: nowrap;
-  width: fit-content;
-}
-
-.sign-up .design-component-instance-node {
-  background: none !important;
-  border: none !important;
-  margin: 0;
-  flex: 0 0 auto !important;
-  height: 20px !important;
-  left: unset !important;
-  padding: unset !important;
-  top: unset !important;
+.btn.secondary {
+  background-color: #eaeaea;
+  color: #333;
 }

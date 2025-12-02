@@ -1,5 +1,7 @@
-import './newkitchen.css';
+// import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
+import { Form } from '../Components/Form/form';
+import './newkitchen.css';
 
 export const PantrySetupCreate = (props) => {
   const [creds, setCreds] = useState({

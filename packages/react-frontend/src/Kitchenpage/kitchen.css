@@ -5,12 +5,13 @@
   background-size: cover;
   background-position: center;
   border-radius: 2px;
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   font-family: 'Inter-Medium', Helvetica, Arial, sans-serif;
   color: #606060;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 /* Top header */
@@ -72,12 +73,36 @@
   object-fit: cover;
 }
 
+.home-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f8f8f8;
+  border: none;
+  transform: translateX(20px);
+}
+
+/* Reuse the existing styling for name + avatar */
+.hb-user-button .hb-user-name {
+  font-size: 18px;
+  color: #fffbfb;
+  background-color: #d4d4d4;
+  border-radius: 8px;
+  padding: 6px 14px;
+}
+
+.hb-user-button .hb-user-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 /* Body layout (sidebar + main) */
 .hb-body {
   display: flex;
-  flex: 1;
-  padding: 0 40px 40px;
-  gap: 32px;
+  height: 100vh;
+  width: 100%;
 }
 
 /* Sidebar */
@@ -139,7 +164,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  padding: 25px 40px;
+  overflow-y: auto;
 }
 
 /* Main header row */
@@ -216,22 +242,6 @@
   /* You had .hb-user with display flex → replicate it here */
 }
 
-/* Reuse the existing styling for name + avatar */
-.hb-user-button .hb-user-name {
-  font-size: 18px;
-  color: #fffbfb;
-  background-color: #d4d4d4;
-  border-radius: 8px;
-  padding: 6px 14px;
-}
-
-.hb-user-button .hb-user-avatar {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 /* Row for Name / Owner / Created fields */
 .hb-kitchen-info-row {
   display: flex;
@@ -270,4 +280,102 @@
   width: 2px;
   height: 24px;
   background-color: #cfcfcf;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  background: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.sidebar-subtitle {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+
+.sidebar-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #444;
+}
+
+.nav-item:hover {
+  color: black;
+}
+
+.nav-item img {
+  width: 22px;
+  opacity: 0.8;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+/* TOP NAVIGATION */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  width: 100%;
+  padding-right: 20px;
+  transform: translateY(-15px);
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-buttons button {
+  padding: 10px 30px;
+  border-radius: 20px;
+  border: 1px solid #aaa;
+  background: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: #333;
+}
+
+.nav-buttons button.active {
+  background: #444;
+  color: white;
+}
+
+.nav-buttons button:hover {
+  background: #333;
+}
+
+.profile-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  border-radius: 50%;
 }
