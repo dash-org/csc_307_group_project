@@ -8,11 +8,8 @@
   "type": "module",
   "scripts": {
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
-    "test:backend": "cross-env NODE_OPTIONS=--experimental-vm-modules jest express-backend-testing --ci --reporters=default --reporters=github-actions --reporters=jest-junit",
+    "test:backend": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --runTestsByPath express-backend-testing/inventory.test.js express-backend-testing/kitchen.test.js express-backend-testing/membership.test.js express-backend-testing/user.test.js --ci --reporters=default --reporters=github-actions --reporters=jest-junit --coverage",
     "lint": "eslint . && npx prettier --check ."
-  },
-  "jest": {
-    "transform": {}
   },
   "dependencies": {
     "jest": "^30.2.0"
