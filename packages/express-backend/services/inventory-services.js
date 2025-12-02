@@ -20,7 +20,7 @@ function getInventory(name, createdBy, createdAt, items) {
 }
 
 function findInventoryById(id) {
-  return inventoryModel.findById(id);
+  return inventoryModel.findById(id).populate('items').populate('createdBy');
 }
 
 function addInventory(inventory) {

@@ -1,25 +1,25 @@
-import React, { useState, useRef, useEffect } from "react";
-import "./inventory.css";
+import React, { useState, useRef, useEffect } from 'react';
+import './inventory.css';
 
-import calendar from "../Images/calendar.png";
-import controlPanel from "../Images/control-panel.png";
-import highImportance from "../Images/high-importance.png";
-import playlist from "../Images/playlist.png";
-import plus from "../Images/plus.png";
-import searchIcon from "../Images/search.png";
-import settings from "../Images/settings.png";
-import shoppingBag from "../Images/shopping-bag.png";
-import chat from "../Images/chat.png";
-import testAccount from "../Images/test-account.png";
+import calendar from '../Images/calendar.png';
+import controlPanel from '../Images/control-panel.png';
+import highImportance from '../Images/high-importance.png';
+import playlist from '../Images/playlist.png';
+import plus from '../Images/plus.png';
+import searchIcon from '../Images/search.png';
+import settings from '../Images/settings.png';
+import shoppingBag from '../Images/shopping-bag.png';
+import chat from '../Images/chat.png';
+import testAccount from '../Images/test-account.png';
 
 export const InventoryEmpty = () => {
   const [showSearch, setShowSearch] = useState(false);
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
   const searchRef = useRef(null);
 
   const handleSearch = () => {
-    alert("Searching for: " + searchText);
-    setSearchText("");
+    alert('Searching for: ' + searchText);
+    setSearchText('');
   };
 
   // Close search if clicked outside
@@ -29,9 +29,9 @@ export const InventoryEmpty = () => {
         setShowSearch(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -43,7 +43,10 @@ export const InventoryEmpty = () => {
         <div className="sidebar-subtitle">Inventory</div>
 
         <nav className="sidebar-nav" aria-label="Main">
-          <button className="nav-item" onClick={() => (window.location.href = "/home")}>
+          <button
+            className="nav-item"
+            onClick={() => (window.location.href = '/home')}
+          >
             <img src={controlPanel} alt="Home" />
             <span>Home</span>
           </button>
@@ -53,7 +56,10 @@ export const InventoryEmpty = () => {
             <span>Reminders</span>
           </button>
 
-          <button className="nav-item" onClick={() => (window.location.href = "/inventory")}>
+          <button
+            className="nav-item"
+            onClick={() => (window.location.href = '/inventory')}
+          >
             <img src={shoppingBag} alt="Inventory" />
             <span>Shopping List</span>
           </button>
@@ -86,8 +92,12 @@ export const InventoryEmpty = () => {
       <main className="dashboard-main">
         <header className="top-nav">
           <div className="nav-buttons">
-            <button onClick={() => (window.location.href = "/home")}>Home</button>
-            <button onClick={() => (window.location.href = "/dash")}>Dashboard</button>
+            <button onClick={() => (window.location.href = '/home')}>
+              Home
+            </button>
+            <button onClick={() => (window.location.href = '/dash')}>
+              Dashboard
+            </button>
             <button>Supplies</button>
           </div>
           <img className="profile-icon" src={testAccount} alt="Profile" />
@@ -106,13 +116,16 @@ export const InventoryEmpty = () => {
                       placeholder="Search items..."
                       value={searchText}
                       onChange={(e) => setSearchText(e.target.value)}
-                      onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                      onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                       autoFocus
                     />
                     <button onClick={handleSearch}>Go</button>
                   </div>
                 ) : (
-                  <button className="icon-btn" onClick={() => setShowSearch(true)}>
+                  <button
+                    className="icon-btn"
+                    onClick={() => setShowSearch(true)}
+                  >
                     <img src={searchIcon} alt="Search" />
                   </button>
                 )}

@@ -123,17 +123,17 @@
 
 /* BIG INVENTORY CARD */
 .card-inventory {
-  grid-row: 1 / span 2; 
+  grid-row: 1 / span 2;
 }
 
 .card-inventory h3 {
-  cursor: pointer;           /* shows the hand pointer */
+  cursor: pointer; /* shows the hand pointer */
   transition: all 0.2s ease; /* smooth transition */
 }
 
 .card-inventory h3:hover {
   text-decoration: underline; /* underline on hover */
-  color: #333;             /* optional: blue color on hover */
+  color: #333; /* optional: blue color on hover */
 }
 
 /* RIGHT COLUMN */
@@ -175,8 +175,8 @@
 .icon-btn {
   background: none !important;
   border: none !important;
-  padding: 6px !important;       /* small padding so it sits in the corner */
-  border-radius: 8px;            /* subtle rounded corner */
+  padding: 6px !important; /* small padding so it sits in the corner */
+  border-radius: 8px; /* subtle rounded corner */
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -194,7 +194,7 @@
 /* Hover effect */
 .icon-btn:hover {
   background: #f3f3f3;
-  transform: scale(1.05);  /* small pop effect */
+  transform: scale(1.05); /* small pop effect */
 }
 
 .icon-btn:hover img {

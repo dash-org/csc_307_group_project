@@ -14,6 +14,7 @@ import { PantrySetupCreate } from './NewKitchen/newkitchen';
 import { PantrySetupInvited } from './ManageMember/managemember';
 import { KitchenPage } from './Kitchenpage/kitchen';
 import { InventorySetupCreate } from './NewInventory/newiventory';
+import { ItemSetupCreate } from './NewItem/newitem';
 import { Navigate } from 'react-router-dom';
 
 function MyApp() {
@@ -310,10 +311,40 @@ function MyApp() {
     return promise;
   }
 
+  function postItem(creds, kitchenId, inventoryId) {
+    const promise = fetch(
+      `${API_PREFIX}/kitchens/${kitchenId}/inventories/${inventoryId}/items`,
+      {
+        method: 'POST',
+        headers: addAuthHeader({
+          'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify(creds),
+      }
+    )
+      .then((response) => {
+        if (response.status === 201) {
+          console.log('sanity check');
+          window.location.assign(
+            `/kitchens/${kitchenId}/inventories/${inventoryId}`
+          );
+        } else {
+          console.log('test12345');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    return promise;
+  }
+
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/dash" element={<DashboardEmpty></DashboardEmpty>} /> */}
+        <Route
+          path="/kitchens/:kitchenId/inventories/:inventoryId/item/create"
+          element={<ItemSetupCreate handleSubmit={postItem} />}
+        />
         {/* Goes to Dashboard when click on view in inventories under kitchen */}
         <Route
           path="/kitchens/:kitchenId/inventories/:inventoryId"
@@ -321,6 +352,7 @@ function MyApp() {
             <DashboardEmpty
               API_PREFIX={API_PREFIX}
               addAuthHeader={addAuthHeader}
+              currentUser={user}
             />
           }
         />

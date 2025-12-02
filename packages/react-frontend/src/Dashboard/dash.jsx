@@ -13,6 +13,8 @@ import settings from '../Images/settings.png';
 import shoppingBag from '../Images/shopping-bag.png';
 import testAccount from '../Images/test-account.png';
 import { useParams } from 'react-router-dom';
+import { InventoryItemList } from './InventoryItemList';
+import rightArrowBracket from '../Images/rightarrowbracket.png';
 
 export const DashboardEmpty = (props) => {
   const [showAddTodo, setShowAddTodo] = useState(false);
@@ -48,8 +50,10 @@ export const DashboardEmpty = (props) => {
       .then((json) => {
         if (json) {
           setInventory(json);
-        } else {
           setLoading(false);
+        } else {
+          setLoading(true);
+          setInventory(null);
         }
       })
       .catch((error) => {
@@ -63,6 +67,27 @@ export const DashboardEmpty = (props) => {
     setTodoText('');
     setShowAddTodo(false);
   };
+
+  function deleteOneInventory(_id) {
+    const promise = fetch(
+      `${props.API_PREFIX}/kitchens/${kitchenId}/inventories/${inventoryId}/items/${_id}`,
+      {
+        method: 'DELETE',
+        headers: props.addAuthHeader(),
+      }
+    );
+
+    promise
+      .then((res) => {
+        if (res.status === 204) {
+          setInventory((prev) => ({
+            ...prev,
+            items: prev.items.filter((item) => item._id !== _id),
+          }));
+        }
+      })
+      .catch((error) => console.log(error));
+  }
 
   return (
     <div className="dashboard-root">
@@ -120,24 +145,83 @@ export const DashboardEmpty = (props) => {
 
       {/* MAIN */}
       <main className="dashboard-main">
+        {/* Top navigation */}
         <header className="top-nav">
-          <div className="nav-buttons">
-            <button onClick={() => (window.location.href = '/home')}>
+          <nav className="nav-buttons">
+            <button
+              className="hb-top-nav-item"
+              onClick={() => {
+                window.location.href = '/home';
+              }}
+            >
               Home
             </button>
-            <button className="active">Dashboard</button>
-            <button>Supplies</button>
-          </div>
-          <img className="profile-icon" src={testAccount} alt="Profile" />
+            <img
+              src={rightArrowBracket}
+              alt="firstbracket"
+              className="hb-sidebar-icon"
+            />
+            <button
+              className="hb-top-nav-item"
+              onClick={() => {
+                window.location.href = `/kitchens/${kitchenId}`;
+              }}
+            >
+              kitchen
+            </button>
+            <img
+              src={rightArrowBracket}
+              alt="firstbracket"
+              className="hb-sidebar-icon"
+            />
+            <button className="active">Inventory Dashboard</button>
+          </nav>
+          {/* User profile*/}
+          <button
+            className="home-profile"
+            onClick={() => {
+              window.location.href = '/login';
+            }}
+          >
+            <span className="hb-user-name">{props.currentUser}</span>
+            <img className="profile-icon" src={testAccount} alt="User avatar" />
+          </button>
         </header>
 
         <section className="cards-layout">
           {/* INVENTORY */}
           <div className="card card-inventory">
             <div className="card-header">
-              <h3 onClick={() => (window.location.href = '/inventory')}>
-                Inventory
-              </h3>
+              <div
+                className="inventory-header-meta"
+                onClick={() => (window.location.href = '/inventory')}
+              >
+                {/* Title always shows something safe */}
+                <h3 className="inventory-title">
+                  {' '}
+                  Inventory Name:
+                  {loading
+                    ? 'Loading...'
+                    : inventory
+                      ? inventory.name
+                      : 'Inventory Not Found'}
+                </h3>
+
+                {/* Created date ONLY if inventory exists */}
+                {!loading && inventory && (
+                  <p className="inventory-created">
+                    Inventory Created:{' '}
+                    {new Date(inventory.createdAt).toLocaleDateString()}
+                  </p>
+                )}
+
+                {!loading && inventory && (
+                  <p className="inventory-created">
+                    Inventory Created By: {inventory.createdBy.name}
+                  </p>
+                )}
+              </div>
+
               <button
                 className="icon-btn"
                 onClick={() => (window.location.href = '/inventory')}
@@ -146,35 +230,36 @@ export const DashboardEmpty = (props) => {
               </button>
             </div>
 
-            {/* Inventory content */}
+            {/* BODY CONTENT */}
             <div className="card-body center">
               {loading ? (
                 <div className="empty-text">Loading inventory...</div>
               ) : !inventory ? (
-                <div className="empty-text"> Inventory not found. </div>
+                <div className="empty-text">Inventory not found.</div>
+              ) : inventory.items?.length > 0 ? (
+                // <div className="inventory-info">
+                //   {inventory.items.map((item) => (
+                //     <div key={item._id} className="inventory-item">
+                //       <strong>{item.name}</strong> : {item.quantity}
+                //     </div>
+                //   ))}
+                // </div>
+                <InventoryItemList
+                  items={inventory.items}
+                  onDelete={deleteOneInventory}
+                />
               ) : (
-                <div className="inventory-info">
-                  <h3>{inventory.name}</h3>
-                  <p>
-                    Created:{' '}
-                    {new Date(inventory.createdAt).toLocaleDateString()}
-                  </p>
-                  {inventory.items?.length > 0 ? (
-                    inventory.items.map((item) => (
-                      <div key={item._id} className="inventory-item">
-                        <strong>{item.name}</strong> : {item.quantity}
-                      </div>
-                    ))
-                  ) : (
-                    <p>No items in this inventory.</p>
-                  )}
-                </div>
+                <div className="empty-text">No items in this inventory.</div>
               )}
             </div>
 
-            {/* Plus for quick add of inventory items for later implementation, ignore for now */}
             <div className="card-footer">
-              <button className="footer-add">
+              <button
+                className="footer-add"
+                onClick={() =>
+                  (window.location.href = `/kitchens/${kitchenId}/inventories/${inventoryId}/item/create`)
+                }
+              >
                 <img src={plus} alt="" />
               </button>
             </div>

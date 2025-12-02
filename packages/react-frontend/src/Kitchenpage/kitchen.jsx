@@ -118,7 +118,10 @@ export const KitchenPage = (props) => {
           <div className="sidebar-brand">SIDER</div>
           <div className="sidebar-subtitle">Kitchen</div>
           <nav className="sidebar-nav" aria-label="Main">
-            <button className="nav-item" onClick={() => (window.location.href = "/home")}>
+            <button
+              className="nav-item"
+              onClick={() => (window.location.href = '/home')}
+            >
               <img src={controlPanel} alt="Home" />
               <span>Home</span>
             </button>
@@ -128,7 +131,10 @@ export const KitchenPage = (props) => {
               <span>Reminders</span>
             </button>
 
-            <button className="nav-item" onClick={() => (window.location.href = "/inventory")}>
+            <button
+              className="nav-item"
+              onClick={() => (window.location.href = '/inventory')}
+            >
               <img src={shoppingBag} alt="Inventory" />
               <span>Shopping List</span>
             </button>
@@ -157,7 +163,6 @@ export const KitchenPage = (props) => {
           </div>
         </aside>
 
-
         {/* Main content */}
         <main className="hb-main">
           {/* Top navigation */}
@@ -176,9 +181,7 @@ export const KitchenPage = (props) => {
                 alt="firstbracket"
                 className="hb-sidebar-icon"
               />
-              <button className="active">
-                Kitchen
-              </button>
+              <button className="active">Kitchen</button>
             </nav>
             {/* User profile*/}
             <button
@@ -188,7 +191,11 @@ export const KitchenPage = (props) => {
               }}
             >
               <span className="hb-user-name">{props.currentUser}</span>
-              <img className="profile-icon" src={testAccount} alt="User avatar" />
+              <img
+                className="profile-icon"
+                src={testAccount}
+                alt="User avatar"
+              />
             </button>
           </header>
           {/* Kitchen Info */}
