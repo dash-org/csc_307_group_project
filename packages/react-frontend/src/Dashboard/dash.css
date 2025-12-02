@@ -239,3 +239,19 @@
 .footer-add img {
   width: 20px;
 }
+
+/* LOW STOCK LIST STYLES */
+.low-stock-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.low-stock-item {
+  padding: 8px 12px;
+  background: #ffe6e6;
+  border-left: 4px solid #ff4d4d;
+  border-radius: 4px;
+  font-size: 14px;
+}
