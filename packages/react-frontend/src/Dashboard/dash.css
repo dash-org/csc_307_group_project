@@ -148,6 +148,15 @@
   height: auto;
 }
 
+/* Make the Low Stock card scroll instead of overflowing */
+.card-lowstock .card-body {
+  justify-content: flex-start; /* no center alignment */
+  align-items: flex-start;
+  overflow-y: auto;            /* enable vertical scroll */
+  padding-right: 10px;         /* avoid scrollbar overlap */
+}
+
+
 /* CARD */
 .card {
   background: white;
