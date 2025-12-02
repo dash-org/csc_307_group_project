@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="28" failures="0" errors="0" time="0.562">
-  <testsuite name="Membership model" errors="0" failures="0" skipped="0" timestamp="2025-12-02T23:30:58" time="0.213" tests="10">
-    <testcase classname="Membership model is valid with required fields" name="Membership model is valid with required fields" time="0.002">
+<testsuites name="jest tests" tests="28" failures="0" errors="0" time="0.501">
+  <testsuite name="Membership model" errors="0" failures="0" skipped="0" timestamp="2025-12-02T23:41:21" time="0.221" tests="10">
+    <testcase classname="Membership model is valid with required fields" name="Membership model is valid with required fields" time="0.003">
     </testcase>
     <testcase classname="Membership model requires a kitchenId" name="Membership model requires a kitchenId" time="0">
     </testcase>
@@ -15,53 +15,53 @@
     </testcase>
     <testcase classname="Membership model rejects invalid permissions for a given role" name="Membership model rejects invalid permissions for a given role" time="0">
     </testcase>
-    <testcase classname="Membership model accepts valid permissions for a given role" name="Membership model accepts valid permissions for a given role" time="0">
+    <testcase classname="Membership model accepts valid permissions for a given role" name="Membership model accepts valid permissions for a given role" time="0.001">
     </testcase>
     <testcase classname="Membership model has expected schema configuration" name="Membership model has expected schema configuration" time="0">
     </testcase>
-    <testcase classname="Membership model uses the correct model name" name="Membership model uses the correct model name" time="0">
+    <testcase classname="Membership model uses the correct model name" name="Membership model uses the correct model name" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="Inventory model" errors="0" failures="0" skipped="0" timestamp="2025-12-02T23:30:58" time="0.089" tests="6">
+  <testsuite name="User model" errors="0" failures="0" skipped="0" timestamp="2025-12-02T23:41:21" time="0.079" tests="6">
+    <testcase classname="User model is valid with required fields" name="User model is valid with required fields" time="0.002">
+    </testcase>
+    <testcase classname="User model requires a name" name="User model requires a name" time="0.001">
+    </testcase>
+    <testcase classname="User model requires a hashpassword" name="User model requires a hashpassword" time="0">
+    </testcase>
+    <testcase classname="User model sets default createdAt" name="User model sets default createdAt" time="0">
+    </testcase>
+    <testcase classname="User model has expected schema configuration" name="User model has expected schema configuration" time="0.001">
+    </testcase>
+    <testcase classname="User model uses the correct model name" name="User model uses the correct model name" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Inventory model" errors="0" failures="0" skipped="0" timestamp="2025-12-02T23:41:21" time="0.078" tests="6">
     <testcase classname="Inventory model is valid with required fields" name="Inventory model is valid with required fields" time="0.002">
     </testcase>
     <testcase classname="Inventory model requires a name" name="Inventory model requires a name" time="0">
     </testcase>
     <testcase classname="Inventory model requires createdBy" name="Inventory model requires createdBy" time="0">
     </testcase>
-    <testcase classname="Inventory model sets default createdAt and items" name="Inventory model sets default createdAt and items" time="0">
+    <testcase classname="Inventory model sets default createdAt and items" name="Inventory model sets default createdAt and items" time="0.001">
     </testcase>
     <testcase classname="Inventory model has expected schema configuration" name="Inventory model has expected schema configuration" time="0">
     </testcase>
     <testcase classname="Inventory model uses the correct model name" name="Inventory model uses the correct model name" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="Kitchen model" errors="0" failures="0" skipped="0" timestamp="2025-12-02T23:30:58" time="0.078" tests="6">
-    <testcase classname="Kitchen model is valid with required fields" name="Kitchen model is valid with required fields" time="0.002">
+  <testsuite name="Kitchen model" errors="0" failures="0" skipped="0" timestamp="2025-12-02T23:41:21" time="0.081" tests="6">
+    <testcase classname="Kitchen model is valid with required fields" name="Kitchen model is valid with required fields" time="0.003">
     </testcase>
-    <testcase classname="Kitchen model requires a name" name="Kitchen model requires a name" time="0.001">
+    <testcase classname="Kitchen model requires a name" name="Kitchen model requires a name" time="0">
     </testcase>
-    <testcase classname="Kitchen model requires an owner" name="Kitchen model requires an owner" time="0">
+    <testcase classname="Kitchen model requires an owner" name="Kitchen model requires an owner" time="0.001">
     </testcase>
     <testcase classname="Kitchen model sets default createdAt and inventories" name="Kitchen model sets default createdAt and inventories" time="0">
     </testcase>
     <testcase classname="Kitchen model has expected schema configuration" name="Kitchen model has expected schema configuration" time="0">
     </testcase>
     <testcase classname="Kitchen model uses the correct model name" name="Kitchen model uses the correct model name" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="User model" errors="0" failures="0" skipped="0" timestamp="2025-12-02T23:30:58" time="0.146" tests="6">
-    <testcase classname="User model is valid with required fields" name="User model is valid with required fields" time="0.002">
-    </testcase>
-    <testcase classname="User model requires a name" name="User model requires a name" time="0">
-    </testcase>
-    <testcase classname="User model requires a hashpassword" name="User model requires a hashpassword" time="0.001">
-    </testcase>
-    <testcase classname="User model sets default createdAt" name="User model sets default createdAt" time="0">
-    </testcase>
-    <testcase classname="User model has expected schema configuration" name="User model has expected schema configuration" time="0">
-    </testcase>
-    <testcase classname="User model uses the correct model name" name="User model uses the correct model name" time="0">
     </testcase>
   </testsuite>
 </testsuites>

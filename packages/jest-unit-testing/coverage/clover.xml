@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1764718258791" clover="3.2.0">
-  <project timestamp="1764718258791" name="All files">
+<coverage generated="1764718881513" clover="3.2.0">
+  <project timestamp="1764718881513" name="All files">
     <metrics statements="15" coveredstatements="15" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3" elements="20" coveredelements="20" complexity="0" loc="15" ncloc="15" packages="1" files="5" classes="5"/>
     <file name="inventory.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/schemas/inventory.js">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
