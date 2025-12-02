@@ -208,6 +208,14 @@
   align-items: center;
 }
 
+/* Make the inventory list scroll inside the card */
+.card-inventory .card-body {
+  justify-content: flex-start; /* remove center alignment */
+  align-items: flex-start;
+  overflow-y: auto;            /* enable vertical scroll */
+  padding-right: 10px;         /* prevent scroll bar overlap */
+}
+
 .empty-text {
   color: #777;
   font-size: 16px;
