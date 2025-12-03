@@ -36,8 +36,8 @@ jobs:
 
       - name: Install backend deps
         working-directory: packages/express-backend
-        run: npm ci --omit=dev --workspaces=false
-      # omit dev dependencies, working in directory already
+        run: npm ci -workspaces --include-workspace-root
+
       - name: Install test deps
         working-directory: packages/jest-unit-testing
         run: npm ci
