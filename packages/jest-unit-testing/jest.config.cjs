@@ -15,6 +15,7 @@ module.exports = {
     '<rootDir>/jest-unit-testing/express-backend-testing/kitchen.test.js',
     '<rootDir>/jest-unit-testing/express-backend-testing/membership.test.js',
     '<rootDir>/jest-unit-testing/express-backend-testing/user.test.js',
+    '<rootDir>/jest-unit-testing/express-backend-testing/inventory-services.test.js',
 
     // later you can add more model tests here
   ],
