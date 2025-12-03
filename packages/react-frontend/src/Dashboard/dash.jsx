@@ -21,7 +21,6 @@ export const DashboardEmpty = (props) => {
   const [todoText, setTodoText] = useState('');
 
   const { kitchenId, inventoryId } = useParams();
-
   {
     /*Store inventory*/
   }
@@ -30,6 +29,29 @@ export const DashboardEmpty = (props) => {
 
   console.log('Kitchen ID:', kitchenId);
   console.log('Inventory ID:', inventoryId);
+
+  {
+    /*Searching*/
+  }
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+
+  {
+    /*For Low-Stock handling and reminders*/
+  }
+  const LOW_STOCK_THRESHOLD = 2;
+
+  const lowStockItems =
+    !loading && inventory?.items
+      ? inventory.items.filter((item) => item.quantity <= LOW_STOCK_THRESHOLD)
+      : [];
+
+  const filteredItems =
+    !loading && inventory?.items
+      ? inventory.items.filter((item) =>
+          item.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : [];
 
   {
     /*Fetch inventory data*/
@@ -119,7 +141,10 @@ export const DashboardEmpty = (props) => {
             <span>Shopping List</span>
           </button>
 
-          <button className="nav-item">
+          <button
+            className="nav-item"
+            onClick={() => (window.location.href = `/kitchens/${kitchenId}`)}
+          >
             <img src={playlist} alt="" />
             <span>Members</span>
           </button>
@@ -222,13 +247,26 @@ export const DashboardEmpty = (props) => {
                 )}
               </div>
 
+              {/* Search button */}
               <button
                 className="icon-btn"
-                onClick={() => (window.location.href = '/inventory')}
+                onClick={() => setShowSearch(!showSearch)}
               >
                 <img src={googleWebSearch} alt="" />
               </button>
             </div>
+            {/*Search Input*/}
+            {showSearch && (
+              <div className="inventory-search-bar">
+                <input
+                  type="text"
+                  className="inventory-search-input"
+                  placeholder="Search items..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+            )}
 
             {/* BODY CONTENT */}
             <div className="card-body center">
@@ -245,7 +283,7 @@ export const DashboardEmpty = (props) => {
                 //   ))}
                 // </div>
                 <InventoryItemList
-                  items={inventory.items}
+                  items={filteredItems}
                   onDelete={deleteOneInventory}
                 />
               ) : (
@@ -303,7 +341,17 @@ export const DashboardEmpty = (props) => {
               </button>
             </div>
             <div className="card-body center">
-              <div className="empty-text">No low-stock items..</div>
+              {lowStockItems.length === 0 ? (
+                <div className="empty-text">No low-stock items.</div>
+              ) : (
+                <div className="low-stock-list">
+                  {lowStockItems.map((item) => (
+                    <div key={item._id} className="low-stock-item">
+                      <strong>{item.name}</strong> — {item.quantity} left
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </section>

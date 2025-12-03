@@ -148,6 +148,15 @@
   height: auto;
 }
 
+/* Make the Low Stock card scroll instead of overflowing */
+.card-lowstock .card-body {
+  justify-content: flex-start; /* no center alignment */
+  align-items: flex-start;
+  overflow-y: auto;            /* enable vertical scroll */
+  padding-right: 10px;         /* avoid scrollbar overlap */
+}
+
+
 /* CARD */
 .card {
   background: white;
@@ -208,6 +217,14 @@
   align-items: center;
 }
 
+/* Make the inventory list scroll inside the card */
+.card-inventory .card-body {
+  justify-content: flex-start; /* remove center alignment */
+  align-items: flex-start;
+  overflow-y: auto;            /* enable vertical scroll */
+  padding-right: 10px;         /* prevent scroll bar overlap */
+}
+
 .empty-text {
   color: #777;
   font-size: 16px;
@@ -231,3 +248,39 @@
 .footer-add img {
   width: 20px;
 }
+
+/* LOW STOCK LIST STYLES */
+.low-stock-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.low-stock-item {
+  padding: 8px 12px;
+  background: #ffe6e6;
+  border-left: 4px solid #ff4d4d;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.inventory-search-bar {
+  padding: 8px 0 12px 0;
+}
+
+.inventory-search-bar input {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  outline: none;
+  transition: 0.15s;
+}
+
+.inventory-search-bar input:focus {
+  border-color: #888;
+  box-shadow: 0 0 0 2px rgba(0,0,0,0.08);
+}
+
