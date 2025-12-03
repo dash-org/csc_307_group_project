@@ -34,22 +34,25 @@ export const DashboardEmpty = (props) => {
     /*Searching*/
   }
   const [showSearch, setShowSearch] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
 
   {
     /*For Low-Stock handling and reminders*/
   }
   const LOW_STOCK_THRESHOLD = 2;
-  
-  const lowStockItems= !loading && inventory?.items
-    ? inventory.items.filter((item) => item.quantity <= LOW_STOCK_THRESHOLD)
-    : [];
 
-  const filteredItems = !loading && inventory?.items
-    ? inventory.items.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
-    : [];
+  const lowStockItems =
+    !loading && inventory?.items
+      ? inventory.items.filter((item) => item.quantity <= LOW_STOCK_THRESHOLD)
+      : [];
 
-  
+  const filteredItems =
+    !loading && inventory?.items
+      ? inventory.items.filter((item) =>
+          item.name.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      : [];
+
   {
     /*Fetch inventory data*/
   }
@@ -138,10 +141,12 @@ export const DashboardEmpty = (props) => {
             <span>Shopping List</span>
           </button>
 
-          <button className="nav-item" onClick={() => (window.location.href = `/kitchens/${kitchenId}`)}>
+          <button
+            className="nav-item"
+            onClick={() => (window.location.href = `/kitchens/${kitchenId}`)}
+          >
             <img src={playlist} alt="" />
-            <span>
-              Members</span>
+            <span>Members</span>
           </button>
 
           <button className="nav-item">
@@ -223,8 +228,8 @@ export const DashboardEmpty = (props) => {
                   {loading
                     ? 'Loading...'
                     : inventory
-                    ? inventory.name
-                    : 'Inventory Not Found'}
+                      ? inventory.name
+                      : 'Inventory Not Found'}
                 </h3>
 
                 {/* Created date ONLY if inventory exists */}
@@ -336,19 +341,17 @@ export const DashboardEmpty = (props) => {
               </button>
             </div>
             <div className="card-body center">
-
               {lowStockItems.length === 0 ? (
                 <div className="empty-text">No low-stock items.</div>
               ) : (
                 <div className="low-stock-list">
-                  {lowStockItems.map(item => (
+                  {lowStockItems.map((item) => (
                     <div key={item._id} className="low-stock-item">
                       <strong>{item.name}</strong> — {item.quantity} left
                     </div>
                   ))}
                 </div>
               )}
-
             </div>
           </div>
         </section>

@@ -20,8 +20,8 @@ import { Navigate } from 'react-router-dom';
 function MyApp() {
   const INVALID_TOKEN = 'INVALID_TOKEN';
   const INVALID_USER = 'INVALID_USER';
-  // const API_PREFIX = 'https://sider.azurewebsites.net';
-  const API_PREFIX = 'http://localhost:8000';
+  const API_PREFIX = 'https://sider.azurewebsites.net';
+  // const API_PREFIX = 'http://localhost:8000';
   /*
   The value of token upon booting the frontend is what is stored in local storage, 
   if its not found in local storage then it is set to INVALID_TOKEN
