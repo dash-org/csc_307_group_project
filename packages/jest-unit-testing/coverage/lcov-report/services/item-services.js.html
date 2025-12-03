@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for services/inventory-services.js</title>
+    <title>Code coverage report for services/item-services.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> inventory-services.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> item-services.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>19/19</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/8</span>
+                <span class='fraction'>12/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>17/17</span>
+                <span class='fraction'>19/19</span>
             </div>
         
             
@@ -110,22 +110,16 @@
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -158,87 +152,57 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import inventoryModel from '../schemas/inventory.js';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import itemModel from '../schemas/item.js';
 &nbsp;
-function getInventory(name, createdBy, createdAt, items) {
-  let promise = inventoryModel.find();
+function getItems(name, quantity, description, tags, createdAt, createdBy) {
+  let promise = itemModel.find();
 &nbsp;
   if (name) {
     promise = promise.find({ name: name });
   }
-  if (createdBy) {
-    promise = promise.find({ createdBy: createdBy });
+  if (quantity) {
+    promise = promise.find({ quantity: quantity });
+  }
+  if (description) {
+    promise = promise.find({ description: description });
+  }
+  if (tags) {
+    promise = promise.find({ tags: { $all: tags } });
   }
   if (createdAt) {
     promise = promise.find({ createdAt: createdAt });
   }
-  if (items) {
-    promise = promise.find({ items: { $all: items } });
+  if (createdBy) {
+    promise = promise.find({ createdBy: createdBy });
   }
 &nbsp;
   return promise;
 }
 &nbsp;
-function findInventoryById(id) {
-  return inventoryModel.findById(id).populate('items').populate('createdBy');
+function findItemById(id) {
+  return itemModel.findById(id);
 }
 &nbsp;
-function addInventory(inventory) {
-  const inventoryToAdd = new inventoryModel(inventory);
-  const promise = inventoryToAdd.save();
+function addItem(item) {
+  const itemToAdd = new itemModel(item);
+  const promise = itemToAdd.save();
   return promise;
 }
 &nbsp;
-function deleteInventoryById(id) {
-  return inventoryModel.deleteOne({ _id: id });
-}
-&nbsp;
-function addItemToInventory(inventoryId, item) {
-  return inventoryModel.findByIdAndUpdate(
-    inventoryId,
-    { $push: { items: item } },
-    { new: true }
-  );
-}
-&nbsp;
-function removeItemFromInventory(inventoryId, itemId) {
-  return inventoryModel.findByIdAndUpdate(
-    inventoryId,
-    { $pull: { items: { _id: itemId } } },
-    { new: true }
-  );
+function deleteItemById(id) {
+  return itemModel.deleteOne({ _id: id });
 }
 &nbsp;
 export default {
-  addInventory,
-  getInventory,
-  findInventoryById,
-  deleteInventoryById,
-  addItemToInventory,
-  removeItemFromInventory,
+  addItem: addItem,
+  getItems: getItems,
+  findItemById: findItemById,
+  deleteItemById: deleteItemById,
 };
 &nbsp;</pre></td></tr></table></pre>
 

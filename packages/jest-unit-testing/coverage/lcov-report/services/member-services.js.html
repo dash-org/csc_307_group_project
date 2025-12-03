@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for services/inventory-services.js</title>
+    <title>Code coverage report for services/member-services.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> inventory-services.js</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> member-services.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -117,12 +117,7 @@
 <a name='L52'></a><a href='#L52'>52</a>
 <a name='L53'></a><a href='#L53'>53</a>
 <a name='L54'></a><a href='#L54'>54</a>
-<a name='L55'></a><a href='#L55'>55</a>
-<a name='L56'></a><a href='#L56'>56</a>
-<a name='L57'></a><a href='#L57'>57</a>
-<a name='L58'></a><a href='#L58'>58</a>
-<a name='L59'></a><a href='#L59'>59</a>
-<a name='L60'></a><a href='#L60'>60</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L55'></a><a href='#L55'>55</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -149,20 +144,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -173,6 +154,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -181,64 +169,61 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import inventoryModel from '../schemas/inventory.js';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import memberModel from '../schemas/membership.js';
 &nbsp;
-function getInventory(name, createdBy, createdAt, items) {
-  let promise = inventoryModel.find();
+function getMembers(userId, role, permissions, addedAt) {
+  let promise = memberModel.find();
 &nbsp;
-  if (name) {
-    promise = promise.find({ name: name });
+  if (userId) {
+    promise = promise.find({ userId: userId });
   }
-  if (createdBy) {
-    promise = promise.find({ createdBy: createdBy });
+  if (role) {
+    promise = promise.find({ role: role });
   }
-  if (createdAt) {
-    promise = promise.find({ createdAt: createdAt });
+  if (permissions) {
+    promise = promise.find({ permissions: { $all: permissions } });
   }
-  if (items) {
-    promise = promise.find({ items: { $all: items } });
+  if (addedAt) {
+    promise = promise.find({ addedAt: addedAt });
   }
 &nbsp;
   return promise;
 }
 &nbsp;
-function findInventoryById(id) {
-  return inventoryModel.findById(id).populate('items').populate('createdBy');
+function findMemberById(id) {
+  return memberModel.findById(id);
 }
 &nbsp;
-function addInventory(inventory) {
-  const inventoryToAdd = new inventoryModel(inventory);
-  const promise = inventoryToAdd.save();
+function getMembersByUserId(userId) {
+  return memberModel.find({ userId: userId });
+}
+&nbsp;
+function getMembersByKitchenId(kitchenId) {
+  return memberModel
+    .find({ kitchenId: kitchenId })
+    .populate('userId')
+    .populate('createdBy');
+}
+&nbsp;
+function addMember(member) {
+  const memberToAdd = new memberModel(member);
+  const promise = memberToAdd.save();
   return promise;
 }
 &nbsp;
-function deleteInventoryById(id) {
-  return inventoryModel.deleteOne({ _id: id });
-}
-&nbsp;
-function addItemToInventory(inventoryId, item) {
-  return inventoryModel.findByIdAndUpdate(
-    inventoryId,
-    { $push: { items: item } },
-    { new: true }
-  );
-}
-&nbsp;
-function removeItemFromInventory(inventoryId, itemId) {
-  return inventoryModel.findByIdAndUpdate(
-    inventoryId,
-    { $pull: { items: { _id: itemId } } },
-    { new: true }
-  );
+function deleteMemberById(id) {
+  return memberModel.deleteOne({ _id: id });
 }
 &nbsp;
 export default {
-  addInventory,
-  getInventory,
-  findInventoryById,
-  deleteInventoryById,
-  addItemToInventory,
-  removeItemFromInventory,
+  addMember,
+  getMembers,
+  findMemberById,
+  deleteMemberById,
+  getMembersByUserId,
+  getMembersByKitchenId,
 };
 &nbsp;</pre></td></tr></table></pre>
 

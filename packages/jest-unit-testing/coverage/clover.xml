@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1764737464125" clover="3.2.0">
-  <project timestamp="1764737464125" name="All files">
-    <metrics statements="32" coveredstatements="32" conditionals="10" coveredconditionals="10" methods="9" coveredmethods="9" elements="51" coveredelements="51" complexity="0" loc="32" ncloc="32" packages="2" files="6" classes="6"/>
+<coverage generated="1764741260413" clover="3.2.0">
+  <project timestamp="1764741260413" name="All files">
+    <metrics statements="68" coveredstatements="68" conditionals="30" coveredconditionals="30" methods="19" coveredmethods="19" elements="117" coveredelements="117" complexity="0" loc="68" ncloc="68" packages="2" files="8" classes="8"/>
     <package name="schemas">
       <metrics statements="15" coveredstatements="15" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
       <file name="inventory.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/schemas/inventory.js">
@@ -11,8 +11,8 @@
       </file>
       <file name="item.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/schemas/item.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="20" count="2" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
       </file>
       <file name="kitchen.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/schemas/kitchen.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -21,13 +21,13 @@
       </file>
       <file name="membership.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/schemas/membership.js">
         <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
-        <line num="21" count="1" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
         <line num="51" count="7" type="cond" truecount="2" falsecount="0"/>
         <line num="52" count="7" type="stmt"/>
         <line num="55" count="1" type="stmt"/>
-        <line num="66" count="1" type="stmt"/>
-        <line num="68" count="1" type="stmt"/>
+        <line num="66" count="2" type="stmt"/>
+        <line num="68" count="2" type="stmt"/>
       </file>
       <file name="user.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/schemas/user.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -36,7 +36,7 @@
       </file>
     </package>
     <package name="services">
-      <metrics statements="17" coveredstatements="17" conditionals="8" coveredconditionals="8" methods="6" coveredmethods="6"/>
+      <metrics statements="53" coveredstatements="53" conditionals="28" coveredconditionals="28" methods="16" coveredmethods="16"/>
       <file name="inventory-services.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/services/inventory-services.js">
         <metrics statements="17" coveredstatements="17" conditionals="8" coveredconditionals="8" methods="6" coveredmethods="6"/>
         <line num="4" count="2" type="stmt"/>
@@ -56,6 +56,48 @@
         <line num="33" count="1" type="stmt"/>
         <line num="37" count="1" type="stmt"/>
         <line num="45" count="1" type="stmt"/>
+      </file>
+      <file name="item-services.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/services/item-services.js">
+        <metrics statements="19" coveredstatements="19" conditionals="12" coveredconditionals="12" methods="4" coveredmethods="4"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="9" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="21" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+      </file>
+      <file name="member-services.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/services/member-services.js">
+        <metrics statements="17" coveredstatements="17" conditionals="8" coveredconditionals="8" methods="6" coveredmethods="6"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="9" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
       </file>
     </package>
   </project>
