@@ -1,11 +1,8 @@
 // packages/jest-unit-testing/express-backend-testing/member-services.test.js
 import { describe, expect, it, jest, beforeEach } from '@jest/globals';
 import Membership from '../../express-backend/schemas/membership.js';
-
-// ✅ Import the default export object from member-services
 import memberServices from '../../express-backend/services/member-services.js';
 
-// ✅ Destructure the functions from that default object
 const {
   addMember,
   getMembers,
@@ -27,11 +24,11 @@ describe('member-services', () => {
 
       const findSpy = jest.spyOn(Membership, 'find').mockReturnValue(mockQuery);
 
-      const result = getMembers(); // no filters
+      const result = getMembers();
 
       expect(findSpy).toHaveBeenCalledTimes(1);
-      expect(findSpy).toHaveBeenCalledWith(); // called with no args
-      expect(mockQuery.find).not.toHaveBeenCalled(); // no chained filters
+      expect(findSpy).toHaveBeenCalledWith();
+      expect(mockQuery.find).not.toHaveBeenCalled();
       expect(result).toBe(mockQuery);
     });
 

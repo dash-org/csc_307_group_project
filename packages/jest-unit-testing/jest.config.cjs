@@ -18,6 +18,8 @@ module.exports = {
     '<rootDir>/jest-unit-testing/express-backend-testing/inventory-services.test.js',
     '<rootDir>/jest-unit-testing/express-backend-testing/item-services.test.js',
     '<rootDir>/jest-unit-testing/express-backend-testing/member-services.test.js',
+    '<rootDir>/jest-unit-testing/express-backend-testing/kitchen-services.test.js',
+    '<rootDir>/jest-unit-testing/express-backend-testing/user-services.test.js',
 
     // later you can add more model tests here
   ],

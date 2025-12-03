@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1764741260413" clover="3.2.0">
-  <project timestamp="1764741260413" name="All files">
-    <metrics statements="68" coveredstatements="68" conditionals="30" coveredconditionals="30" methods="19" coveredmethods="19" elements="117" coveredelements="117" complexity="0" loc="68" ncloc="68" packages="2" files="8" classes="8"/>
+<coverage generated="1764806139063" clover="3.2.0">
+  <project timestamp="1764806139064" name="All files">
+    <metrics statements="113" coveredstatements="113" conditionals="42" coveredconditionals="42" methods="40" coveredmethods="40" elements="195" coveredelements="195" complexity="0" loc="113" ncloc="113" packages="2" files="10" classes="10"/>
     <package name="schemas">
       <metrics statements="15" coveredstatements="15" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
       <file name="inventory.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/schemas/inventory.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="22" count="2" type="stmt"/>
-        <line num="33" count="2" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
       </file>
       <file name="item.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/schemas/item.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="20" count="3" type="stmt"/>
-        <line num="33" count="3" type="stmt"/>
+        <line num="20" count="4" type="stmt"/>
+        <line num="33" count="4" type="stmt"/>
       </file>
       <file name="kitchen.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/schemas/kitchen.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="22" count="1" type="stmt"/>
-        <line num="42" count="1" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="42" count="3" type="stmt"/>
       </file>
       <file name="membership.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/schemas/membership.js">
         <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
-        <line num="21" count="2" type="stmt"/>
-        <line num="34" count="2" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
         <line num="51" count="7" type="cond" truecount="2" falsecount="0"/>
         <line num="52" count="7" type="stmt"/>
         <line num="55" count="1" type="stmt"/>
-        <line num="66" count="2" type="stmt"/>
-        <line num="68" count="2" type="stmt"/>
+        <line num="66" count="4" type="stmt"/>
+        <line num="68" count="4" type="stmt"/>
       </file>
       <file name="user.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/schemas/user.js">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="20" count="1" type="stmt"/>
-        <line num="25" count="1" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
       </file>
     </package>
     <package name="services">
-      <metrics statements="53" coveredstatements="53" conditionals="28" coveredconditionals="28" methods="16" coveredmethods="16"/>
+      <metrics statements="98" coveredstatements="98" conditionals="40" coveredconditionals="40" methods="37" coveredmethods="37"/>
       <file name="inventory-services.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/services/inventory-services.js">
         <metrics statements="17" coveredstatements="17" conditionals="8" coveredconditionals="8" methods="6" coveredmethods="6"/>
         <line num="4" count="2" type="stmt"/>
@@ -79,6 +79,38 @@
         <line num="35" count="1" type="stmt"/>
         <line num="39" count="1" type="stmt"/>
       </file>
+      <file name="kitchen-services.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/services/kitchen-services.js">
+        <metrics statements="29" coveredstatements="29" conditionals="8" coveredconditionals="8" methods="13" coveredmethods="13"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="9" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="72" count="2" type="stmt"/>
+        <line num="73" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="74" count="1" type="stmt"/>
+        <line num="77" count="1" type="stmt"/>
+        <line num="78" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="88" count="1" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+      </file>
       <file name="member-services.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/services/member-services.js">
         <metrics statements="17" coveredstatements="17" conditionals="8" coveredconditionals="8" methods="6" coveredmethods="6"/>
         <line num="4" count="2" type="stmt"/>
@@ -98,6 +130,25 @@
         <line num="39" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
         <line num="44" count="1" type="stmt"/>
+      </file>
+      <file name="user-services.js" path="/Users/isaacericsson/CalPoly/Classes/Q1Y2/CSC-307/csc_307_group_project/packages/express-backend/services/user-services.js">
+        <metrics statements="16" coveredstatements="16" conditionals="4" coveredconditionals="4" methods="8" coveredmethods="8"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="8" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
       </file>
     </package>
   </project>
