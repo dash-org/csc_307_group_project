@@ -31,6 +31,12 @@ export const DashboardEmpty = (props) => {
   console.log('Inventory ID:', inventoryId);
 
   {
+    /*Searching*/
+  }
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  {
     /*For Low-Stock handling and reminders*/
   }
   const LOW_STOCK_THRESHOLD = 2;
@@ -39,6 +45,11 @@ export const DashboardEmpty = (props) => {
     ? inventory.items.filter((item) => item.quantity <= LOW_STOCK_THRESHOLD)
     : [];
 
+  const filteredItems = !loading && inventory?.items
+    ? inventory.items.filter(item => item.name.toLowerCase().includes(searchQuery.toLowerCase()))
+    : [];
+
+  
   {
     /*Fetch inventory data*/
   }
@@ -212,8 +223,8 @@ export const DashboardEmpty = (props) => {
                   {loading
                     ? 'Loading...'
                     : inventory
-                      ? inventory.name
-                      : 'Inventory Not Found'}
+                    ? inventory.name
+                    : 'Inventory Not Found'}
                 </h3>
 
                 {/* Created date ONLY if inventory exists */}
@@ -231,13 +242,26 @@ export const DashboardEmpty = (props) => {
                 )}
               </div>
 
+              {/* Search button */}
               <button
                 className="icon-btn"
-                onClick={() => (window.location.href = '/inventory')}
+                onClick={() => setShowSearch(!showSearch)}
               >
                 <img src={googleWebSearch} alt="" />
               </button>
             </div>
+            {/*Search Input*/}
+            {showSearch && (
+              <div className="inventory-search-bar">
+                <input
+                  type="text"
+                  className="inventory-search-input"
+                  placeholder="Search items..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+              </div>
+            )}
 
             {/* BODY CONTENT */}
             <div className="card-body center">
@@ -254,7 +278,7 @@ export const DashboardEmpty = (props) => {
                 //   ))}
                 // </div>
                 <InventoryItemList
-                  items={inventory.items}
+                  items={filteredItems}
                   onDelete={deleteOneInventory}
                 />
               ) : (
