@@ -56,7 +56,6 @@ export const PantrySetupInvited = (props) => {
               value={role}
               onChange={(e) => setRole(e.target.value)}
             >
-              <option value="owner">Owner</option>
               <option value="admin">Admin</option>
               <option value="editor">Editor</option>
               <option value="viewer">Viewer</option>
