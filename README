@@ -40,7 +40,7 @@ Start by running 'npm install jest'
 To test currently navigate to jest-unit-testing and run 'npm test' or run 'npm run test' from the root
 
 ## Class Diagram
-![UML Diagram](docs/uml.svg)
+[UML Diagram](docs/uml.svg)
 
 ## Demo Video
 https://cpslo-my.sharepoint.com/:v:/g/personal/salcedop_calpoly_edu/EUmoHrUgZltIk_YHa9yFI4EB6GKVCvQaJGRmb6mZY8XVRg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=fhBLEi
