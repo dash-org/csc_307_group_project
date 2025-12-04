@@ -20,6 +20,10 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
+
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Outfit:wght@100..900&display=swap');
+
 html {
   line-height: 1.15;
   /* 1 */
@@ -34,6 +38,22 @@ html {
  */
 body {
   margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading-h1-font-family) !important;
+}
+
+body,
+p,
+span,
+div {
+  font-family: var(--body-b1-regular-font-family);
 }
 
 /**
@@ -804,9 +824,7 @@ button,
 [type='button'] {
   -webkit-appearance: none;
   display: inline-block;
-  border: 1px solid #0366ee;
   border-radius: 4px;
-  background: #0366ee;
   color: #ffffff;
   font-weight: 600;
   font-family:
@@ -827,7 +845,7 @@ button,
   line-height: 1;
 }
 
-.button:hover,
+/* .button:hover,
 a.button:hover,
 button:hover,
 [type='submit']:hover,
@@ -837,7 +855,7 @@ button:hover,
   background: #0250bc;
   color: #ffffff;
   text-decoration: none;
-}
+} */
 
 .button:focus,
 .button:active,

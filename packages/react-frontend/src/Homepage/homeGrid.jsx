@@ -1,4 +1,5 @@
 import './homeGrid.css';
+import { Button } from '../Components/Button/button';
 export const HomeGrid = (props) => {
   return (
     <section className="hb-kitchen-grid">
@@ -12,21 +13,35 @@ export const HomeGrid = (props) => {
             <p className="hb-kitchen-created"> Owner: {kitchen.owner.name}</p>
 
             <div className="hb-kitchen-actions">
-              <button
+              <Button
+                className="hb-view-btn"
+                hierarchy="primary"
+                buttonText="View"
+                onClick={() => {
+                  window.location.href = `/kitchens/${kitchen._id}`;
+                }}
+              />
+              {/* <button
                 className="hb-view-btn"
                 onClick={() => {
                   window.location.href = `/kitchens/${kitchen._id}`;
                 }}
               >
                 View
-              </button>
+              </button> */}
 
-              <button
+              <Button
+                className="hb-delete-btn"
+                hierarchy="tertiary"
+                buttonText="Delete"
+                onClick={() => props.removeKitchen(kitchen._id)}
+              />
+              {/* <button
                 className="hb-delete-btn"
                 onClick={() => props.removeKitchen(kitchen._id)}
               >
                 Delete
-              </button>
+              </button> */}
             </div>
           </div>
         ))

@@ -1,5 +1,6 @@
 // kitchenGrid.jsx
 import './kitchenGrid.css';
+import { Button } from '../Components/Button/button';
 
 export const MembershipGrid = (props) => {
   const { memberships, removeMembership } = props;
@@ -39,12 +40,18 @@ export const MembershipGrid = (props) => {
               <p className="hb-kitchen-created">Added By User: {OGuser}</p>
 
               <div className="hb-kitchen-actions">
-                <button
+                <Button
+                  className="hb-delete-btn"
+                  hierarchy="tertiary"
+                  buttonText="Remove"
+                  onClick={() => removeMembership(membership._id)}
+                />
+                {/* <button
                   className="hb-delete-btn"
                   onClick={() => removeMembership(membership._id)}
                 >
                   Remove
-                </button>
+                </button> */}
               </div>
             </div>
           );

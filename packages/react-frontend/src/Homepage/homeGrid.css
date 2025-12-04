@@ -40,32 +40,6 @@
   margin-top: 0.5rem;
 }
 
-/* VIEW button */
-.hb-view-btn {
-  background: #4a6cff;
-  color: white;
-  border: none;
-  padding: 0.45rem 0.9rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.85rem;
-}
-
-.hb-view-btn:hover {
-  background: #3c59d7;
-}
-
-/* DELETE button */
-.hb-delete-btn {
-  background: #ff4f4f;
-  color: white;
-  border: none;
-  padding: 0.45rem 0.9rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.85rem;
-}
-
-.hb-delete-btn:hover {
-  background: #e64444;
+.button .hb-delete-btn {
+  color: var(--boiling-500) !important;
 }

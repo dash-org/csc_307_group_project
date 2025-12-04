@@ -26,27 +26,23 @@
 
 .button.disabled {
   border-radius: 12px;
-  left: 850px;
   opacity: 0.5;
   padding: 12px 24px;
 }
 
 .button.pressed {
   border-radius: 12px;
-  left: 650px;
   padding: 12px 24px;
 }
 
 .button.hover {
   border-radius: 12px;
-  left: 450px;
   padding: 12px 24px;
 }
 
 .button.focus {
   border: 1px solid;
   border-color: var(--cooling-200);
-  left: 248px;
 }
 
 .button.primary {
@@ -63,87 +59,65 @@
 
 .button.enabled {
   border-radius: 12px;
-  left: 50px;
   padding: 12px 24px;
 }
 
 .button.primary.disabled {
   background-color: var(--cooling-500);
-  top: 8px;
 }
 
 .button.primary.pressed {
   background-color: var(--cooling-900);
-  top: 8px;
 }
 
 .button.enabled.tertiary {
-  top: 128px;
 }
 
 .button.primary.focus {
   border-radius: 14px;
   padding: 2px;
-  top: 6px;
 }
 
 .button.secondary.enabled {
   border: 2px solid;
   border-color: var(--cooling-500);
-  top: 68px;
 }
 
 .button.primary.hover {
   background-color: var(--cooling-700);
-  top: 8px;
 }
 
 .button.secondary.focus {
   border-radius: 14px;
   padding: 2px;
-  top: 66px;
 }
 
 .button.secondary.disabled {
   border: 2px solid;
   border-color: var(--cooling-500);
-  top: 68px;
 }
 
 .button.secondary.pressed {
   background-color: var(--cooling-20050);
   border: 2px solid;
   border-color: var(--cooling-500);
-  top: 68px;
 }
 
 .button.tertiary.disabled {
-  top: 128px;
 }
 
 .button.primary.enabled {
   background-color: var(--cooling-500);
-  top: 8px;
-}
-
-.button.pressed.tertiary {
-  top: 128px;
 }
 
 .button.tertiary.focus {
   padding: 14px 26px;
-  top: 126px;
-}
-
-.button.hover.tertiary {
-  top: 128px;
 }
 
 .button.secondary.hover {
   background-color: var(--cooling-20025);
   border: 2px solid;
   border-color: var(--cooling-500);
-  top: 68px;
 }
 
 .button.disabled .div {
