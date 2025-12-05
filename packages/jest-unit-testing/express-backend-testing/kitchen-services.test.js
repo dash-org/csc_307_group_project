@@ -67,7 +67,6 @@ describe('kitchen-services', () => {
       const owner = 'owner-456';
       const createdAt = new Date('2024-01-01');
 
-      // Mock the Kitchen query chain
       const mockKitchenQuery = {
         select: jest.fn().mockReturnThis(),
         find: jest.fn().mockReturnThis(),
@@ -78,7 +77,6 @@ describe('kitchen-services', () => {
         .spyOn(Kitchen, 'find')
         .mockReturnValue(mockKitchenQuery);
 
-      // Mock memberServices.getMembersByUserId(...).select('kitchenId')
       const memberships = [{ kitchenId: 'k1' }, { kitchenId: 'k2' }];
       const membershipSelect = jest.fn().mockReturnValue(memberships);
 
