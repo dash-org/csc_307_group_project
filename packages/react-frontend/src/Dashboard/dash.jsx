@@ -8,7 +8,6 @@ import googleWebSearch from '../Images/google-web-search.png';
 import highImportance from '../Images/high-importance.png';
 import playlist from '../Images/playlist.png';
 import plus from '../Images/plus.png';
-// import search from '../Images/search.png';
 import settings from '../Images/settings.png';
 import shoppingBag from '../Images/shopping-bag.png';
 import testAccount from '../Images/test-account.png';
@@ -37,7 +36,12 @@ export const DashboardEmpty = (props) => {
   const [searchQuery, setSearchQuery] = useState('');
 
   {
-    /*For Low-Stock handling and reminders*/
+    /*
+      For Low-Stock handling and reminders
+      - Display items with low stock when <= 2
+      - First checks data has loaded & inventory exists
+      - Then filters items based on quantity and compares against threshold
+    */
   }
   const LOW_STOCK_THRESHOLD = 2;
 
@@ -46,6 +50,13 @@ export const DashboardEmpty = (props) => {
       ? inventory.items.filter((item) => item.quantity <= LOW_STOCK_THRESHOLD)
       : [];
 
+  {/*
+    Filter items based on search query
+    - Only runs if data loaded and inventory exists
+    - Filters items typed in search box 
+    - Search is case insensitive(capitalization doesn't matter)
+    - Includes performs a substring match(can match part of the item name)
+  */}
   const filteredItems =
     !loading && inventory?.items
       ? inventory.items.filter((item) =>
@@ -275,13 +286,6 @@ export const DashboardEmpty = (props) => {
               ) : !inventory ? (
                 <div className="empty-text">Inventory not found.</div>
               ) : inventory.items?.length > 0 ? (
-                // <div className="inventory-info">
-                //   {inventory.items.map((item) => (
-                //     <div key={item._id} className="inventory-item">
-                //       <strong>{item.name}</strong> : {item.quantity}
-                //     </div>
-                //   ))}
-                // </div>
                 <InventoryItemList
                   items={filteredItems}
                   onDelete={deleteOneInventory}
