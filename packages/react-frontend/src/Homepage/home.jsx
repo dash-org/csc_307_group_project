@@ -4,7 +4,6 @@ import calendar from '../Images/calendar.png';
 import chat from '../Images/chat.png';
 import controlPanel from '../Images/control-panel.png';
 import highImportance from '../Images/high-importance.png';
-// import playlist from '../Images/playlist.png';
 import plus from '../Images/plus.png';
 import settings from '../Images/settings.png';
 import shoppingBag from '../Images/shopping-bag.png';
@@ -137,9 +136,6 @@ export const HomepageBlank = (props) => {
           <div className="hb-main-header">
             <div>
               <h1 className="hb-title">Kitchens</h1>
-              {/* <p className="hb-subtitle">
-                Couldn’t find any kitchens. Start one now.
-              </p> */}
             </div>
 
             <button
@@ -156,14 +152,6 @@ export const HomepageBlank = (props) => {
             kitchens={kitchens}
             removeKitchen={deleteOneKitchen}
           ></HomeGrid>
-
-          {/* Content card / empty state */}
-          {/* <section className="hb-card">
-            <p className="hb-card-text">
-              You don’t have any kitchens set up. Create one to start tracking
-              supplies, members, and shopping lists.
-            </p>
-          </section> */}
         </main>
       </div>
     </div>
