@@ -41,11 +41,8 @@ jobs:
       - name: Build backend
         run: npm run -w express-backend build --if-present
 
-      # tests are currently commented out because they are not set to run well through Azure environment
-      # - name: Test backend
-      #  run: npm run -w express-backend test --if-present
-      #  env:
-      #    NODE_ENV: test
+      - name: Test backend
+        run: npm run -w express-backend test --if-present
 
       - name: Create deployment zip
         run: |
