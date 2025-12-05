@@ -40,6 +40,7 @@ function findKitchenById(id) {
     .populate('owner');
 }
 
+// Set the creater (from the token) to be the kitchen owner, both in kitchen schema and membership
 function addKitchen(kitchen) {
   const kitchenToAdd = new kitchenModel(kitchen);
   let savedKitchen;
@@ -68,6 +69,7 @@ function addKitchen(kitchen) {
     });
 }
 
+// When deleting a kitchen also delete relevant inventories and memberships
 function deleteKitchenById(id) {
   return kitchenModel.findById(id).then((kitchen) => {
     if (!kitchen) {

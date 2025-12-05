@@ -1,4 +1,7 @@
 // kitchen-auth.js
+/** The purpose of kitchen-auth is to restrict users access to certain routes based on their membership status
+ * in order to enforce the strict collaboration system we have.
+ */
 import memberServices from './services/member-services.js';
 
 // Get user's role in a kitchen
@@ -15,7 +18,7 @@ export async function getUserKitchenRole(userId, kitchenId) {
   }
 }
 
-// Users can only access their own user data
+// Users can only access their own user data. Check if their bearer token matches the requested id.
 export async function authorizeSelfOnly(req, res, next) {
   const targetUserId = req.params.userId || req.params.id;
   const requesterId = req.userId;
@@ -79,7 +82,7 @@ export async function authorizeMembershipCreation(req, res, next) {
 
 // Owners can delete any membership except their own owner membership
 // Admins can delete editor and viewer memberships
-// Users can delete their own membership unless they are the owner
+// Any user can delete their own membership unless they are the owner
 export async function authorizeMembershipDeletion(req, res, next) {
   const membershipId = req.params.id;
   const requesterId = req.userId;
@@ -132,7 +135,7 @@ export async function authorizeMembershipDeletion(req, res, next) {
   }
 }
 
-// Users can only delete their own account
+// Users can only delete their own account (site-wide account)
 export async function authorizeUserDeletion(req, res, next) {
   const targetUserId = req.params.id;
   const requesterId = req.userId;
@@ -152,7 +155,8 @@ const roleHierarchy = {
   owner: 3,
 };
 
-// General authorization function that checks minimum required role
+// General authorization function that checks minimum required role. Role is specified for each route
+// And then this function checks that you have at least that role within the kitchen.
 export function authorizeMinRole(minRole) {
   return async (req, res, next) => {
     const kitchenId = req.params.kitchenId || req.params.id;
