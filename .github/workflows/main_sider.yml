@@ -40,7 +40,7 @@ jobs:
       # omit dev dependencies, working in directory already
 
       - name: Install jest unit testing deps
-        working-directory: jest-unit-testing
+        working-directory: packages/jest-unit-testing
         run: npm ci # note: no --omit=dev here
 
       - name: Build backend
