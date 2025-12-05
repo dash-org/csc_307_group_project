@@ -34,14 +34,14 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: Install jest unit testing deps
+        working-directory: packages/jest-unit-testing
+        run: npm ci # note: no --omit=dev here
+
       - name: Install backend deps
         working-directory: packages/express-backend
         run: npm ci --omit=dev --workspaces=false
       # omit dev dependencies, working in directory already
-
-      - name: Install jest unit testing deps
-        working-directory: packages/jest-unit-testing
-        run: npm ci # note: no --omit=dev here
 
       - name: Build backend
         run: npm run -w express-backend build --if-present
