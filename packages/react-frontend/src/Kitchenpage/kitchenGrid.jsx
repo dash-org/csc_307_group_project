@@ -24,14 +24,12 @@ export const KitchenGrid = (props) => {
                 className="hb-view-btn"
                 hierarchy="primary"
                 onClick={() => {
-                  // adjust to whatever route you use for viewing a single inventory
                   console.log('debug123');
                   console.log(kitchenId);
                   window.location.href = `/kitchens/${kitchenId}/inventories/${inventory._id}`;
                 }}
               />
               {/* View */}
-              {/* </button> */}
 
               <Button
                 buttonText="Delete"
@@ -39,12 +37,6 @@ export const KitchenGrid = (props) => {
                 hierarchy="tertiary"
                 onClick={() => removeInventory(inventory._id)}
               />
-              {/* <button
-                className="hb-delete-btn"
-                onClick={() => removeInventory(inventory._id)}
-              >
-                Delete
-              </button> */}
             </div>
           </div>
         ))

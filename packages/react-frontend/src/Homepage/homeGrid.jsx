@@ -21,14 +21,6 @@ export const HomeGrid = (props) => {
                   window.location.href = `/kitchens/${kitchen._id}`;
                 }}
               />
-              {/* <button
-                className="hb-view-btn"
-                onClick={() => {
-                  window.location.href = `/kitchens/${kitchen._id}`;
-                }}
-              >
-                View
-              </button> */}
 
               <Button
                 className="hb-delete-btn"
@@ -36,12 +28,6 @@ export const HomeGrid = (props) => {
                 buttonText="Delete"
                 onClick={() => props.removeKitchen(kitchen._id)}
               />
-              {/* <button
-                className="hb-delete-btn"
-                onClick={() => props.removeKitchen(kitchen._id)}
-              >
-                Delete
-              </button> */}
             </div>
           </div>
         ))

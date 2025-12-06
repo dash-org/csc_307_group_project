@@ -46,12 +46,6 @@ export const MembershipGrid = (props) => {
                   buttonText="Remove"
                   onClick={() => removeMembership(membership._id)}
                 />
-                {/* <button
-                  className="hb-delete-btn"
-                  onClick={() => removeMembership(membership._id)}
-                >
-                  Remove
-                </button> */}
               </div>
             </div>
           );

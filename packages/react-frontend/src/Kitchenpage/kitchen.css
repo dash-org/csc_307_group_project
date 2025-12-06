@@ -1,6 +1,5 @@
 /* Root layout */
 .homepage-blank {
-  /* keep your background if you want it */
   background-image: url(./rectangle-43.png);
   background-size: cover;
   background-position: center;
@@ -25,7 +24,7 @@
 .hb-logo {
   color: #000000;
   font-family: 'Inter-ExtraBold', Helvetica, Arial, sans-serif;
-  font-size: 40px; /* toned down from 64px */
+  font-size: 40px;
   font-weight: 800;
   letter-spacing: 0.05em;
 }
@@ -179,7 +178,7 @@
   margin: 0;
   font-size: 32px;
   font-weight: 500;
-  color: #8b8b8b; /* your .text-wrapper-5 color */
+  color: #8b8b8b;
 }
 
 .hb-subtitle {
@@ -238,8 +237,6 @@
   /* Prevent shrinking/layout shifts */
   font: inherit;
   color: inherit;
-
-  /* You had .hb-user with display flex → replicate it here */
 }
 
 /* Row for Name / Owner / Created fields */

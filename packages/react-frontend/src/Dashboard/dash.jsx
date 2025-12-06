@@ -50,13 +50,15 @@ export const DashboardEmpty = (props) => {
       ? inventory.items.filter((item) => item.quantity <= LOW_STOCK_THRESHOLD)
       : [];
 
-  {/*
+  {
+    /*
     Filter items based on search query
     - Only runs if data loaded and inventory exists
     - Filters items typed in search box 
     - Search is case insensitive(capitalization doesn't matter)
     - Includes performs a substring match(can match part of the item name)
-  */}
+  */
+  }
   const filteredItems =
     !loading && inventory?.items
       ? inventory.items.filter((item) =>

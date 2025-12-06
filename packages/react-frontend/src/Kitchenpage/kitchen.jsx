@@ -59,7 +59,6 @@ export const KitchenPage = (props) => {
       .then((res) => (res.status === 200 ? res.json() : undefined))
       .then((json) => {
         if (json) {
-          // adjust key if your backend returns something like { inventories: [...] }
           setMemberships(json.members_list);
         } else {
           setMemberships([]);
