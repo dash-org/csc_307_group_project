@@ -45,5 +45,14 @@ To test currently navigate to jest-unit-testing and run 'npm test' or run 'npm r
 ## Class Diagram
 [UML Diagram](docs/uml.svg)
 
+## Login/Signup
+Click the top right user icon and you can navigate the UI to create a new user and then login.
+Otherwise you can use this account for testing out stuff
+Username: tester3
+Password: password
+
+## Figma
+https://www.figma.com/design/z3lUJiBAhSUVPsbx5rrHpC/SIDER-Prototype?node-id=0-1&m=dev
+
 ## Demo Video
 https://cpslo-my.sharepoint.com/:v:/g/personal/salcedop_calpoly_edu/EUmoHrUgZltIk_YHa9yFI4EB6GKVCvQaJGRmb6mZY8XVRg?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=fhBLEi
