@@ -1,5 +1,9 @@
 import './homeGrid.css';
 import { Button } from '../Components/Button/button';
+
+/*
+Takes an array of kitchens and turns it into a grid of kitchens with minimal info and buttons for viewing/deleting
+*/
 export const HomeGrid = (props) => {
   return (
     <section className="hb-kitchen-grid">
