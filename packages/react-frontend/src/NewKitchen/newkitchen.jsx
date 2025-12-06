@@ -3,6 +3,9 @@ import { Button } from '../Components/Button/button';
 import { FormField } from '../Components/FormField/formfield';
 import './newkitchen.css';
 
+/*
+Very generic form page
+*/
 export const PantrySetupCreate = (props) => {
   const [creds, setCreds] = useState({
     name: '',

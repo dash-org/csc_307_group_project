@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './newitem.css';
 
+/*
+Very generic form page
+*/
 export const ItemSetupCreate = ({ handleSubmit }) => {
   const navigate = useNavigate();
   const { kitchenId, inventoryId } = useParams();

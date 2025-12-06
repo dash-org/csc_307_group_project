@@ -4,6 +4,9 @@ import { Button } from '../Components/Button/button';
 import { FormField } from '../Components/FormField/formfield';
 import { useParams } from 'react-router-dom';
 
+/*
+Very generic form page
+*/
 export const InventorySetupCreate = (props) => {
   const { id } = useParams();
   const kitchenId = id;

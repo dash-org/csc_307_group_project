@@ -15,6 +15,9 @@ import { useParams } from 'react-router-dom';
 import { InventoryItemList } from './InventoryItemList';
 import rightArrowBracket from '../Images/rightarrowbracket.png';
 
+/*
+Refer to home.jsx for generic comments
+*/
 export const DashboardEmpty = (props) => {
   const [showAddTodo, setShowAddTodo] = useState(false);
   const [todoText, setTodoText] = useState('');
@@ -84,10 +87,10 @@ export const DashboardEmpty = (props) => {
       .then((res) => (res.status === 200 ? res.json() : undefined))
       .then((json) => {
         if (json) {
-          setInventory(json);
-          setLoading(false);
+          setInventory(json); // We expect an inventory object from the api backend
+          setLoading(false); // Disable the loading coverup
         } else {
-          setLoading(true);
+          setLoading(true); // Enable the loading coverup
           setInventory(null);
         }
       })

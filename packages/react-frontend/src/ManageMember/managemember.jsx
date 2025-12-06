@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './managemember.css';
 
+/*
+Very generic form page aside from the drop down used to select the role
+*/
 export const PantrySetupInvited = (props) => {
   const [username, setUsername] = useState('');
   const [role, setRole] = useState('viewer'); // default

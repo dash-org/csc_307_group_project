@@ -31,11 +31,6 @@ function MyApp() {
   const [, setMessage] = useState(''); // Errors are currently not being displayed
 
   /*
-  The format of this use state should be used for future tables
-   */
-  const [characters, setCharacters] = useState([]);
-
-  /*
   This useState allows us to rerender the page whenever an error occurs and display the error on the page.
   For now this is just the login page and rerenders whenever the login request fails
   */
@@ -67,39 +62,6 @@ function MyApp() {
     },
     [token]
   );
-
-  /*
-  fetchUsers will make a get request with the header populated by addAuthHeader, which means that the request format will change
-  everytime addAuthHeader/token changes
-  */
-  const fetchUsers = useCallback(() => {
-    const promise = fetch(`${API_PREFIX}/users`, {
-      headers: addAuthHeader(),
-    });
-    return promise;
-  }, [addAuthHeader]);
-
-  /*
-  This useffect depends on fetchUsers and token, which means it runs every time the token changes
-  The token is set upon loading the page, so this use effect will run at the start of the page every time
-  We get to set the users being displayed based on the response from fetchUsers()
-   */
-  useEffect(() => {
-    console.log('jofifd');
-    console.log(token);
-    fetchUsers()
-      .then((res) => (res.status === 200 ? res.json() : undefined))
-      .then((json) => {
-        if (json) {
-          setCharacters(json['users_list']);
-        } else {
-          setCharacters(null);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [fetchUsers, token]);
 
   /*
   This is called everytime the user submits the login form on the login page, which sends a post request with the
@@ -195,45 +157,9 @@ function MyApp() {
     return promise;
   }
 
-  /* 
-  Refer to this for future api calls
-  Based on the response status, we utilize setCharacters to rerender the table with the updated set of users
+  /*
+  Generic post request for creating a kitchen, upon succeeding it directs a client to the home page
   */
-  // function removeOneCharacter(index) {
-  //   const trash = characters.at(index);
-  //   const promise = fetch(`${API_PREFIX}/users/${trash._id}`, {
-  //     method: `DELETE`,
-  //     headers: addAuthHeader(),
-  //   });
-
-  //   promise
-  //     .then((res) => {
-  //       if (res.status == 204) {
-  //         const updated = characters.filter((character, i) => {
-  //           return i !== index;
-  //         });
-  //         setCharacters(updated);
-  //       }
-  //     })
-  //     .catch((error) => console.log(error));
-  // }
-
-  function _updateList(person) {
-    postUser(person)
-      .then((res) => {
-        if (res.status != 201) {
-          throw new Error();
-        }
-        return res.json();
-      })
-      .then((json) => {
-        return setCharacters([...characters, json]);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
   function postKitchen(creds) {
     const promise = fetch(`${API_PREFIX}/kitchens`, {
       method: 'POST',
@@ -256,6 +182,11 @@ function MyApp() {
     return promise;
   }
 
+  /*
+  This post request requires the kitchenId in order to create a proper inventory. 
+  MyApp.jsx won't know what inventory the kitchen belongs to, which means that the component calling
+  will need to supply the kitchenId. In this case, the createInventory page gets the kitchenId from its URL route so it can easily supply it
+  */
   function postInventory(creds, kitchenId) {
     const promise = fetch(`${API_PREFIX}/kitchens/${kitchenId}/inventories`, {
       method: 'POST',
@@ -278,6 +209,9 @@ function MyApp() {
     return promise;
   }
 
+  /*
+  Very similar to postInventory up above
+  */
   function postMembership(username, role, kitchenId) {
     const promise = fetch(`${API_PREFIX}/memberships`, {
       method: 'POST',
@@ -307,6 +241,9 @@ function MyApp() {
     return promise;
   }
 
+  /*
+  Very similar to postInventory up above
+  */
   function postItem(creds, kitchenId, inventoryId) {
     const promise = fetch(
       `${API_PREFIX}/kitchens/${kitchenId}/inventories/${inventoryId}/items`,
@@ -334,6 +271,10 @@ function MyApp() {
     return promise;
   }
 
+  /*
+  We give API_PREFIX and addAuthHeader to the dashboard, homepage, and kitchen page 
+  to allow for them to have delete functions within their page components
+  */
   return (
     <BrowserRouter>
       <Routes>

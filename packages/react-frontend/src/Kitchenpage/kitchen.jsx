@@ -18,10 +18,13 @@ import { MembershipGrid } from './membershipGrid';
 // Expecting props:
 // - API_PREFIX
 // - addAuthHeader()
-// - kitchenId (the kitchen whose inventories we are showing)
+
+/*
+Refer to home.jsx for generic comments
+*/
 export const KitchenPage = (props) => {
   const { id } = useParams();
-  const kitchenId = id;
+  const kitchenId = id; // taken from the url
   const [kitchen, setKitchen] = useState(null);
   const [memberships, setMemberships] = useState([]);
 
@@ -32,7 +35,6 @@ export const KitchenPage = (props) => {
   }, [props, kitchenId]);
 
   const fetchInventories = useCallback(() => {
-    // adjust the endpoint if your backend uses a different path
     return fetch(`${props.API_PREFIX}/kitchens/${kitchenId}`, {
       headers: props.addAuthHeader(),
     });
@@ -43,7 +45,7 @@ export const KitchenPage = (props) => {
       .then((res) => (res.status === 200 ? res.json() : undefined))
       .then((json) => {
         if (json) {
-          // adjust key if your backend returns something like { inventories: [...] }
+          // We expect a kitchen object from the backend
           setKitchen(json);
         } else {
           setKitchen(null);
